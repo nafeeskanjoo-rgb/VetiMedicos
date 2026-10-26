@@ -85,8 +85,8 @@ html, body {
     position: relative;
 }
 
-/* Home Landing Page Desktop 100vh Screen Lock (Desktop screens only) */
-@media (min-width: 901px) {
+/* Home Landing Page Desktop 100vh Screen Lock (Widescreen High-Res Desktops Only) */
+@media (min-width: 1025px) and (min-height: 750px) {
     html.home-page,
     body.home-page {
         width: 100% !important;
@@ -109,7 +109,7 @@ html, body {
 }
 
 /* Home Landing Page Mobile & Tablet (Full Touch & Scroll Support) */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     html.home-page,
     body.home-page {
         width: 100% !important;
@@ -6519,164 +6519,500 @@ body.discount-page .navbar {
 
 /* =============================================================
    Home Landing Page Fit-To-Screen Fine-Tuning & Elevated Footer
+   Applied strictly to widescreen desktops with sufficient height
    ============================================================= */
-html:has(body.home-page),
-body.home-page {
-    height: 100vh !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
+@media (min-width: 1025px) and (min-height: 750px) {
+    html:has(body.home-page),
+    body.home-page {
+        height: 100vh !important;
+        max-height: 100vh !important;
+        overflow: hidden !important;
+    }
+
+    body.home-page .app-container {
+        height: 100vh !important;
+        max-height: 100vh !important;
+        overflow: hidden !important;
+        justify-content: space-between !important;
+        padding-bottom: clamp(6px, 1vh, 12px) !important;
+    }
+
+    body.home-page .navbar {
+        height: clamp(50px, 6.5vh, 58px) !important;
+        flex-shrink: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    body.home-page .main-stage {
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: space-between !important;
+        padding-top: clamp(4px, 1vh, 12px) !important;
+        padding-bottom: clamp(6px, 1.2vh, 14px) !important;
+    }
+
+    body.home-page .hero-content {
+        align-self: flex-end !important;
+        max-width: clamp(380px, 42vw, 500px) !important;
+        padding-bottom: 0 !important;
+        margin-bottom: clamp(10px, 1.8vh, 20px) !important;
+    }
+
+    body.home-page .hero-glass-card {
+        padding: clamp(14px, 1.8vh, 20px) clamp(18px, 2vw, 26px) !important;
+        border-radius: var(--radius-lg) !important;
+    }
+
+    body.home-page .hero-tagline {
+        font-size: 0.74rem !important;
+        padding: 3px 10px !important;
+        margin-bottom: clamp(4px, 0.8vh, 8px) !important;
+    }
+
+    body.home-page .hero-title {
+        font-size: clamp(1.8rem, 2.8vw, 2.6rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: clamp(4px, 0.8vh, 8px) !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    body.home-page .hero-subtitle {
+        font-size: clamp(0.78rem, 0.9vw, 0.88rem) !important;
+        line-height: 1.4 !important;
+        margin-bottom: clamp(10px, 1.4vh, 14px) !important;
+    }
+
+    body.home-page .hero-cta-group {
+        gap: 10px !important;
+    }
+
+    body.home-page .hero-cta-group .btn-primary,
+    body.home-page .hero-cta-group .btn-secondary {
+        font-size: 0.82rem !important;
+        padding: clamp(7px, 1vh, 9px) clamp(14px, 1.4vw, 20px) !important;
+    }
+
+    body.home-page .hero-highlights-wrap {
+        align-self: flex-end !important;
+        margin-bottom: clamp(14px, 2.2vh, 24px) !important;
+        gap: clamp(6px, 1vh, 10px) !important;
+    }
+
+    body.home-page .highlight-pill-glass {
+        padding: clamp(6px, 0.9vh, 8px) clamp(12px, 1.2vw, 15px) !important;
+        font-size: clamp(0.74rem, 0.82vw, 0.8rem) !important;
+    }
+
+    body.home-page .hero-endpoint-footer {
+        flex-shrink: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: clamp(7px, 0.9vh, 11px) clamp(16px, 1.8vw, 24px) !important;
+        border-radius: 18px !important;
+        gap: 14px !important;
+        box-shadow: 0 6px 25px rgba(12, 16, 22, 0.1), inset 0 1px 2px #ffffff !important;
+    }
+
+    body.home-page .endpoint-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    body.home-page .endpoint-brand-title {
+        font-size: 1.12rem !important;
+        line-height: 1.15 !important;
+    }
+
+    body.home-page .endpoint-badge {
+        font-size: 0.6rem !important;
+        padding: 1px 6px !important;
+    }
+
+    body.home-page .endpoint-tagline {
+        font-size: 0.68rem !important;
+    }
+
+    body.home-page .endpoint-subtext {
+        font-size: 0.68rem !important;
+        line-height: 1.25 !important;
+    }
+
+    body.home-page .endpoint-trust-pill {
+        padding: 3px 10px !important;
+        font-size: 0.7rem !important;
+    }
+
+    body.home-page .endpoint-copyright {
+        font-size: 0.67rem !important;
+    }
+
+    body.home-page .endpoint-emergency-desk {
+        gap: 3px !important;
+    }
+
+    body.home-page .emergency-desk-header {
+        font-size: 0.66rem !important;
+    }
+
+    body.home-page .endpoint-emergency-btn {
+        padding: 6px 16px !important;
+        gap: 8px !important;
+        border-radius: 40px !important;
+    }
+
+    body.home-page .emergency-btn-icon-wrap {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.95rem !important;
+    }
+
+    body.home-page .emergency-btn-label {
+        font-size: 0.58rem !important;
+    }
+
+    body.home-page .emergency-btn-number {
+        font-size: 1.08rem !important;
+    }
+
+    body.home-page .emergency-desk-sub {
+        font-size: 0.65rem !important;
+    }
 }
 
-body.home-page .app-container {
-    height: 100vh !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
-    justify-content: space-between !important;
-    padding-bottom: clamp(6px, 1vh, 12px) !important;
+/* =============================================================
+   Universal Tablet & Mobile Responsive System (Screens <= 1024px)
+   ============================================================= */
+.mobile-feature-grid {
+    display: none;
 }
 
-body.home-page .navbar {
-    height: clamp(50px, 6.5vh, 58px) !important;
-    flex-shrink: 0 !important;
-    margin-bottom: 0 !important;
+@media (max-width: 1024px) {
+    html,
+    body,
+    html.home-page,
+    body.home-page,
+    html:has(body.home-page) {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        max-height: none !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        touch-action: pan-y !important;
+        -webkit-overflow-scrolling: touch !important;
+        position: relative !important;
+    }
+
+    body.home-page .app-container,
+    .app-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0 16px 85px 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Navbar on Tablet & Mobile */
+    .navbar {
+        height: 54px !important;
+        padding: 0 12px !important;
+        margin-top: 8px !important;
+        margin-bottom: 12px !important;
+        border-radius: 16px !important;
+        flex-shrink: 0 !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+    }
+
+    .brand-logo .brand-badge {
+        display: none !important;
+    }
+
+    .brand-title {
+        font-size: 1.1rem !important;
+    }
+
+    .logo-icon-wrap {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    .firebase-status-pill .status-text {
+        display: none !important;
+    }
+
+    .firebase-status-pill {
+        padding: 6px 9px !important;
+    }
+
+    .nav-user-trigger .nav-login-pill {
+        display: none !important;
+    }
+
+    .nav-actions {
+        gap: 8px !important;
+    }
+
+    /* Main Stage on Tablet & Mobile */
+    body.home-page .main-stage,
+    .main-stage {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        min-height: auto !important;
+        max-height: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
+        padding-top: 6px !important;
+        padding-bottom: 16px !important;
+    }
+
+    body.home-page .hero-content,
+    .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+        margin-bottom: 0 !important;
+    }
+
+    body.home-page .hero-glass-card,
+    .hero-glass-card {
+        padding: 24px 18px !important;
+        border-radius: 20px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        background: rgba(255, 252, 245, 0.88) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        border: 1.5px solid rgba(223, 162, 67, 0.45) !important;
+        box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12) !important;
+    }
+
+    body.home-page .hero-tagline,
+    .hero-tagline {
+        font-size: 0.78rem !important;
+        padding: 5px 12px !important;
+        margin-bottom: 12px !important;
+        justify-content: center !important;
+    }
+
+    body.home-page .hero-title,
+    .hero-title {
+        font-size: clamp(1.8rem, 5.5vw, 2.5rem) !important;
+        line-height: 1.18 !important;
+        margin-bottom: 10px !important;
+        text-align: center !important;
+    }
+
+    body.home-page .hero-subtitle,
+    .hero-subtitle {
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 20px !important;
+        text-align: center !important;
+        max-width: 540px !important;
+    }
+
+    body.home-page .hero-cta-group,
+    .hero-cta-group {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    body.home-page .hero-cta-group .btn-primary,
+    body.home-page .hero-cta-group .btn-secondary,
+    .hero-cta-group .btn-primary,
+    .hero-cta-group .btn-secondary {
+        flex: 1 1 160px !important;
+        max-width: 260px !important;
+        height: 44px !important;
+        padding: 0 16px !important;
+        font-size: 0.86rem !important;
+        justify-content: center !important;
+        border-radius: 12px !important;
+    }
+
+    /* Highlights Row on Tablet & Mobile */
+    body.home-page .hero-highlights-wrap,
+    .hero-highlights-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-top: 4px !important;
+        margin-bottom: 10px !important;
+    }
+
+    body.home-page .highlight-pill-glass,
+    .highlight-pill-glass {
+        padding: 10px 14px !important;
+        font-size: 0.78rem !important;
+        text-align: center !important;
+        justify-content: center !important;
+        border-radius: 14px !important;
+    }
+
+    /* Mobile Quick Feature Action Cards */
+    .mobile-feature-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin: 4px 0 16px 0 !important;
+    }
+
+    .mobile-feature-card {
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border: 1.5px solid rgba(223, 162, 67, 0.4) !important;
+        border-radius: 16px !important;
+        padding: 16px 12px !important;
+        text-decoration: none !important;
+        color: inherit !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 6px !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06) !important;
+        transition: transform 0.2s ease, border-color 0.2s ease !important;
+    }
+
+    .mobile-feature-card:active {
+        transform: scale(0.97) !important;
+        border-color: #df9c30 !important;
+    }
+
+    .mobile-feature-icon {
+        font-size: 1.8rem !important;
+        line-height: 1 !important;
+        margin-bottom: 2px !important;
+    }
+
+    .mobile-feature-title {
+        font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        color: #0c1e28 !important;
+    }
+
+    .mobile-feature-desc {
+        font-size: 0.7rem !important;
+        color: #64748b !important;
+        line-height: 1.3 !important;
+    }
+
+    /* End-Point Footer on Tablet & Mobile (Docked naturally at bottom) */
+    body.home-page .hero-endpoint-footer,
+    .hero-endpoint-footer {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 14px !important;
+        padding: 20px 16px !important;
+        border-radius: 20px !important;
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+        background: rgba(255, 252, 245, 0.92) !important;
+    }
+
+    .endpoint-brand-wrap {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 8px !important;
+    }
+
+    .endpoint-brand-title {
+        font-size: 1.15rem !important;
+        justify-content: center !important;
+    }
+
+    .endpoint-tagline {
+        font-size: 0.74rem !important;
+        text-align: center !important;
+    }
+
+    .endpoint-subtext {
+        font-size: 0.72rem !important;
+        text-align: center !important;
+        max-width: 440px !important;
+    }
+
+    .endpoint-center-info {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .endpoint-emergency-desk {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .endpoint-emergency-btn,
+    body.home-page .endpoint-emergency-btn {
+        width: 100% !important;
+        max-width: 340px !important;
+        height: 48px !important;
+        justify-content: center !important;
+        padding: 0 16px !important;
+    }
 }
 
-body.home-page .main-stage {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    display: flex !important;
-    align-items: flex-end !important;
-    justify-content: space-between !important;
-    padding-top: clamp(4px, 1vh, 12px) !important;
-    padding-bottom: clamp(6px, 1.2vh, 14px) !important;
-}
-
-body.home-page .hero-content {
-    align-self: flex-end !important;
-    max-width: clamp(380px, 42vw, 500px) !important;
-    padding-bottom: 0 !important;
-    margin-bottom: clamp(10px, 1.8vh, 20px) !important;
-}
-
-body.home-page .hero-glass-card {
-    padding: clamp(14px, 1.8vh, 20px) clamp(18px, 2vw, 26px) !important;
-    border-radius: var(--radius-lg) !important;
-}
-
-body.home-page .hero-tagline {
-    font-size: 0.74rem !important;
-    padding: 3px 10px !important;
-    margin-bottom: clamp(4px, 0.8vh, 8px) !important;
-}
-
-body.home-page .hero-title {
-    font-size: clamp(1.8rem, 2.8vw, 2.6rem) !important;
-    line-height: 1.1 !important;
-    margin-bottom: clamp(4px, 0.8vh, 8px) !important;
-    letter-spacing: -0.5px !important;
-}
-
-body.home-page .hero-subtitle {
-    font-size: clamp(0.78rem, 0.9vw, 0.88rem) !important;
-    line-height: 1.4 !important;
-    margin-bottom: clamp(10px, 1.4vh, 14px) !important;
-}
-
-body.home-page .hero-cta-group {
-    gap: 10px !important;
-}
-
-body.home-page .hero-cta-group .btn-primary,
-body.home-page .hero-cta-group .btn-secondary {
-    font-size: 0.82rem !important;
-    padding: clamp(7px, 1vh, 9px) clamp(14px, 1.4vw, 20px) !important;
-}
-
-body.home-page .hero-highlights-wrap {
-    align-self: flex-end !important;
-    margin-bottom: clamp(14px, 2.2vh, 24px) !important;
-    gap: clamp(6px, 1vh, 10px) !important;
-}
-
-body.home-page .highlight-pill-glass {
-    padding: clamp(6px, 0.9vh, 8px) clamp(12px, 1.2vw, 15px) !important;
-    font-size: clamp(0.74rem, 0.82vw, 0.8rem) !important;
-}
-
-/* Home End-Point Footer - Elevated, Compact & 100% Fit On Screen */
-body.home-page .hero-endpoint-footer {
-    flex-shrink: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding: clamp(7px, 0.9vh, 11px) clamp(16px, 1.8vw, 24px) !important;
-    border-radius: 18px !important;
-    gap: 14px !important;
-    box-shadow: 0 6px 25px rgba(12, 16, 22, 0.1), inset 0 1px 2px #ffffff !important;
-}
-
-body.home-page .endpoint-logo-img {
-    width: 44px !important;
-    height: 44px !important;
-}
-
-body.home-page .endpoint-brand-title {
-    font-size: 1.12rem !important;
-    line-height: 1.15 !important;
-}
-
-body.home-page .endpoint-badge {
-    font-size: 0.6rem !important;
-    padding: 1px 6px !important;
-}
-
-body.home-page .endpoint-tagline {
-    font-size: 0.68rem !important;
-}
-
-body.home-page .endpoint-subtext {
-    font-size: 0.68rem !important;
-    line-height: 1.25 !important;
-}
-
-body.home-page .endpoint-trust-pill {
-    padding: 3px 10px !important;
-    font-size: 0.7rem !important;
-}
-
-body.home-page .endpoint-copyright {
-    font-size: 0.67rem !important;
-}
-
-body.home-page .endpoint-emergency-desk {
-    gap: 3px !important;
-}
-
-body.home-page .emergency-desk-header {
-    font-size: 0.66rem !important;
-}
-
-body.home-page .endpoint-emergency-btn {
-    padding: 6px 16px !important;
-    gap: 8px !important;
-    border-radius: 40px !important;
-}
-
-body.home-page .emergency-btn-icon-wrap {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 0.95rem !important;
-}
-
-body.home-page .emergency-btn-label {
-    font-size: 0.58rem !important;
-}
-
-body.home-page .emergency-btn-number {
-    font-size: 1.08rem !important;
-}
-
-body.home-page .emergency-desk-sub {
-    font-size: 0.65rem !important;
+/* Compact Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+    body.home-page .app-container,
+    .app-container {
+        padding: 0 10px 85px 10px !important;
+    }
+    .navbar {
+        padding: 0 10px !important;
+    }
+    .brand-title {
+        font-size: 1rem !important;
+    }
+    .hero-title {
+        font-size: 1.7rem !important;
+    }
+    .hero-cta-group .btn-primary,
+    .hero-cta-group .btn-secondary {
+        max-width: 100% !important;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+    .mobile-feature-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
 }
 
 /* =============================================================
