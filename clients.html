@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="clients-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VIP Clients &amp; Pets Directory | VetiMedicos Official Sanctuary</title>
+    <meta name="description" content="Explore verified pet parents, registered canine and feline companions, and their clinical wellness records at VetiMedicos World-Class Sanctuary.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="clients-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 70px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="checkup.html" id="nav-checkup-link" title="Instant Online Pet Checkup &amp; Video Consultations">Online Checkup <span style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(16,185,129,0.4);">LIVE</span></a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" class="active" id="nav-clients-link" title="Click to view Signed-In Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart Button -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons...">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Master Clients Stage ================= -->
+        <main class="clients-page-stage">
+            
+            <!-- 1. Hero Showcase Card -->
+            <section class="roster-hero-card" aria-label="VIP Clients Directory Showcase">
+                <div class="roster-hero-tagline">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="Crest EST. 2026" style="width:20px; height:20px; border-radius:50%; object-fit:contain; border:1px solid rgba(223,162,67,0.6);">
+                    <span>🐾</span> Verified Pet Parents &amp; Companions &bull; <strong>EST. 2026</strong>
+                </div>
+
+                <h1 class="roster-hero-title">
+                    Verified <span class="highlight-gold">VIP Clients &amp; Pets</span> Directory
+                </h1>
+
+                <p class="roster-hero-subtitle">
+                    Live pet parent registry: Meet our community of verified client families, their noble pets, vaccination passports, and tailored sanctuary wellness programs.
+                </p>
+
+                <!-- Live Statistics Strip -->
+                <div class="roster-stats-strip">
+                    <div class="roster-stat-card">
+                        <div class="roster-stat-icon">👑</div>
+                        <div>
+                            <div class="roster-stat-val" id="clients-stat-total">5</div>
+                            <div class="roster-stat-lbl">Active VIP Families</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(223, 162, 67, 0.4);">
+                        <div class="roster-stat-icon" style="background:#fff8eb; border-color:#fed7aa; color:#c2410c;">🐕</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #c2410c;" id="clients-stat-dogs">3</div>
+                            <div class="roster-stat-lbl">Registered Dogs</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(147, 51, 234, 0.4);">
+                        <div class="roster-stat-icon" style="background:#faf5ff; border-color:#e9d5ff; color:#7e22ce;">🐈</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #7e22ce;" id="clients-stat-cats">3</div>
+                            <div class="roster-stat-lbl">Registered Cats</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                        <div class="roster-stat-icon" style="background:#ecfdf5; border-color:#a7f3d0; color:#059669;">🦜</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #059669;" id="clients-stat-others">2</div>
+                            <div class="roster-stat-lbl">Birds &amp; Exotic Pets</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Controls & Search Toolbar -->
+            <section class="roster-toolbar-card" aria-label="Clients Search and Filters">
+                <div class="roster-search-bar">
+                    <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="clients-search-input" placeholder="Search by client name, pet name, breed, or pet type..." autocomplete="off">
+                    <button type="button" class="search-clear-btn" id="clients-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                </div>
+
+                <div class="roster-filters-wrap duty-filters-group" role="tablist" aria-label="Filter Clients by Pet Type">
+                    <button type="button" class="duty-filter-chip client-filter-chip active" data-filter="all">All Clients (5)</button>
+                    <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Dog">🐕 Dogs (3)</button>
+                    <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Cat">🐈 Cats (3)</button>
+                    <button type="button" class="duty-filter-chip client-filter-chip" data-filter="other">🦜 Birds &amp; Others (2)</button>
+                </div>
+
+                <div class="roster-actions-wrap">
+                    <a href="history.html" class="btn-duty-login-switch" id="btn-clients-history" title="View All Clients &amp; Pets Medical History &amp; Official Reports" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color:#ffffff; font-weight:800; padding:9px 18px; border-radius:12px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.25); box-shadow:0 4px 14px rgba(16, 185, 129, 0.35);">
+                        <span>📜</span> Clients History &amp; Medical Reports
+                    </a>
+                    <button type="button" class="btn-duty-login-switch" id="clients-quick-demo-btn" title="Instant 1-Click Client Sign In" style="background:rgba(239, 246, 255, 0.7); border-color:#93c5fd; color:#1d4ed8; font-weight:800; padding:9px 16px; border-radius:12px; cursor:pointer;">
+                        ⚡ Quick Test Client
+                    </button>
+                    <button type="button" class="btn-duty-login-switch" id="clients-to-login-btn" title="Client Sign In / Register" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; font-weight:800; padding:9px 16px; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.2);">
+                        🔐 Client Sign In
+                    </button>
+                </div>
+            </section>
+
+            <!-- 3. Dynamic Clients & Pets Grid -->
+            <section class="roster-cards-stage" id="clients-directory-grid" aria-label="Active Clients and Pets Grid">
+                <!-- Dynamically rendered via app.js -->
+            </section>
+
+            <!-- 4. Sanctuary Perks Banner -->
+            <section class="roster-hero-card" style="padding: 24px; text-align: left; flex-direction: row; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-color: rgba(223, 162, 67, 0.4); background: linear-gradient(135deg, rgba(255, 252, 245, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 52px; height: 52px; border-radius: 14px; background: #fff8eb; border: 1.5px solid #fed7aa; display: grid; place-content: center; font-size: 1.8rem;">
+                        💎
+                    </div>
+                    <div>
+                        <h3 style="color: #9a3412; font-size: 1.2rem; font-weight: 900; margin-bottom: 2px;">VetiMedicos Royal Membership Program</h3>
+                        <p style="color: #7c2d12; font-size: 0.88rem; margin: 0;">Enjoy priority OPD tokens, complimentary clinical coat polishing, and same-day home diet deliveries.</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <a href="history.html" class="btn-primary" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; padding: 10px 20px; border-radius: 30px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+                        <span>📜</span> Open All Pets Medical History &amp; Lab Reports
+                    </a>
+                    <a href="shop.html" class="btn-primary" style="background: var(--gold-gradient); color: #fff; padding: 10px 22px; border-radius: 30px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px rgba(223, 162, 67, 0.35);">
+                        🛍️ Explore Member Emporium
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ================= End Point Official Brand Seal ================= -->
+        <footer class="roster-official-footer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px 20px 12px; margin-top: 30px; margin-bottom: 0; border-top: 1.5px solid rgba(223, 162, 67, 0.35); background: rgba(255, 252, 245, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
+                <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 52px; height: 52px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 16px rgba(223, 162, 67, 0.4); border: 2px solid rgba(223, 162, 67, 0.65); background: #ffffff;">
+                <div style="text-align: left; line-height: 1.25;">
+                    <div style="font-size: 1.25rem; font-weight: 900; color: #0c1e28; letter-spacing: -0.4px;">
+                        Veti<span style="color: #df9c30;">Medicos</span>
+                        <span style="font-size: 0.65rem; background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; padding: 2px 7px; border-radius: 8px; border: 1px solid rgba(223, 162, 67, 0.45); font-weight: 800; vertical-align: middle; margin-left: 4px;">EST. 2026</span>
+                    </div>
+                    <div style="font-size: 0.74rem; font-weight: 800; color: #b45309; letter-spacing: 0.8px; text-transform: uppercase;">
+                        World-Class 5-Star Veterinary Sanctuary &bull; Hospital
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 0 0 6px 0; max-width: 580px; line-height: 1.5;">
+                Dedicated to veterinary excellence, compassionate animal medicine, and 5-star royal luxury care for your beloved companions. &bull; 24/7 Emergency Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a>
+            </p>
+            <div style="font-size: 0.74rem; color: #94a3b8; font-weight: 600;">
+                &copy; 2026 VetiMedicos™. All Rights Reserved. Official Medical Cross &amp; Laurel Crest Registered.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================= Toast Notification System ================= -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Application Script -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

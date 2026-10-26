@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" class="home-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VetiMedicos - Veterinary & Pet Care Portal | Client & Doctor Login</title>
+    <meta name="description" content="VetiMedicos - Professional pet care, veterinary doctors, clinic appointments, and premium nutrition. Sign in as Pet Parent or Veti Doctor.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="home-page">
+    <!-- Full-Page Background Pets Image Stage (Shifted Lower Down, Clear & Grounded) -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Group" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+    </div>
+
+    <!-- Ambient Lighting Effects -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Application Viewport Container (Strictly 100vh, No Scroll on Desktop) -->
+    <div class="app-container">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="checkup.html" id="nav-checkup-link" title="Instant Online Pet Checkup &amp; Video Consultations">Online Checkup <span style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(16,185,129,0.4);">LIVE</span></a></li>
+                    <li><a href="services.html" id="nav-services-link">Services</a></li>
+                    <li><a href="shop.html" id="nav-shop-link">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view VIP Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart" onclick="if(window.openCartDrawer) window.openCartDrawer();">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons..." onclick="if(window.openSearchModal) window.openSearchModal();">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button (Adjusted into Login Icon with Pill) -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Main Hero Section ================= -->
+        <main class="main-stage">
+            
+            <!-- Left Hero Content (Frosted Glass Card) -->
+            <section class="hero-content">
+                <div class="hero-glass-card">
+                    <div class="hero-tagline" style="display: flex; align-items: center; gap: 8px;">
+                        <img src="assets/images/vetimedicos_official_logo.png" alt="Official Crest EST. 2026" style="width: 24px; height: 24px; border-radius: 50%; object-fit: contain; box-shadow: 0 2px 6px rgba(223,162,67,0.4); border: 1px solid rgba(223,162,67,0.6);">
+                        <span>✦</span> World-Class 5-Star Sanctuary &bull; <strong>EST. 2026</strong>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Give<br>
+                        <span class="highlight">Satisfaction &amp; Luxury</span><br>
+                        to your pet
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Experience world-class veterinary medicine, 5-star holistic wellness, and royal comfort tailored for your beloved companions.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="checkup.html" class="btn-primary" id="hero-cta-btn" title="Live Video &amp; Chat Online Checkup with Veti Specialists">
+                            <span>Online Checkup</span>
+                            <div class="btn-icon-box">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </a>
+
+                        <a href="tel:03264223100" class="btn-secondary hero-emergency-btn" id="hero-emergency-btn" title="Call Emergency 24/7 (0326-4223100)">
+                            <span>Emergency Call</span>
+                            <span class="emergency-pulse-icon">📞</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Hero Highlights -->
+            <aside class="hero-highlights-wrap" aria-label="Clinic Highlights">
+                <div class="highlight-pill-glass">
+                    <span>⭐</span> 4.98/5 Rating (5,200+ VIP Clients)
+                </div>
+                <div class="highlight-pill-glass">
+                    <span>👑</span> 12,000+ Royal Pets Pampered
+                </div>
+                <a href="doctors.html" class="highlight-pill-glass" id="pill-duty-trigger" style="text-decoration: none; color: inherit; cursor: pointer;" title="Click to view full duty roster">
+                    <span>🩺</span> 48 Certified Specialists <span style="background:rgba(16, 185, 129, 0.15); color:#059669; border:1px solid rgba(16, 185, 129, 0.35); padding:2px 8px; border-radius:10px; font-size:0.7rem; margin-left:4px; font-weight:800;">🟢 4 ON DUTY</span>
+                </a>
+            </aside>
+        </main>
+
+        <!-- ================= End-Point Official Brand Seal & Emergency Desk ================= -->
+        <footer class="hero-endpoint-footer" id="hero-endpoint-footer" role="contentinfo" aria-label="VetiMedicos Official Footer & Emergency Desk">
+            <!-- Left: Brand Logo & Identity -->
+            <div class="endpoint-brand-wrap">
+                <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Seal EST. 2026" class="endpoint-logo-img">
+                <div class="endpoint-brand-meta">
+                    <div class="endpoint-brand-title">
+                        Veti<span class="gold-txt">Medicos</span>
+                        <span class="endpoint-badge">EST. 2026</span>
+                    </div>
+                    <div class="endpoint-tagline">
+                        World-Class 5-Star Veterinary Sanctuary &bull; Hospital
+                    </div>
+                    <div class="endpoint-subtext">
+                        Dedicated to clinical excellence, compassionate medicine, and 24/7 royal luxury care.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle: Accreditation & Trust Badge -->
+            <div class="endpoint-center-info">
+                <div class="endpoint-trust-pill">
+                    <span class="trust-shield">🛡️</span> PVMC &amp; Clinical Board Certified &bull; 24/7 Trauma ICU
+                </div>
+                <div class="endpoint-copyright">
+                    &copy; 2026 VetiMedicos™. All Rights Reserved. Official Medical Crest Registered.
+                </div>
+            </div>
+
+            <!-- Right: 24/7 Emergency Dialing Desk -->
+            <div class="endpoint-emergency-desk">
+                <div class="emergency-desk-header">
+                    <span class="emergency-pulse-dot"></span>
+                    <span>24/7 Critical Trauma Helpline</span>
+                </div>
+                <a href="tel:03264223100" class="endpoint-emergency-btn" id="footer-emergency-call-btn" title="Instant 1-Click Dial to Emergency Desk">
+                    <div class="emergency-btn-icon-wrap" aria-hidden="true">
+                        📞
+                    </div>
+                    <div class="emergency-btn-text-wrap">
+                        <span class="emergency-btn-label">Instant Emergency Call</span>
+                        <span class="emergency-btn-number">0326-4223100</span>
+                    </div>
+                </a>
+                <div class="emergency-desk-sub">
+                    🟢 Specialists on Duty &bull; Click to Dial Directly
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =============================================================
+         Auth Floating Dropdown / Modal (Adjusted into Login Icon)
+         ============================================================= -->
+    <div class="auth-modal-wrapper" id="auth-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="signin-heading-title">
+        <!-- Backdrop Scrim -->
+        <div class="auth-modal-backdrop" id="auth-modal-backdrop"></div>
+
+        <!-- Floating Card Container -->
+        <div class="auth-floating-container">
+            <div class="auth-card">
+                <!-- Close Button -->
+                <button type="button" class="auth-close-btn" id="auth-close-btn" aria-label="Close Login Modal">&times;</button>
+
+                <!-- Official Crest Header in Login Card -->
+                <div class="auth-brand-badge" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(223, 162, 67, 0.2);">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Crest EST. 2026" style="width: 38px; height: 38px; border-radius: 50%; box-shadow: 0 3px 10px rgba(223, 162, 67, 0.35); border: 1.5px solid rgba(223, 162, 67, 0.5); object-fit: contain; background: #ffffff;">
+                    <div style="text-align: left; line-height: 1.15;">
+                        <div style="font-weight: 800; font-size: 0.95rem; color: #0c1e28;">Veti<span style="color:#df9c30;">Medicos</span></div>
+                        <div style="font-size: 0.62rem; color: #b45309; font-weight: 800; letter-spacing: 0.6px;">OFFICIAL CREST &bull; EST. 2026</div>
+                    </div>
+                </div>
+
+                <!-- Dual Role Selector: Client vs Veti Doctor -->
+                <div class="role-selector-bar" role="tablist" aria-label="Select Login Role">
+                    <button type="button" class="role-chip active" data-role="client" id="role-chip-client" role="tab" aria-selected="true">
+                        <span class="role-icon">🐾</span>
+                        <span>Client / Pet Parent</span>
+                    </button>
+                    <button type="button" class="role-chip" data-role="doctor" id="role-chip-doctor" role="tab" aria-selected="false">
+                        <span class="role-icon">🩺</span>
+                        <span>Veti Doctor</span>
+                    </button>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 1: SIGN IN VIEW
+                     ----------------------------------------- -->
+                <div id="view-signin" class="card-view active">
+                    <div class="card-header">
+                        <h2 class="card-title" id="signin-heading-title">Client <span>Sign In</span></h2>
+                        <p class="card-desc" id="signin-heading-subtitle">Welcome Pet Parent! Manage your pets &amp; clinic appointments</p>
+                    </div>
+
+                    <form id="form-signin" novalidate>
+                        <!-- Email Input -->
+                        <div class="form-group">
+                            <label for="signin-email" class="input-label">Email Address</label>
+                            <div class="input-box">
+                                <input type="email" id="signin-email" placeholder="client@example.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Specified Doctor Information Box (Visible only in Doctor Mode) -->
+                        <div class="doctor-signin-field" id="doctor-signin-spec-box">
+                            <div class="doctor-spec-compact-box">
+                                <div class="doctor-spec-header">
+                                    <span>🩺 Specified Doctor Details <span class="spec-req-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link" id="auth-duty-link" title="View Doctors On Duty">📋 OPD Roster</button>
+                                </div>
+                                
+                                <!-- Doctor Name & License -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-name" class="input-label">Doctor Name *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-doctor-name" placeholder="e.g. Dr. Farhan Qureshi" required autocomplete="name">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-license" class="input-label">License / Reg *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-license" placeholder="e.g. VET-PK-2026-DVM" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Specialization & Assigned Room -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-specialty" class="input-label">Specialization</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-specialty">
+                                                <option value="Chief Veterinary Surgeon|Department of Surgery & Orthopedics">Chief Veterinary Surgeon</option>
+                                                <option value="Canine Health & Dog Diagnostics|Canine Wellness OPD Block A">Canine &amp; Dog Specialist</option>
+                                                <option value="Feline (Cat) & Small Pet Medicine|Cat Care & Vaccination Wing">Feline &amp; Small Pet Specialist</option>
+                                                <option value="Emergency Veterinary Physician|24/7 Trauma & Emergency ICU">Emergency &amp; Trauma ICU</option>
+                                                <option value="Clinical Pet Nutrition & Dietetics|Pet Nutrition & Preventive Care">Clinical Pet Nutrition</option>
+                                                <option value="Birds, Parrots & Exotic Mammals|Exotic Animals & Aviary Unit">Avian &amp; Exotic Species</option>
+                                                <option value="General Veterinary Medicine|Outpatient Clinic Services">General Veterinary Medicine</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-room" class="input-label">Chamber / Room</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-room">
+                                                <option value="Executive Surgery Suite 101">Suite 101</option>
+                                                <option value="Canine OPD Room 103">Room 103 (Canine)</option>
+                                                <option value="Feline Clinic Room 105">Room 105 (Feline)</option>
+                                                <option value="Dietary Clinic Room 108">Room 108 (Nutrition)</option>
+                                                <option value="Trauma Ward & OT-2">OT-2 (Trauma)</option>
+                                                <option value="Aviary Clinic Room 110">Room 110 (Aviary)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Duty Shift & Duty Status -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-shift" class="input-label">Duty Shift</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-shift">
+                                                <option value="08:00 AM - 04:00 PM (Morning)">Morning (08:00 AM - 04:00 PM)</option>
+                                                <option value="10:00 AM - 06:00 PM (General)">General (10:00 AM - 06:00 PM)</option>
+                                                <option value="02:00 PM - 10:00 PM (Evening)">Evening (02:00 PM - 10:00 PM)</option>
+                                                <option value="12:00 PM - 08:00 PM (Emergency Shift)">Emergency (12:00 PM - 08:00 PM)</option>
+                                                <option value="04:00 PM - 11:00 PM (Night Shift)">Night (04:00 PM - 11:00 PM)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-status" class="input-label">Initial Status</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-status">
+                                                <option value="onduty">🟢 On Duty Now</option>
+                                                <option value="surgery">🟡 In Surgery</option>
+                                                <option value="consultation">🔵 In Consultation</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Client Pet Information (Visible in Client Mode) -->
+                        <div class="client-signin-field" id="client-signin-pet-box">
+                            <div class="client-spec-compact-box">
+                                <div class="client-spec-header">
+                                    <span>🐾 Pet Details (Client Profile) <span class="spec-req-badge client-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link client-link" id="auth-clients-link" title="View Registered Clients">🐾 Live Directory</button>
+                                </div>
+                                <div class="spec-grid-3">
+                                    <div>
+                                        <label for="signin-pet-name" class="input-label">Pet Name *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-pet-name" placeholder="e.g. Rocky, Bella" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-type" class="input-label">Species</label>
+                                        <div class="input-box">
+                                            <select id="signin-pet-type">
+                                                <option value="Dog">🐕 Dog</option>
+                                                <option value="Cat">🐈 Cat</option>
+                                                <option value="Bird">🦜 Bird / Parrot</option>
+                                                <option value="Rabbit">🐇 Rabbit</option>
+                                                <option value="Other">🐾 Other Pet</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-breed" class="input-label">Breed / Age</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-pet-breed" placeholder="Golden Retriever, 2 yrs">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="form-group">
+                            <label for="signin-password" class="input-label">Password</label>
+                            <div class="input-box">
+                                <input type="password" id="signin-password" placeholder="enter your password" required autocomplete="current-password">
+                                <button type="button" class="input-toggle-pw" data-target="signin-password" aria-label="Toggle password visibility">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="form-options">
+                            <label class="remember-label">
+                                <input type="checkbox" id="remember-me" checked>
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" id="btn-to-forgot" class="forgot-link">Forgot password ?</a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit" id="btn-submit-signin">
+                            <span class="btn-text" id="signin-btn-label">Sign In as Client 🐾</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <!-- Social Divider -->
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Google Sign In -->
+                        <button type="button" class="btn-google" id="btn-google-signin">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Sign In with Google</span>
+                        </button>
+
+                        <!-- Footer Links -->
+                        <div class="card-footer">
+                            <span class="footer-text">New to VetiMedicos?</span>
+                            <button type="button" id="btn-to-signup" class="footer-switch-btn">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 2: SIGN UP VIEW
+                     ----------------------------------------- -->
+                <div id="view-signup" class="card-view">
+                    <div class="card-header">
+                        <h2 class="card-title" id="signup-heading-title">Create <span>Pet Account</span></h2>
+                        <p class="card-desc" id="signup-heading-subtitle">Join VetiMedicos for professional pet care &amp; nutrition</p>
+                    </div>
+
+                    <form id="form-signup" novalidate>
+                        <!-- Name Input -->
+                        <div class="form-group">
+                            <label for="signup-name" class="input-label">Full Name</label>
+                            <div class="input-box">
+                                <input type="text" id="signup-name" placeholder="John Doe / Dr. Sarah" required autocomplete="name">
+                            </div>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="form-group">
+                            <label for="signup-email" class="input-label">Email Address</label>
+                            <div class="input-box">
+                                <input type="email" id="signup-email" placeholder="name@domain.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Doctor Specialization & License (Doctor mode only) -->
+                        <div class="doctor-signup-field" style="margin-bottom: 5px;">
+                            <div class="spec-grid-2">
+                                <div>
+                                    <label for="signup-specialty" class="input-label">Specialization</label>
+                                    <div class="input-box">
+                                        <select id="signup-specialty">
+                                            <option value="General Veterinary Medicine">General Veterinary</option>
+                                            <option value="Small Animal Surgery">Small Animal Surgery</option>
+                                            <option value="Canine & Feline Specialist">Canine &amp; Feline</option>
+                                            <option value="Veterinary Dermatology">Dermatology</option>
+                                            <option value="Animal Nutrition & Dietetics">Nutrition &amp; Diet</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="signup-license" class="input-label">License Number</label>
+                                    <div class="input-box">
+                                        <input type="text" id="signup-license" placeholder="VET-LIC-2026-PK">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Client Pet Information (Client mode only) -->
+                        <div class="client-signup-field" id="client-pet-fields-wrap" style="margin-bottom: 5px;">
+                            <div class="client-spec-compact-box">
+                                <div class="client-spec-header">
+                                    <span>🐾 Your Pet Information (Optional)</span>
+                                </div>
+                                <div class="spec-grid-3">
+                                    <div>
+                                        <label for="signup-pet-name" class="input-label">Pet Name</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signup-pet-name" placeholder="Rocky">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signup-pet-type" class="input-label">Species</label>
+                                        <div class="input-box">
+                                            <select id="signup-pet-type">
+                                                <option value="Dog">🐕 Dog</option>
+                                                <option value="Cat">🐈 Cat</option>
+                                                <option value="Bird">🦜 Bird</option>
+                                                <option value="Rabbit">🐇 Rabbit</option>
+                                                <option value="Other">🐾 Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signup-pet-breed" class="input-label">Breed / Age</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signup-pet-breed" placeholder="Golden Retriever, 2y">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password & Confirm Password side-by-side -->
+                        <div class="spec-grid-2">
+                            <div>
+                                <label for="signup-password" class="input-label">Password</label>
+                                <div class="input-box">
+                                    <input type="password" id="signup-password" placeholder="Min 6 chars" required autocomplete="new-password">
+                                    <button type="button" class="input-toggle-pw" data-target="signup-password" aria-label="Toggle password">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="signup-confirm" class="input-label">Confirm Password</label>
+                                <div class="input-box">
+                                    <input type="password" id="signup-confirm" placeholder="Repeat password" required autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit" id="btn-submit-signup">
+                            <span class="btn-text" id="signup-btn-label">Create Pet Account 🐾</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+
+                        <button type="button" class="btn-google" id="btn-google-signup">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Sign Up with Google</span>
+                        </button>
+
+                        <div class="card-footer">
+                            <span class="footer-text">Already registered?</span>
+                            <button type="button" id="btn-to-signin-from-up" class="footer-switch-btn">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 3: FORGOT PASSWORD VIEW
+                     ----------------------------------------- -->
+                <div id="view-forgot" class="card-view">
+                    <div class="card-header">
+                        <h2 class="card-title">Reset <span>Password</span></h2>
+                        <p class="card-desc">Enter your email to receive recovery instructions</p>
+                    </div>
+
+                    <form id="form-forgot" novalidate>
+                        <div class="form-group">
+                            <label for="forgot-email" class="input-label">Registered Email</label>
+                            <div class="input-box">
+                                <input type="email" id="forgot-email" placeholder="enter your email" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btn-submit-forgot">
+                            <span class="btn-text">Send Reset Link</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <div class="card-footer" style="justify-content: center;">
+                            <button type="button" id="btn-to-signin-from-forgot" class="footer-switch-btn">← Back to Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 4: AUTHENTICATED USER DASHBOARD
+                     ----------------------------------------- -->
+                <div id="view-user" class="card-view">
+                    <div class="card-header" style="text-align: center;">
+                        <div style="width: 58px; height: 58px; background: #e0f2fe; color: #0284c7; border-radius: 50%; display: grid; place-content: center; font-size: 1.7rem; margin: 0 auto 10px auto;">
+                            🐾
+                        </div>
+                        <div id="user-role-badge" class="role-badge client-badge">🐾 Verified Pet Parent</div>
+                        <h2 class="card-title" id="user-display-name">Pet Care User</h2>
+                        <p class="card-desc" id="user-display-email">user@veticare.com</p>
+                    </div>
+
+                    <div style="background: rgba(255, 255, 255, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 12px; margin-bottom: 18px;" id="user-role-details">
+                        <!-- Dynamically filled by app.js based on role -->
+                    </div>
+
+                    <button type="button" id="btn-signout" class="btn-submit">
+                        <span class="btn-text">Sign Out</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= Firebase Setup Guide Modal ================= -->
+    <div class="modal-backdrop" id="firebase-help-modal">
+        <div class="modal-box">
+            <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close Modal">&times;</button>
+            <h3 class="modal-title">
+                <span>🔥</span> How to Attach Firebase
+            </h3>
+            <p class="modal-subtitle">
+                Aap bohot asani se apni Firebase is project me attach kar sakte hain:
+            </p>
+
+            <ol class="setup-steps">
+                <li>
+                    <div>
+                        <strong>Firebase Console Kholain:</strong><br>
+                        <a href="https://console.firebase.google.com/" target="_blank" style="color: #f58220; text-decoration: underline;">https://console.firebase.google.com/</a> par ja kar naya project banayein.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Authentication &amp; Realtime Database Enable Karen:</strong><br>
+                        Left sidebar me <em>Build &gt; Authentication &gt; Get Started</em> me <strong>Email/Password</strong> aur <strong>Google</strong> on karein. Sath hi <em>Realtime Database</em> create karein.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Web App Credentials Copy Karen:</strong><br>
+                        Project Settings (Gear icon) me <em>General &gt; Your apps &gt; &lt;/&gt; Web</em> register karen aur <code>firebaseConfig</code> credentials copy karein.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>js/firebase-config.js Me Paste Karen:</strong><br>
+                        Is project ke file <code>js/firebase-config.js</code> me jakar placeholder keys ko apne real keys se replace kar dein:
+                    </div>
+                </li>
+            </ol>
+
+            <pre class="code-snippet"><code>const firebaseConfig = {
+    apiKey: "AIzaSyAPyS8fz1KeiShKZu3MDhu3jaNIohNPhko",
+    authDomain: "veticareorg.firebaseapp.com",
+    databaseURL: "https://veticareorg-default-rtdb.firebaseio.com",
+    projectId: "veticareorg",
+    storageBucket: "veticareorg.firebasestorage.app",
+    messagingSenderId: "1081993307648",
+    appId: "1:1081993307648:web:a99a69cf72b4895abfdae5",
+    measurementId: "G-QRMNGK9R79"
+};</code></pre>
+
+            <div style="font-size: 0.8rem; color: #065f46; background: #ecfdf5; padding: 10px 12px; border-radius: 8px; border-left: 3px solid #10b981;">
+                🟢 <strong>Live Mode Active:</strong> Realtime Firebase project <code>veticareorg</code> is fully connected! Client &amp; Doctor Dual Logins, Realtime Database sync, Orders, and Google Analytics are active.
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         Doctors On-Duty Board & Shift Roster Modal
+         ============================================================= -->
+    <div class="doctors-duty-backdrop" id="doctors-duty-modal" role="dialog" aria-modal="true" aria-labelledby="duty-modal-title">
+        <div class="doctors-duty-box">
+            <!-- Header -->
+            <div class="doctors-duty-header">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="duty-modal-title" style="display:flex; align-items:center; gap:8px;">
+                            <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest" style="width:28px; height:28px; vertical-align:middle;">
+                            <span>VetiMedicos <span>Doctor Portal</span></span>
+                        </h2>
+                        <p class="duty-subtitle">Live Duty Directory: Only verified veterinary doctors who have signed in as a Doctor appear here in real-time.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="duty-live-badge"><span class="pulse-green"></span> Live OPD Roster</span>
+                        <button type="button" class="btn-duty-login-switch" id="duty-quick-demo-btn" title="Instant 1-Click Doctor Sign In" style="background:#f0fdf4; border-color:#86efac; color:#15803d;">⚡ Quick Test Doctor</button>
+                        <button type="button" class="btn-duty-login-switch" id="duty-to-staff-login-btn" title="Doctor Staff Login">Staff Login 🔐</button>
+                        <button type="button" class="auth-close-btn" id="duty-modal-close-btn" aria-label="Close Doctor Portal" style="position: static;">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Search & Filter Controls -->
+                <div class="duty-controls-row">
+                    <div class="duty-search-box">
+                        <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="duty-search-input" placeholder="Search signed-in doctor by name, specialty, or room..." autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="modal-duty-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                    </div>
+                    <div class="duty-filters-group" role="tablist" aria-label="Filter Doctors by Status">
+                        <button type="button" class="duty-filter-chip active" data-filter="all">All Signed In (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="onduty">🟢 On Duty (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="surgery">🟡 In Surgery (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="consultation">🔵 In Consult (0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doctors Cards Body -->
+            <div class="doctors-duty-body" id="doctors-duty-grid">
+                <!-- Dynamically rendered via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         Clients & Pets Live Directory Modal
+         ============================================================= -->
+    <div class="doctors-duty-backdrop" id="clients-directory-modal" role="dialog" aria-modal="true" aria-labelledby="clients-modal-title">
+        <div class="doctors-duty-box">
+            <!-- Header -->
+            <div class="doctors-duty-header" style="background: rgba(240, 249, 255, 0.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="clients-modal-title" style="display:flex; align-items:center; gap:8px;">
+                            <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest" style="width:28px; height:28px; vertical-align:middle;">
+                            <span>VetiMedicos <span style="color: #0284c7;">Clients &amp; Pets Portal</span></span>
+                        </h2>
+                        <p class="duty-subtitle">Live Pet Parent Directory: View verified clients currently signed in along with their registered pets.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="duty-live-badge" id="clients-live-badge" style="background: rgba(224, 242, 254, 0.6); border-color:#bae6fd; color:#0369a1;"><span class="pulse-green" style="background:#0284c7; box-shadow:0 0 10px #0284c7;"></span> Live Clients (0)</span>
+                        <button type="button" class="btn-duty-login-switch" id="clients-quick-demo-btn" title="Instant 1-Click Client Sign In" style="background: rgba(239, 246, 255, 0.5); border-color: rgba(191, 219, 254, 0.8); color:#1d4ed8;">⚡ Quick Test Client</button>
+                        <button type="button" class="btn-duty-login-switch" id="clients-to-login-btn" title="Client Sign In / Register">Client Login 🐾</button>
+                        <button type="button" class="auth-close-btn" id="clients-modal-close-btn" aria-label="Close Clients Portal" style="position: static;">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Search & Filter Controls -->
+                <div class="duty-controls-row">
+                    <div class="duty-search-box">
+                        <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="clients-search-input" placeholder="Search by client name, pet name, breed, or pet type..." autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="modal-clients-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                    </div>
+                    <div class="duty-filters-group" role="tablist" aria-label="Filter Clients by Pet Type">
+                        <button type="button" class="duty-filter-chip client-filter-chip active" data-filter="all">All Clients (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Dog">🐕 Dogs (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Cat">🐈 Cats (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="other">🦜 Birds &amp; Others (0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients Cards Body -->
+            <div class="doctors-duty-body" id="clients-directory-grid">
+                <!-- Dynamically rendered via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         SLIDING SHOPPING CART DRAWER (FULL STATE)
+         ============================================================= -->
+    <div class="cart-drawer-backdrop" id="cart-drawer-backdrop" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-heading">
+        <div class="cart-drawer-box">
+            <!-- Header -->
+            <div class="cart-drawer-header">
+                <div class="cart-drawer-title-wrap">
+                    <h3 id="cart-drawer-heading" style="display:flex; align-items:center; gap:8px;">
+                        <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest EST. 2026" style="width:26px; height:26px; vertical-align:middle;">
+                        <span>Your VIP Shopping Bag</span>
+                        <span class="cart-count-badge" id="drawer-cart-badge">0 items</span>
+                    </h3>
+                </div>
+                <button type="button" class="auth-close-btn" id="cart-drawer-close-btn" aria-label="Close Shopping Bag" style="position:static;">&times;</button>
+            </div>
+
+            <!-- Free Shipping Progress -->
+            <div class="cart-free-shipping-bar" id="cart-free-shipping-bar">
+                <div id="free-shipping-text">Spend Rs. 5,000 for FREE Express VIP Shipping!</div>
+                <div class="free-ship-progress">
+                    <div class="free-ship-fill" id="free-shipping-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="cart-items-list" id="cart-items-container">
+                <!-- Dynamically populated or empty state -->
+            </div>
+
+            <!-- Footer Summary & Checkout Actions -->
+            <div class="cart-drawer-footer">
+                <div class="cart-summary-line">
+                    <span>Subtotal:</span>
+                    <strong id="cart-subtotal-val">Rs. 0</strong>
+                </div>
+                <div class="cart-summary-line">
+                    <span>Estimated Shipping (Pakistan):</span>
+                    <span id="cart-shipping-val">Rs. 250</span>
+                </div>
+                <div class="cart-summary-line total-line">
+                    <span>Total Amount:</span>
+                    <strong id="cart-total-val" style="color: #c2410c;">Rs. 0</strong>
+                </div>
+
+                <div class="cart-checkout-actions">
+                    <!-- WhatsApp 1-Click Order Button -->
+                    <button type="button" class="btn-cart-whatsapp" id="btn-cart-whatsapp" title="Instant Pakistani WhatsApp Order">
+                        <span>💬 Order via WhatsApp (Instant Confirmation)</span>
+                    </button>
+                    <!-- Standard Checkout Modal Button -->
+                    <button type="button" class="btn-cart-checkout" id="btn-cart-checkout" title="Proceed to Cash on Delivery Checkout">
+                        <span>Proceed to Checkout (COD / Bank Transfer) &rarr;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         CASH ON DELIVERY (COD) / CHECKOUT MODAL
+         ============================================================= -->
+    <div class="quickview-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title">
+        <div class="quickview-card" style="max-width: 520px;">
+            <button type="button" class="auth-close-btn" id="checkout-close-btn" aria-label="Close Checkout" style="position:absolute; top:14px; right:14px;">&times;</button>
+            
+            <div style="margin-bottom: 16px;">
+                <h3 id="checkout-modal-title" style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+                    🚚 Complete Your Order
+                </h3>
+                <p style="font-size: 0.78rem; color: #64748b;">
+                    Cash on Delivery (COD) &amp; Bank Transfer available nationwide across Pakistan.
+                </p>
+            </div>
+
+            <form id="form-shop-checkout" novalidate>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="order-fullname" class="input-label">Full Name *</label>
+                    <div class="input-box">
+                        <input type="text" id="order-fullname" placeholder="e.g. Farhan Ahmed" required autocomplete="name">
+                    </div>
+                </div>
+
+                <div class="spec-grid-2" style="margin-bottom: 10px;">
+                    <div>
+                        <label for="order-phone" class="input-label">WhatsApp / Phone *</label>
+                        <div class="input-box">
+                            <input type="tel" id="order-phone" placeholder="0300-1234567" required autocomplete="tel">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="order-city" class="input-label">City *</label>
+                        <div class="input-box">
+                            <select id="order-city">
+                                <option value="Islamabad">Islamabad (Same-Day)</option>
+                                <option value="Rawalpindi">Rawalpindi (Same-Day)</option>
+                                <option value="Lahore">Lahore (Same-Day)</option>
+                                <option value="Karachi">Karachi (TCS Express)</option>
+                                <option value="Peshawar">Peshawar (Express)</option>
+                                <option value="Faisalabad">Faisalabad (Express)</option>
+                                <option value="Multan">Multan (Express)</option>
+                                <option value="Quetta">Quetta (Express)</option>
+                                <option value="Sialkot">Sialkot (Express)</option>
+                                <option value="Gujranwala">Gujranwala (Express)</option>
+                                <option value="Other">Other City in Pakistan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="order-address" class="input-label">Delivery Street Address *</label>
+                    <div class="input-box">
+                        <input type="text" id="order-address" placeholder="House #, Street, Phase / Sector" required autocomplete="street-address">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label class="input-label">Payment Method</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <label style="border: 1.5px solid rgba(223, 162, 67, 0.4); border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #334155; cursor: pointer; background: #fff8eb;">
+                            <input type="radio" name="payment_method" value="cod" checked>
+                            <span>💵 Cash on Delivery</span>
+                        </label>
+                        <label style="border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #334155; cursor: pointer; background: #ffffff;">
+                            <input type="radio" name="payment_method" value="bank">
+                            <span>🏦 Bank / Nayapay</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Order Total Summary Box -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.8rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="color: #64748b;">Cart Total:</span>
+                        <strong id="checkout-summary-total">Rs. 0</strong>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #15803d; font-weight: 700;">
+                        🚚 Free express delivery applied on qualifying orders!
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit-order" style="height: 44px; font-size: 0.95rem;">
+                    <span class="btn-text">Confirm &amp; Place Order 📦</span>
+                    <span class="spinner"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

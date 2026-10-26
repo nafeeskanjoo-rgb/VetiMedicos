@@ -1,0 +1,6 @@
+# Local & System files
+.DS_Store
+Thumbs.db
+*.log
+scratch/
+edge_profile/

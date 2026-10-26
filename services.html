@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en" class="services-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hospital Facilities & Medical Services | VetiMedicos World-Class Sanctuary</title>
+    <meta name="description" content="Explore VetiMedicos' premier veterinary facilities: 24/7 Emergency Trauma ICU, Executive Surgical Suites, Digital Radiology, In-House Pathology Lab, and VIP Recovery Suites.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="services-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: auto !important; max-height: none !important; overflow: visible !important; padding-bottom: 24px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="shop.html" id="nav-shop-link">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view VIP Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons...">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Services Page Header ================= -->
+        <section class="services-hero-header">
+            <div class="services-tagline">
+                <span>✦</span> World-Class Hospital Infrastructure &amp; Medical Facilities
+            </div>
+            <h1 class="services-title">
+                Our Specialized <span class="highlight-gold">Medical Facilities</span>
+            </h1>
+            <p class="services-subtitle">
+                At VetiMedicos, every department is custom-engineered for maximum clinical precision, humane comfort, and rapid emergency intervention. Discover our state-of-the-art facilities detailed below.
+            </p>
+        </section>
+
+        <!-- ================= Filter & Search Toolbar ================= -->
+        <section class="facilities-toolbar" aria-label="Facility Filters and Search">
+            <div class="facility-search-wrap">
+                <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="facility-search-input" placeholder="Search facilities, doctors, equipment, or departments..." aria-label="Search Facilities" autocomplete="off">
+                <button type="button" class="search-clear-btn" id="facility-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+            </div>
+
+            <div class="facility-category-filters" role="tablist" aria-label="Filter by Category">
+                <button type="button" class="facility-filter-chip active" data-category="all">All Facilities (10)</button>
+                <button type="button" class="facility-filter-chip" data-category="emergency">🚨 Emergency ICU</button>
+                <button type="button" class="facility-filter-chip" data-category="surgery">🔪 Surgery &amp; OT</button>
+                <button type="button" class="facility-filter-chip" data-category="diagnostics">🔬 Diagnostics &amp; Lab</button>
+                <button type="button" class="facility-filter-chip" data-category="opd">🐾 Specialized OPD</button>
+                <button type="button" class="facility-filter-chip" data-category="wellness">✨ Spa &amp; Boarding</button>
+            </div>
+        </section>
+
+        <!-- ================= Facilities Cards Grid (10 Detailed Facilities) ================= -->
+        <main class="facilities-grid" id="facilities-grid">
+
+            <!-- 1. Emergency & Trauma ICU -->
+            <article class="facility-card" data-category="emergency">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fff1f2; border-color:#fecdd3; color:#e11d48;">🚨</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#ffe4e6; color:#be123c;">Critical Care</span>
+                                <span class="facility-badge-status">🟢 24/7 LIVE ON DUTY</span>
+                            </div>
+                            <h2 class="facility-card-title">24/7 Emergency &amp; Trauma Intensive Care Unit (ICU)</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Immediate life-saving emergency medical interventions for acute vehicular trauma, internal hemorrhages, toxic ingestions, severe respiratory failure, and cardiac emergencies with round-the-clock rapid response.
+                    </p>
+                    
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Key Clinical Equipment &amp; Capabilities
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Continuous Pressurized Oxygen Therapy Cages &amp; Nebulizers
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Mindray Multiparameter Patient Vital Signs Monitors (ECG, SpO2, NIBP)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Emergency Blood Transfusion Unit &amp; Fresh Frozen Plasma Storage
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Crash Cart Defibrillator, Syringe Infusion Pumps &amp; Suction
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Specialist In Charge</span>
+                            <span class="facility-meta-value">Dr. Ayesha Malik (Trauma Head)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">Ground Floor — Emergency Wing A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="24/7 Emergency &amp; Trauma ICU">
+                        <span>Book / Inquire Emergency</span>
+                        <span>🚨</span>
+                    </button>
+                    <a href="tel:03264223100" class="btn-primary" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; padding: 10px 18px; border-radius: 30px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);" title="Call Emergency Line 0326-4223100">
+                        <span>📞 Call 0326-4223100</span>
+                    </a>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card" title="View doctors on duty right now">
+                        <span>Doctors on Duty</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 2. Executive Surgical & Orthopedic Theaters -->
+            <article class="facility-card" data-category="surgery">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#eff6ff; border-color:#bfdbfe; color:#2563eb;">🔪</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#dbeafe; color:#1d4ed8;">Advanced Surgery</span>
+                                <span class="facility-badge-status">🟢 STERILE OT ACTIVE</span>
+                            </div>
+                            <h2 class="facility-card-title">Executive Surgical &amp; Orthopedic Suites (OT-1 &amp; OT-2)</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Positive-pressure, HEPA-filtered sterile surgical theaters for complex soft-tissue surgeries, orthopedic bone fracture plating (TPLO), neurosurgery, thoracic operations, and minimally invasive laparoscopy.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Surgical Equipment &amp; Anesthesia Safety
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Dräger Isoflurane / Sevoflurane Inhalation Anesthesia with Ventilator
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Stryker Orthopedic Bone Power Saws &amp; Dynamic Compression Plating
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                High-Definition Rigid Laparoscopic Tower for Keyhole Surgery
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Harmonic Ultrasonic Scalpel &amp; Bipolar Electro-Cautery
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Lead Surgeon</span>
+                            <span class="facility-meta-value">Dr. Farhan Qureshi (Chief Surgeon)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">1st Floor — Executive Suite 101</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Executive Surgical &amp; Orthopedic Suite">
+                        <span>Schedule Surgical Consult</span>
+                        <span>📅</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Surgeons on Duty</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 3. Digital X-Ray & Ultrasound Radiology -->
+            <article class="facility-card" data-category="diagnostics">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#f5f3ff; border-color:#ddd6fe; color:#7c3aed;">🔬</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#ede9fe; color:#6d28d9;">Diagnostic Radiology</span>
+                                <span class="facility-badge-status">🟢 REAL-TIME SCANNING</span>
+                            </div>
+                            <h2 class="facility-card-title">Digital Radiography (X-Ray) &amp; Color Doppler Sonography</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Instant low-dose digital imaging for structural fracture analysis, pulmonary evaluations, and live multi-frequency echocardiography to detect cardiac murmurs and abdominal organ pathologies.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Advanced Imaging Technologies
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Canon Flat-Panel High-Frequency Digital X-Ray (Instant High-Res)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                GE LOGIQ Color Doppler Ultrasound with Micro-Convex &amp; Cardiac Probes
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Digital Contrast Studies &amp; Foreign Body Gastrointestinal Transit
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                DICOM Cloud Archiving: Instant report delivery to Pet Parent app
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Consultant Radiologist</span>
+                            <span class="facility-meta-value">Dr. Zainab Tariq (Radiology Head)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">Ground Floor — Imaging Suite 104</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Digital X-Ray &amp; Color Doppler Imaging">
+                        <span>Book Imaging Appointment</span>
+                        <span>📷</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>View Radiologist</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 4. Clinical Pathology & Automated Diagnostic Lab -->
+            <article class="facility-card" data-category="diagnostics">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#ecfdf5; border-color:#a7f3d0; color:#059669;">🧪</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#d1fae5; color:#047857;">Central Lab</span>
+                                <span class="facility-badge-status">🟢 15-MIN TEST RESULTS</span>
+                            </div>
+                            <h2 class="facility-card-title">In-House Clinical Pathology &amp; Molecular Blood Lab</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Fully automated laboratory providing real-time hematology, liver/kidney biochemistries, electrolyte balances, urinalysis, and rapid PCR snap testing for Parvovirus, Distemper, FeLV, and FIV.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Laboratory Diagnostic Analyzers
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Automated Laser Hematology CBC Analyzer (26 Parameters)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Dry-Chemistry Analyzer (ALT, BUN, Creatinine, Lipase, Bilirubin)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Blood Gas, Acid-Base &amp; Electrolyte (Na+, K+, Cl-) Profiler
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                High-Power Phase-Contrast Microscope for Skin Scraping &amp; Cytology
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Pathologist</span>
+                            <span class="facility-meta-value">Dr. Hamza Bilal (Lab Director)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">Ground Floor — Central Lab Room 106</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="In-House Clinical Pathology Lab">
+                        <span>Request Comprehensive Lab Test</span>
+                        <span>🩸</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Lab Staff</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 5. Specialized Canine Wellness & Pediatric OPD -->
+            <article class="facility-card" data-category="opd">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fff7ed; border-color:#fed7aa; color:#ea580c;">🐕</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#ffedd5; color:#c2410c;">Canine OPD</span>
+                                <span class="facility-badge-status">🟢 MORNING &amp; EVENING OPD</span>
+                            </div>
+                            <h2 class="facility-card-title">Specialized Canine Wellness, Vaccination &amp; Pediatric OPD</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Dedicated outpatient wing for dogs and growing puppies. Complete pediatric health evaluations, core vaccination scheduling (DHPPi, Rabies), ISO microchipping, and routine preventive deworming.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Canine Clinic Amenities
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Hydraulic Low-Stress Antiseptic Canine Examination Tables
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                International Cold-Chain Vaccine Storage (2°C – 8°C Monitored)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                ISO 11784/11785 Universal RFID Microchip Implanters &amp; Scanners
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Welch Allyn Diagnostic Otoscopes &amp; Ophthalmoscopes
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Canine Lead</span>
+                            <span class="facility-meta-value">Dr. Sarah Khan (DVM, Canine OPD)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">Ground Floor — Room 102 &amp; 103</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Canine Wellness &amp; Vaccination OPD">
+                        <span>Book Dog Checkup</span>
+                        <span>🐾</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Doctors on Duty</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 6. Quiet Feline Sanctuary & Cat-Friendly OPD -->
+            <article class="facility-card" data-category="opd">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fdf2f8; border-color:#fbcfe8; color:#db2777;">🐱</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#fce7f3; color:#be185d;">Feline Exclusive</span>
+                                <span class="facility-badge-status">🟢 CAT-FRIENDLY CERTIFIED</span>
+                            </div>
+                            <h2 class="facility-card-title">Quiet Feline Sanctuary &amp; Cat-Friendly Specialized Wing</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        A strictly dog-free, quiet, peaceful environment engineered for feline comfort. Uses natural feline facial pheromone diffusers, warm padded perches, and low-stress handling for examination and dental hygiene.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Cat-Friendly Environment Features
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Acoustic Noise Dampened Walls &amp; Continuous Feliway Pheromone Diffusers
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Heated Non-Slip Feline Mats &amp; Soft Towel Wrap Stations
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Ultrasonic Dental Scaler &amp; Micromotor Polisher for Feline Stomatitis
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Feline Doppler Blood Pressure Measurement Unit
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Feline Specialist</span>
+                            <span class="facility-meta-value">Dr. Maria Ahmed (ISFM Member)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">1st Floor — Feline Quiet Wing 105</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Quiet Feline Sanctuary OPD">
+                        <span>Book Cat Consultation</span>
+                        <span>🐾</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Feline Specialists</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 7. Clinical Pet Nutrition & Endocrinology -->
+            <article class="facility-card" data-category="opd">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fefce8; border-color:#fef08a; color:#ca8a04;">🥗</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#fef9c3; color:#a16207;">Preventive Medicine</span>
+                                <span class="facility-badge-status">🟢 DIETARY CLINIC ACTIVE</span>
+                            </div>
+                            <h2 class="facility-card-title">Therapeutic Pet Nutrition, Allergy &amp; Metabolic Care</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Scientific dietary formulation and metabolic treatment plans for pets suffering from chronic renal insufficiency, diabetes, food allergies, skin dermatopathies, obesity, and post-surgical rehabilitation.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Nutrition &amp; Metabolic Diagnostics
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Bioelectrical Pet Body Composition &amp; Muscle Mass Analyzers
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Food Elimination &amp; Environmental Allergy ELISA Serology Panels
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Continuous Blood Glucose Monitoring for Diabetic Pets
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Full Therapeutic Prescription Diet Dispensary (Renal, Gastro, Hypoallergenic)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Clinical Nutritionist</span>
+                            <span class="facility-meta-value">Dr. Usman Ali (Nutrition Head)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">1st Floor — Metabolic Room 108</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Therapeutic Pet Nutrition &amp; Diet Plan">
+                        <span>Book Diet Consultation</span>
+                        <span>📋</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Nutrition Staff</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 8. Luxury Pet Spa & Hydrotherapy -->
+            <article class="facility-card" data-category="wellness">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#f0fdfa; border-color:#99f6e4; color:#0d9488;">🛁</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#ccfbf1; color:#0f766e;">Grooming &amp; Spa</span>
+                                <span class="facility-badge-status">🟢 SPA SESSIONS OPEN</span>
+                            </div>
+                            <h2 class="facility-card-title">Luxury Pet Spa, Grooming &amp; Medicated Hydrotherapy</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Premium wellness salon offering breed-standard styling, de-shedding treatments, therapeutic medicated dermatological baths for skin infections, claw pedicures, and soothing hydro-massage therapy.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Spa &amp; Hydrotherapy Amenities
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oxygen Microbubble Ozone Hydro-Surge Bathtubs (Deep Skin Cleansing)
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Low-Noise High-Velocity Variable Temperature Fur Dryers
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Anti-Bacterial UV-Sterilization Chambers for Grooming Scissors &amp; Blades
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Natural Organic Oatmeal, Chlorhexidine, and Keratolytic Medicated Shampoos
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Master Groomer &amp; Derm</span>
+                            <span class="facility-meta-value">Sana Raza (Master Stylist)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">Ground Floor — Pavilion Suite 112</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Luxury Pet Spa &amp; Grooming">
+                        <span>Book Spa &amp; Grooming</span>
+                        <span>✨</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>View Staff</span>
+                        <span>✂️</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 9. Avian, Exotic & Small Pet Wing -->
+            <article class="facility-card" data-category="opd">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fef2f2; border-color:#fecaca; color:#dc2626;">🦜</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#fee2e2; color:#b91c1c;">Exotic Animals</span>
+                                <span class="facility-badge-status">🟢 CERTIFIED AVIAN CARE</span>
+                            </div>
+                            <h2 class="facility-card-title">Avian, Exotic Birds &amp; Small Companion Mammals Wing</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Specialized veterinary medicine and surgery dedicated to exotic species: parrots, songbirds, birds of prey, rabbits, guinea pigs, ferrets, hamsters, and reptiles with species-specific warming incubators.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Exotic Diagnostics &amp; Care
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Micro-Precision Electronic Gram Scales for Sensitive Dosage Calculation
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Heated Digital Incubators with Precision Temperature &amp; Humidity Control
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Miniature Inhalation Mask Anesthesia Systems for Small Rodents &amp; Birds
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Beak, Feather &amp; Dental Malocclusion Trimming Equipment
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Avian / Exotic Lead</span>
+                            <span class="facility-meta-value">Dr. Bilal Aslam (Exotic DVM)</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">2nd Floor — Aviary Room 110</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="Avian &amp; Exotic Pet Consultation">
+                        <span>Book Exotic Pet Visit</span>
+                        <span>🦜</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Exotic Doctors</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 10. VIP Inpatient Recovery Suites & Boarding -->
+            <article class="facility-card" data-category="wellness">
+                <div>
+                    <div class="facility-card-header">
+                        <div class="facility-icon-box" style="background:#fffbeb; border-color:#fde68a; color:#d97706;">🏨</div>
+                        <div class="facility-title-wrap">
+                            <div class="facility-badges-row">
+                                <span class="facility-badge-cat" style="background:#fef3c7; color:#b45309;">VIP Inpatient</span>
+                                <span class="facility-badge-status">🟢 24/7 NURSE SUPERVISED</span>
+                            </div>
+                            <h2 class="facility-card-title">VIP Inpatient Recovery Suites &amp; Climate-Controlled Boarding</h2>
+                        </div>
+                    </div>
+                    <p class="facility-desc">
+                        Ultra-comfortable, sanitized, glass-fronted private suites for post-operative recovery and medical boarding. Offers 24-hour continuous veterinary nurse monitoring, orthopedic bedding, and private parent video access.
+                    </p>
+
+                    <div class="facility-specs-box">
+                        <div class="facility-specs-title">
+                            <span>⚡</span> Inpatient Comfort &amp; Safety
+                        </div>
+                        <ul class="facility-specs-list">
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Individual Climate-Controlled Clean Air HEPA Filtration in Each Suite
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                24/7 Dedicated Veterinary Nursing Staff &amp; Vital Chart Tracking
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                High-Definition Pet-Cam Streaming for Pet Parents via Secure Link
+                            </li>
+                            <li>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                Orthopedic Memory Foam Bedding &amp; Organic Therapeutic Play Areas
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="facility-meta-grid">
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Nursing Director</span>
+                            <span class="facility-meta-value">Sister Maryam &amp; Resident DVM</span>
+                        </div>
+                        <div class="facility-meta-item">
+                            <span class="facility-meta-label">Location / Wing</span>
+                            <span class="facility-meta-value">2nd Floor — VIP Suites Block</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facility-actions-row">
+                    <button type="button" class="btn-facility-book" data-facility="VIP Inpatient Recovery Suite &amp; Boarding">
+                        <span>Reserve Inpatient Suite</span>
+                        <span>🛏️</span>
+                    </button>
+                    <button type="button" class="btn-facility-doctors trigger-duty-from-card">
+                        <span>Duty Nurses</span>
+                        <span>🩺</span>
+                    </button>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- Services Page Compact Luxury Footer -->
+        <footer class="services-footer" style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; padding: 16px 20px 10px; border-top: 1px solid rgba(223, 162, 67, 0.3); margin-top: 20px; margin-bottom: 0; border-radius: 20px 20px 0 0;">
+            <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 42px; height: 42px; border-radius: 50%; object-fit: contain; box-shadow: 0 3px 12px rgba(223,162,67,0.35); border: 1.5px solid rgba(223,162,67,0.5); background: #ffffff;">
+            <div style="text-align: left; line-height: 1.3;">
+                <div style="font-weight: 800; font-size: 0.95rem; color: #0c1e28;">Veti<span style="color:#df9c30;">Medicos</span> <span style="font-size:0.65rem; background:linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color:#b45309; padding:2px 6px; border-radius:6px; border:1px solid rgba(223,162,67,0.4); font-weight:800;">EST. 2026</span></div>
+                <p style="margin: 0; font-size: 0.8rem; color: #64748b;">© 2026 VetiMedicos Royal Pet Sanctuary. All Rights Reserved. &bull; 24/7 Emergency ICU Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =============================================================
+         Facility Booking & Inquiry Modal
+         ============================================================= -->
+    <div class="facility-modal-wrapper" id="facility-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="facility-modal-title">
+        <div class="facility-modal-backdrop" id="facility-modal-backdrop"></div>
+        <div class="facility-modal-card">
+            <button type="button" class="auth-close-btn" id="facility-modal-close" aria-label="Close Facility Modal">&times;</button>
+            
+            <div class="card-header" style="margin-bottom:16px;">
+                <span style="font-size:0.75rem; font-weight:800; color:#9e6411; text-transform:uppercase; letter-spacing:0.5px;">✦ Facility Reservation / Inquiry</span>
+                <h2 id="facility-modal-title" style="font-size:1.4rem; font-weight:800; color:#0f172a; margin-top:4px;">Book Facility Service</h2>
+                <p id="facility-modal-desc" style="font-size:0.85rem; color:#64748b; margin-top:2px;">Select your preferred time slot and pet details to reserve facility access.</p>
+            </div>
+
+            <form id="facility-inquiry-form">
+                <div class="form-group">
+                    <label class="input-label" for="fac-input-name">Pet Parent Name *</label>
+                    <div class="input-box">
+                        <input type="text" id="fac-input-name" placeholder="Enter your full name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-label" for="fac-input-pet">Pet Name &amp; Species *</label>
+                    <div class="input-box">
+                        <input type="text" id="fac-input-pet" placeholder="e.g. Leo (Golden Retriever, 2 yrs)" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-label" for="fac-input-facility">Selected Medical Facility</label>
+                    <div class="input-box">
+                        <input type="text" id="fac-input-facility" readonly style="background:rgba(255,255,255,0.8); font-weight:700; color:#9e6411;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-label" for="fac-input-shift">Preferred Slot / Shift</label>
+                    <div class="input-box">
+                        <select id="fac-input-shift">
+                            <option value="immediate">🚨 Immediate Emergency Admission</option>
+                            <option value="morning" selected>Morning Shift (08:00 AM – 02:00 PM)</option>
+                            <option value="evening">Evening Shift (02:00 PM – 08:00 PM)</option>
+                            <option value="night">Night Special (08:00 PM – 12:00 AM)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-label" for="fac-input-notes">Notes / Symptoms</label>
+                    <div class="input-box">
+                        <input type="text" id="fac-input-notes" placeholder="Describe clinical symptoms or special requests...">
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button type="submit" class="btn-submit" id="fac-submit-btn">
+                        <span>Confirm Facility Booking</span>
+                        <span>✓</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         VIP Royal Facility Reservation Success Modal
+         ============================================================= -->
+    <div class="facility-success-modal-wrapper" id="facility-success-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+        <div class="facility-success-modal-backdrop" id="facility-success-backdrop"></div>
+        <div class="facility-success-card">
+            <button type="button" class="auth-close-btn" id="facility-success-close" aria-label="Close Confirmation Modal">&times;</button>
+            
+            <div class="success-royal-header">
+                <div class="success-icon-ring">
+                    <span class="success-ring-emoji">👑</span>
+                    <span class="success-ring-check">✓</span>
+                </div>
+                <div class="success-badge-pill">
+                    <span class="pulse-gold"></span> VETIMEDICOS ROYAL CONFIRMATION
+                </div>
+                <h2 class="success-royal-title" id="success-modal-title">
+                    Facility Reservation <span>Confirmed!</span>
+                </h2>
+                <p class="success-royal-sub">
+                    Your priority appointment has been formally registered with our Chief Clinical Concierge.
+                </p>
+            </div>
+
+            <!-- VIP Ticket Pass Layout -->
+            <div class="vip-booking-pass">
+                <div class="pass-watermark">VetiMedicos</div>
+                <div class="pass-row-top">
+                    <div>
+                        <span class="pass-meta-label">RESERVATION PASS CODE</span>
+                        <span class="pass-meta-value pass-code-highlight" id="conf-pass-code">VM-2026-98421</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="pass-meta-label">PRIORITY STATUS</span>
+                        <span class="pass-status-badge">🟢 VIP PRIORITY CONFIRMED</span>
+                    </div>
+                </div>
+
+                <div class="pass-divider-dashed"></div>
+
+                <div class="pass-details-grid">
+                    <div class="pass-item">
+                        <span class="pass-icon">👤</span>
+                        <div>
+                            <span class="pass-label">Pet Parent</span>
+                            <strong class="pass-val" id="conf-parent-name">Nafees</strong>
+                        </div>
+                    </div>
+                    <div class="pass-item">
+                        <span class="pass-icon">🐾</span>
+                        <div>
+                            <span class="pass-label">Registered Pet</span>
+                            <strong class="pass-val" id="conf-pet-name">Swetie (German Shepherd, 2 yrs)</strong>
+                        </div>
+                    </div>
+                    <div class="pass-item pass-item-full">
+                        <span class="pass-icon">🏥</span>
+                        <div>
+                            <span class="pass-label">Selected Medical Facility</span>
+                            <strong class="pass-val" id="conf-facility-name" style="color: #9e6411;">Executive Surgical &amp; Orthopedic Suite</strong>
+                        </div>
+                    </div>
+                    <div class="pass-item">
+                        <span class="pass-icon">⏰</span>
+                        <div>
+                            <span class="pass-label">Reserved Slot / Shift</span>
+                            <strong class="pass-val" id="conf-shift-name">Morning Shift (08:00 AM – 02:00 PM)</strong>
+                        </div>
+                    </div>
+                    <div class="pass-item">
+                        <span class="pass-icon">🩺</span>
+                        <div>
+                            <span class="pass-label">Attending Care Team</span>
+                            <strong class="pass-val" id="conf-doctor-name">Senior DVM &amp; Surgical Nurses</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concierge Notification Notice -->
+            <div class="vip-concierge-notice">
+                <div class="concierge-notice-icon">📞</div>
+                <div class="concierge-notice-text">
+                    <strong>Concierge Guarantee:</strong> Our duty specialist will contact you on your registered contact number within <strong>15 minutes</strong>. An immediate SMS confirmation has been dispatched.
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="success-actions-row">
+                <button type="button" class="btn-royal-done" id="btn-success-done">
+                    <span>👑 Done &amp; View Facilities</span>
+                </button>
+                <button type="button" class="btn-royal-roster" id="btn-success-to-duty">
+                    <span>📋 View Duty Doctors</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         Doctors On-Duty Board & Shift Roster Modal
+         ============================================================= -->
+    <div class="doctors-duty-backdrop" id="doctors-duty-modal" role="dialog" aria-modal="true" aria-labelledby="duty-modal-title">
+        <div class="doctors-duty-box">
+            <!-- Header -->
+            <div class="doctors-duty-header">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="duty-modal-title" style="display:flex; align-items:center; gap:8px;">
+                            <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest" style="width:28px; height:28px; vertical-align:middle;">
+                            <span>VetiMedicos <span>Doctor Portal</span></span>
+                        </h2>
+                        <p class="duty-subtitle">Live Duty Directory: Only verified veterinary doctors who have signed in as a Doctor appear here in real-time.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="duty-live-badge"><span class="pulse-green"></span> Live OPD Roster</span>
+                        <button type="button" class="btn-duty-login-switch" id="duty-quick-demo-btn" title="Instant 1-Click Doctor Sign In" style="background:#f0fdf4; border-color:#86efac; color:#15803d;">⚡ Quick Test Doctor</button>
+                        <button type="button" class="btn-duty-login-switch" id="duty-to-staff-login-btn" title="Doctor Staff Login">Staff Login 🔐</button>
+                        <button type="button" class="auth-close-btn" id="duty-modal-close-btn" aria-label="Close Doctor Portal" style="position: static;">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Search & Filter Controls -->
+                <div class="duty-controls-row">
+                    <div class="duty-search-box">
+                        <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="duty-search-input" placeholder="Search signed-in doctor by name, specialty, or room..." autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="services-modal-duty-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                    </div>
+                    <div class="duty-filters-group" role="tablist" aria-label="Filter Doctors by Status">
+                        <button type="button" class="duty-filter-chip active" data-filter="all">All Signed In (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="onduty">🟢 On Duty (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="surgery">🟡 In Surgery (0)</button>
+                        <button type="button" class="duty-filter-chip" data-filter="consultation">🔵 In Consult (0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doctors Cards Body -->
+            <div class="doctors-duty-body" id="doctors-duty-grid">
+                <!-- Dynamically rendered via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         Clients & Pets Live Directory Modal
+         ============================================================= -->
+    <div class="doctors-duty-backdrop" id="clients-directory-modal" role="dialog" aria-modal="true" aria-labelledby="clients-modal-title">
+        <div class="doctors-duty-box">
+            <!-- Header -->
+            <div class="doctors-duty-header" style="background: rgba(240, 249, 255, 0.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="clients-modal-title" style="display:flex; align-items:center; gap:8px;">
+                            <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest" style="width:28px; height:28px; vertical-align:middle;">
+                            <span>VetiMedicos <span style="color: #0284c7;">Clients &amp; Pets Portal</span></span>
+                        </h2>
+                        <p class="duty-subtitle">Live Pet Parent Directory: View verified clients currently signed in along with their registered pets.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="duty-live-badge" id="clients-live-badge" style="background: rgba(224, 242, 254, 0.6); border-color:#bae6fd; color:#0369a1;"><span class="pulse-green" style="background:#0284c7; box-shadow:0 0 10px #0284c7;"></span> Live Clients (0)</span>
+                        <button type="button" class="btn-duty-login-switch" id="clients-quick-demo-btn" title="Instant 1-Click Client Sign In" style="background: rgba(239, 246, 255, 0.5); border-color: rgba(191, 219, 254, 0.8); color:#1d4ed8;">⚡ Quick Test Client</button>
+                        <button type="button" class="btn-duty-login-switch" id="clients-to-login-btn" title="Client Sign In / Register">Client Login 🐾</button>
+                        <button type="button" class="auth-close-btn" id="clients-modal-close-btn" aria-label="Close Clients Portal" style="position: static;">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Search & Filter Controls -->
+                <div class="duty-controls-row">
+                    <div class="duty-search-box">
+                        <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="clients-search-input" placeholder="Search by client name, pet name, breed, or pet type..." autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="services-modal-clients-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                    </div>
+                    <div class="duty-filters-group" role="tablist" aria-label="Filter Clients by Pet Type">
+                        <button type="button" class="duty-filter-chip client-filter-chip active" data-filter="all">All Clients (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Dog">🐕 Dogs (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="Cat">🐈 Cats (0)</button>
+                        <button type="button" class="duty-filter-chip client-filter-chip" data-filter="other">🦜 Birds &amp; Others (0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients Cards Body -->
+            <div class="doctors-duty-body" id="clients-directory-grid">
+                <!-- Dynamically rendered via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Dual Role Auth Modal -->
+    <div class="auth-modal-wrapper" id="auth-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="signin-heading-title">
+        <div class="auth-modal-backdrop" id="auth-modal-backdrop"></div>
+        
+        <!-- Floating Card Container -->
+        <div class="auth-floating-container">
+            <div class="auth-card">
+                <!-- Close Button -->
+                <button type="button" class="auth-close-btn" id="auth-close-btn" aria-label="Close Login Modal">&times;</button>
+
+                <!-- Official Crest Header in Login Card -->
+                <div class="auth-brand-badge" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(223, 162, 67, 0.2);">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Crest EST. 2026" style="width: 38px; height: 38px; border-radius: 50%; box-shadow: 0 3px 10px rgba(223, 162, 67, 0.35); border: 1.5px solid rgba(223, 162, 67, 0.5); object-fit: contain; background: #ffffff;">
+                    <div style="text-align: left; line-height: 1.15;">
+                        <div style="font-weight: 800; font-size: 0.95rem; color: #0c1e28;">Veti<span style="color:#df9c30;">Medicos</span></div>
+                        <div style="font-size: 0.62rem; color: #b45309; font-weight: 800; letter-spacing: 0.6px;">OFFICIAL CREST &bull; EST. 2026</div>
+                    </div>
+                </div>
+
+                <!-- Dual Role Selector: Client vs Veti Doctor -->
+                <div class="role-selector-bar" role="tablist" aria-label="Select Login Role">
+                    <button type="button" class="role-chip active" data-role="client" id="role-chip-client" role="tab" aria-selected="true">
+                        <span class="role-icon">🐾</span>
+                        <span>Client / Pet Parent</span>
+                    </button>
+                    <button type="button" class="role-chip" data-role="doctor" id="role-chip-doctor" role="tab" aria-selected="false">
+                        <span class="role-icon">🩺</span>
+                        <span>Veti Doctor</span>
+                    </button>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 1: SIGN IN VIEW
+                     ----------------------------------------- -->
+                <div id="view-signin" class="card-view active">
+                    <div class="card-header">
+                        <h2 class="card-title" id="signin-heading-title">Client <span>Sign In</span></h2>
+                        <p class="card-desc" id="signin-heading-subtitle">Welcome Pet Parent! Manage your pets &amp; clinic appointments</p>
+                    </div>
+
+                    <form id="form-signin" novalidate>
+                        <!-- Email Input -->
+                        <div class="form-group">
+                            <label for="signin-email" class="input-label">Email Address</label>
+                            <div class="input-box">
+                                <input type="email" id="signin-email" placeholder="client@example.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Specified Doctor Information Box (Visible only in Doctor Mode) -->
+                        <div class="doctor-signin-field" id="doctor-signin-spec-box">
+                            <div class="doctor-spec-compact-box">
+                                <div class="doctor-spec-header">
+                                    <span>🩺 Specified Doctor Details <span class="spec-req-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link" id="auth-duty-link" title="View Doctors On Duty">📋 OPD Roster</button>
+                                </div>
+                                
+                                <!-- Doctor Name & License -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-name" class="input-label">Doctor Name *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-doctor-name" placeholder="e.g. Dr. Farhan Qureshi" required autocomplete="name">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-license" class="input-label">License / Reg *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-license" placeholder="e.g. VET-PK-2026-DVM" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Specialization & Assigned Room -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-specialty" class="input-label">Specialization</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-specialty">
+                                                <option value="Chief Veterinary Surgeon|Department of Surgery & Orthopedics">Chief Veterinary Surgeon</option>
+                                                <option value="Canine Health & Dog Diagnostics|Canine Wellness OPD Block A">Canine &amp; Dog Specialist</option>
+                                                <option value="Feline (Cat) & Small Pet Medicine|Cat Care & Vaccination Wing">Feline &amp; Small Pet Specialist</option>
+                                                <option value="Emergency Veterinary Physician|24/7 Trauma & Emergency ICU">Emergency &amp; Trauma ICU</option>
+                                                <option value="Clinical Pet Nutrition & Dietetics|Pet Nutrition & Preventive Care">Clinical Pet Nutrition</option>
+                                                <option value="Birds, Parrots & Exotic Mammals|Exotic Animals & Aviary Unit">Avian &amp; Exotic Species</option>
+                                                <option value="General Veterinary Medicine|Outpatient Clinic Services">General Veterinary Medicine</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-room" class="input-label">Chamber / Room</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-room">
+                                                <option value="Executive Surgery Suite 101">Suite 101</option>
+                                                <option value="Canine OPD Room 103">Room 103 (Canine)</option>
+                                                <option value="Feline Clinic Room 105">Room 105 (Feline)</option>
+                                                <option value="Dietary Clinic Room 108">Room 108 (Nutrition)</option>
+                                                <option value="Trauma Ward & OT-2">OT-2 (Trauma)</option>
+                                                <option value="Aviary Clinic Room 110">Room 110 (Aviary)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Duty Shift & Duty Status -->
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-shift" class="input-label">Duty Shift</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-shift">
+                                                <option value="08:00 AM - 04:00 PM (Morning)">Morning (08:00 AM - 04:00 PM)</option>
+                                                <option value="10:00 AM - 06:00 PM (General)">General (10:00 AM - 06:00 PM)</option>
+                                                <option value="02:00 PM - 10:00 PM (Evening)">Evening (02:00 PM - 10:00 PM)</option>
+                                                <option value="12:00 PM - 08:00 PM (Emergency Shift)">Emergency (12:00 PM - 08:00 PM)</option>
+                                                <option value="04:00 PM - 11:00 PM (Night Shift)">Night (04:00 PM - 11:00 PM)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-status" class="input-label">Initial Status</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-status">
+                                                <option value="onduty">🟢 On Duty Now</option>
+                                                <option value="surgery">🟡 In Surgery</option>
+                                                <option value="consultation">🔵 In Consultation</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Client Pet Information (Visible in Client Mode) -->
+                        <div class="client-signin-field" id="client-signin-pet-box">
+                            <div class="client-spec-compact-box">
+                                <div class="client-spec-header">
+                                    <span>🐾 Pet Details (Client Profile) <span class="spec-req-badge client-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link client-link" id="auth-clients-link" title="View Registered Clients">🐾 Live Directory</button>
+                                </div>
+                                <div class="spec-grid-3">
+                                    <div>
+                                        <label for="signin-pet-name" class="input-label">Pet Name *</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-pet-name" placeholder="e.g. Rocky, Bella" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-type" class="input-label">Species</label>
+                                        <div class="input-box">
+                                            <select id="signin-pet-type">
+                                                <option value="Dog">🐕 Dog</option>
+                                                <option value="Cat">🐈 Cat</option>
+                                                <option value="Bird">🦜 Bird / Parrot</option>
+                                                <option value="Rabbit">🐇 Rabbit</option>
+                                                <option value="Other">🐾 Other Pet</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-breed" class="input-label">Breed / Age</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signin-pet-breed" placeholder="Golden Retriever, 2 yrs">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="form-group">
+                            <label for="signin-password" class="input-label">Password</label>
+                            <div class="input-box">
+                                <input type="password" id="signin-password" placeholder="enter your password" required autocomplete="current-password">
+                                <button type="button" class="input-toggle-pw" data-target="signin-password" aria-label="Toggle password visibility">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="form-options">
+                            <label class="remember-label">
+                                <input type="checkbox" id="remember-me" checked>
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" id="btn-to-forgot" class="forgot-link">Forgot password ?</a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit" id="btn-submit-signin">
+                            <span class="btn-text" id="signin-btn-label">Sign In as Client 🐾</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <!-- Social Divider -->
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Google Sign In -->
+                        <button type="button" class="btn-google" id="btn-google-signin">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Sign In with Google</span>
+                        </button>
+
+                        <!-- Footer Links -->
+                        <div class="card-footer">
+                            <span class="footer-text">New to VetiMedicos?</span>
+                            <button type="button" id="btn-to-signup" class="footer-switch-btn">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 2: SIGN UP VIEW
+                     ----------------------------------------- -->
+                <div id="view-signup" class="card-view">
+                    <div class="card-header">
+                        <h2 class="card-title" id="signup-heading-title">Create <span>Pet Account</span></h2>
+                        <p class="card-desc" id="signup-heading-subtitle">Join VetiMedicos for professional pet care &amp; nutrition</p>
+                    </div>
+
+                    <form id="form-signup" novalidate>
+                        <!-- Name Input -->
+                        <div class="form-group">
+                            <label for="signup-name" class="input-label">Full Name</label>
+                            <div class="input-box">
+                                <input type="text" id="signup-name" placeholder="John Doe / Dr. Sarah" required autocomplete="name">
+                            </div>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="form-group">
+                            <label for="signup-email" class="input-label">Email Address</label>
+                            <div class="input-box">
+                                <input type="email" id="signup-email" placeholder="name@domain.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Doctor Specialization & License (Doctor mode only) -->
+                        <div class="doctor-signup-field" style="margin-bottom: 5px;">
+                            <div class="spec-grid-2">
+                                <div>
+                                    <label for="signup-specialty" class="input-label">Specialization</label>
+                                    <div class="input-box">
+                                        <select id="signup-specialty">
+                                            <option value="General Veterinary Medicine">General Veterinary</option>
+                                            <option value="Small Animal Surgery">Small Animal Surgery</option>
+                                            <option value="Canine & Feline Specialist">Canine &amp; Feline</option>
+                                            <option value="Veterinary Dermatology">Dermatology</option>
+                                            <option value="Animal Nutrition & Dietetics">Nutrition &amp; Diet</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="signup-license" class="input-label">License Number</label>
+                                    <div class="input-box">
+                                        <input type="text" id="signup-license" placeholder="VET-LIC-2026-PK">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Client Pet Information (Client mode only) -->
+                        <div class="client-signup-field" id="client-pet-fields-wrap" style="margin-bottom: 5px;">
+                            <div class="client-spec-compact-box">
+                                <div class="client-spec-header">
+                                    <span>🐾 Your Pet Information (Optional)</span>
+                                </div>
+                                <div class="spec-grid-3">
+                                    <div>
+                                        <label for="signup-pet-name" class="input-label">Pet Name</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signup-pet-name" placeholder="Rocky">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signup-pet-type" class="input-label">Species</label>
+                                        <div class="input-box">
+                                            <select id="signup-pet-type">
+                                                <option value="Dog">🐕 Dog</option>
+                                                <option value="Cat">🐈 Cat</option>
+                                                <option value="Bird">🦜 Bird</option>
+                                                <option value="Rabbit">🐇 Rabbit</option>
+                                                <option value="Other">🐾 Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signup-pet-breed" class="input-label">Breed / Age</label>
+                                        <div class="input-box">
+                                            <input type="text" id="signup-pet-breed" placeholder="Golden Retriever, 2y">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password & Confirm Password side-by-side -->
+                        <div class="spec-grid-2">
+                            <div>
+                                <label for="signup-password" class="input-label">Password</label>
+                                <div class="input-box">
+                                    <input type="password" id="signup-password" placeholder="Min 6 chars" required autocomplete="new-password">
+                                    <button type="button" class="input-toggle-pw" data-target="signup-password" aria-label="Toggle password">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="signup-confirm" class="input-label">Confirm Password</label>
+                                <div class="input-box">
+                                    <input type="password" id="signup-confirm" placeholder="Repeat password" required autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit" id="btn-submit-signup">
+                            <span class="btn-text" id="signup-btn-label">Create Pet Account 🐾</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+
+                        <button type="button" class="btn-google" id="btn-google-signup">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Sign Up with Google</span>
+                        </button>
+
+                        <div class="card-footer">
+                            <span class="footer-text">Already registered?</span>
+                            <button type="button" id="btn-to-signin-from-up" class="footer-switch-btn">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 3: FORGOT PASSWORD VIEW
+                     ----------------------------------------- -->
+                <div id="view-forgot" class="card-view">
+                    <div class="card-header">
+                        <h2 class="card-title">Reset <span>Password</span></h2>
+                        <p class="card-desc">Enter your email to receive recovery instructions</p>
+                    </div>
+
+                    <form id="form-forgot" novalidate>
+                        <div class="form-group">
+                            <label for="forgot-email" class="input-label">Registered Email</label>
+                            <div class="input-box">
+                                <input type="email" id="forgot-email" placeholder="enter your email" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btn-submit-forgot">
+                            <span class="btn-text">Send Reset Link</span>
+                            <span class="spinner"></span>
+                        </button>
+
+                        <div class="card-footer" style="justify-content: center;">
+                            <button type="button" id="btn-to-signin-from-forgot" class="footer-switch-btn">← Back to Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -----------------------------------------
+                     VIEW 4: AUTHENTICATED USER DASHBOARD
+                     ----------------------------------------- -->
+                <div id="view-user" class="card-view">
+                    <div class="card-header" style="text-align: center;">
+                        <div style="width: 58px; height: 58px; background: #e0f2fe; color: #0284c7; border-radius: 50%; display: grid; place-content: center; font-size: 1.7rem; margin: 0 auto 10px auto;">
+                            🐾
+                        </div>
+                        <div id="user-role-badge" class="role-badge client-badge">🐾 Verified Pet Parent</div>
+                        <h2 class="card-title" id="user-display-name">Pet Care User</h2>
+                        <p class="card-desc" id="user-display-email">user@veticare.com</p>
+                    </div>
+
+                    <div style="background: rgba(255, 255, 255, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 12px; margin-bottom: 18px;" id="user-role-details">
+                        <!-- Dynamically filled by app.js based on role -->
+                    </div>
+
+                    <button type="button" id="btn-signout" class="btn-submit">
+                        <span class="btn-text">Sign Out</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Services Dynamic Filter & Booking Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('facility-search-input');
+            const filterChips = document.querySelectorAll('.facility-filter-chip');
+            const facilityCards = document.querySelectorAll('.facility-card');
+
+            // Category Filtering
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    const category = chip.getAttribute('data-category');
+                    applyFilter(category, searchInput.value.trim().toLowerCase());
+
+                    // Smoothly adjust scroll position if user was scrolled down
+                    const toolbar = document.querySelector('.facilities-toolbar');
+                    if (toolbar && window.scrollY > toolbar.offsetTop) {
+                        window.scrollTo({ top: toolbar.offsetTop - 80, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Live Search
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    const activeChip = document.querySelector('.facility-filter-chip.active');
+                    const category = activeChip ? activeChip.getAttribute('data-category') : 'all';
+                    applyFilter(category, searchInput.value.trim().toLowerCase());
+                });
+            }
+
+            function applyFilter(category, query) {
+                facilityCards.forEach(card => {
+                    const cardCat = card.getAttribute('data-category');
+                    const text = card.textContent.toLowerCase();
+                    const matchesCategory = (category === 'all' || cardCat === category);
+                    const matchesQuery = (!query || text.includes(query));
+
+                    if (matchesCategory && matchesQuery) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Universal Modal Scroll Lock helper
+            function setModalScrollLock(locked) {
+                if (window.setModalScrollLock) {
+                    window.setModalScrollLock(locked);
+                } else {
+                    if (locked) {
+                        document.documentElement.classList.add('modal-active');
+                        document.body.classList.add('modal-active');
+                        document.documentElement.style.overflow = 'hidden';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        const anyOpen = document.querySelector(
+                            '.facility-modal-wrapper.open, .facility-success-modal-wrapper.open, .doctors-duty-backdrop.open, .auth-modal-wrapper.open'
+                        );
+                        if (!anyOpen) {
+                            document.documentElement.classList.remove('modal-active');
+                            document.body.classList.remove('modal-active');
+                            document.documentElement.style.overflow = '';
+                            document.body.style.overflow = '';
+                        }
+                    }
+                }
+            }
+
+            // Facility Booking Modal Logic
+            const modalWrapper = document.getElementById('facility-modal-wrapper');
+            const modalClose = document.getElementById('facility-modal-close');
+            const modalBackdrop = document.getElementById('facility-modal-backdrop');
+            const facInput = document.getElementById('fac-input-facility');
+            const facForm = document.getElementById('facility-inquiry-form');
+
+            document.querySelectorAll('.btn-facility-book').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const facilityName = btn.getAttribute('data-facility');
+                    if (facInput) facInput.value = facilityName;
+                    if (modalWrapper) {
+                        modalWrapper.classList.add('open');
+                        setModalScrollLock(true);
+                    }
+                });
+            });
+
+            function closeFacModal() {
+                if (modalWrapper) modalWrapper.classList.remove('open');
+                setModalScrollLock(false);
+            }
+
+            if (modalClose) modalClose.addEventListener('click', closeFacModal);
+            if (modalBackdrop) modalBackdrop.addEventListener('click', closeFacModal);
+
+            // VIP Royal Success Modal Elements
+            const successWrapper = document.getElementById('facility-success-modal-wrapper');
+            const successClose = document.getElementById('facility-success-close');
+            const successBackdrop = document.getElementById('facility-success-backdrop');
+            const btnSuccessDone = document.getElementById('btn-success-done');
+            const btnSuccessToDuty = document.getElementById('btn-success-to-duty');
+
+            function closeSuccessModal() {
+                if (successWrapper) successWrapper.classList.remove('open');
+                setModalScrollLock(false);
+            }
+
+            if (successClose) successClose.addEventListener('click', closeSuccessModal);
+            if (successBackdrop) successBackdrop.addEventListener('click', closeSuccessModal);
+            if (btnSuccessDone) btnSuccessDone.addEventListener('click', closeSuccessModal);
+
+            if (btnSuccessToDuty) {
+                btnSuccessToDuty.addEventListener('click', () => {
+                    closeSuccessModal();
+                    const dutyModal = document.getElementById('doctors-duty-modal');
+                    if (dutyModal) {
+                        dutyModal.classList.add('open');
+                        setModalScrollLock(true);
+                    }
+                });
+            }
+
+            if (facForm) {
+                facForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('fac-input-name').value.trim();
+                    const pet = document.getElementById('fac-input-pet').value.trim();
+                    const fac = (facInput && facInput.value.trim()) || 'Executive Veterinary Suite';
+                    const shiftSelect = document.getElementById('fac-input-shift');
+                    const shiftText = shiftSelect ? shiftSelect.options[shiftSelect.selectedIndex].text : 'Morning Shift';
+
+                    // Generate unique VIP pass code
+                    const passCode = 'VM-2026-' + Math.floor(10000 + Math.random() * 90000);
+
+                    // Populate VIP Royal Confirmation Ticket
+                    const elPass = document.getElementById('conf-pass-code');
+                    const elParent = document.getElementById('conf-parent-name');
+                    const elPet = document.getElementById('conf-pet-name');
+                    const elFac = document.getElementById('conf-facility-name');
+                    const elShift = document.getElementById('conf-shift-name');
+
+                    if (elPass) elPass.textContent = passCode;
+                    if (elParent) elParent.textContent = name || 'Valued Pet Parent';
+                    if (elPet) elPet.textContent = pet || 'Royal Pet';
+                    if (elFac) elFac.textContent = fac;
+                    if (elShift) elShift.textContent = shiftText;
+
+                    closeFacModal();
+                    facForm.reset();
+
+                    // Open VIP Success Modal with rich animation & guaranteed fit
+                    if (successWrapper) {
+                        successWrapper.classList.add('open');
+                        setModalScrollLock(true);
+                    }
+
+                    // Also dispatch royal toast notification
+                    if (window.showToast) {
+                        window.showToast('success', '👑 Booking Confirmed!', `VIP Pass #${passCode} registered for ${name}. Concierge call dispatched.`);
+                    }
+                });
+            }
+
+            // Trigger Doctors On Duty Modal from card
+            document.querySelectorAll('.trigger-duty-from-card').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const dutyModal = document.getElementById('doctors-duty-modal');
+                    if (dutyModal) {
+                        dutyModal.classList.add('open');
+                        setModalScrollLock(true);
+                    }
+                });
+            });
+
+            // Escape key dismisses open modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (successWrapper && successWrapper.classList.contains('open')) closeSuccessModal();
+                    if (modalWrapper && modalWrapper.classList.contains('open')) closeFacModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" class="shop-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VetiMedicos VIP Pet Nutrition &amp; Luxury Accessories | Official Emporium Pakistan</title>
+    <meta name="description" content="Discover VetiMedicos professional pet nutrition, kitten vitality formulas, Persian adult royal diets, and luxury pet gear. Same-day express delivery in Islamabad &amp; Lahore.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="shop-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: auto !important; max-height: none !important; overflow: visible !important; padding-bottom: 40px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html" class="active">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view VIP Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart Button -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart" onclick="if(window.openCartDrawer) window.openCartDrawer();" style="background: #ffffff; border-color: rgba(223, 162, 67, 0.5); color: #b45309; position: relative;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count" id="header-cart-count" style="background: var(--gold-gradient); color:#ffffff; font-weight:800; font-size:0.7rem; min-width:18px; height:18px; border-radius:50%; display:grid; place-content:center; position:absolute; top:-4px; right:-4px; box-shadow: 0 2px 6px rgba(223, 162, 67, 0.5);">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons..." onclick="if(window.openSearchModal) window.openSearchModal();">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Master Shop Stage ================= -->
+        <main class="shop-stage">
+            
+            <!-- 1. Luxury Hero Showcase Card -->
+            <section class="shop-hero-card" aria-label="VetiMedicos Showcase">
+                <div class="shop-hero-content">
+                    <div class="shop-royal-tagline">
+                        <span>👑</span> Official VetiMedicos™ &amp; VIP Pet Gear Pakistan
+                    </div>
+                    
+                    <h1 class="shop-hero-title">
+                        Tailored Science Nutrition &amp;<br>
+                        <span class="gold-txt">Luxury Pet Accessories</span>
+                    </h1>
+
+                    <p class="shop-hero-desc">
+                        Scientifically formulated veterinary nutrition tailored for cats, kittens, puppies, and dogs. Direct cold-chain imported with 100% authentic sealed packaging, plus veterinarian-curated premium accessories.
+                    </p>
+
+                    <div class="shop-hero-badges-row">
+                        <span class="shop-badge-pill">🛡️ 100% Authentic VetiMedicos Formula</span>
+                        <span class="shop-badge-pill">🩺 Prescribed by Veterinary Doctors</span>
+                        <span class="shop-badge-pill">⚡ Same-Day Delivery in Islamabad &amp; Lahore</span>
+                        <span class="shop-badge-pill">🚚 2-3 Days Nationwide via TCS Express</span>
+                    </div>
+
+                    <div class="shop-hero-actions">
+                        <button type="button" class="btn-primary" id="btn-hero-shop-scroll">
+                            <span>Browse VetiMedicos Collection</span>
+                            <div class="btn-icon-box">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </button>
+                        <button type="button" class="btn-secondary" id="btn-hero-open-cart">
+                            <span>View Bag</span>
+                            <span>🛍️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="shop-hero-media-wrap">
+                    <div class="shop-hero-img-box">
+                        <img src="assets/images/vetimedicos_collection.jpg" alt="VetiMedicos Professional Nutrition Collection Display in Pakistan">
+                        <div class="shop-hero-floating-seal" style="display:inline-flex; align-items:center; gap:6px;">
+                            <img src="assets/images/vetimedicos_official_logo.png" alt="Official Seal EST. 2026" style="width:22px; height:22px; border-radius:50%; object-fit:contain; border:1px solid rgba(223,162,67,0.5);">
+                            <span>VetiMedicos Swiss Formulation &bull; EST. 2026 Verified</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Trust Indicators Strip -->
+            <section class="shop-trust-strip" aria-label="Trust & Guarantees">
+                <div class="trust-item-card">
+                    <div class="trust-icon-bubble">🛡️</div>
+                    <div class="trust-text-wrap">
+                        <h4>100% Authentic Guarantee</h4>
+                        <p>Direct batch imports with verified security QR seal &amp; long expiry.</p>
+                    </div>
+                </div>
+                <div class="trust-item-card">
+                    <div class="trust-icon-bubble">⚡</div>
+                    <div class="trust-text-wrap">
+                        <h4>Express Pakistan Shipping</h4>
+                        <p>Same-day in Islamabad &amp; Lahore. Free delivery on orders over Rs. 5,000.</p>
+                    </div>
+                </div>
+                <div class="trust-item-card">
+                    <div class="trust-icon-bubble">🩺</div>
+                    <div class="trust-text-wrap">
+                        <h4>Clinical Diet Consultation</h4>
+                        <p>Free guidance by our on-duty veterinary surgeons for your pet's needs.</p>
+                    </div>
+                </div>
+                <div class="trust-item-card">
+                    <div class="trust-icon-bubble">💳</div>
+                    <div class="trust-text-wrap">
+                        <h4>Cash on Delivery (COD)</h4>
+                        <p>Pay at your doorstep or instant WhatsApp 1-Click order confirmation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Controls Panel: Live Search & Category Chips -->
+            <section class="shop-controls-panel" id="shop-catalog-anchor">
+                <div class="shop-controls-top">
+                    <!-- Live Search Box -->
+                    <div class="shop-search-box">
+                        <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="shop-search-input" class="shop-search-input" placeholder="Search VetiMedicos Kitten, Persian, Maxi, Litter Box, Harness..." autocomplete="off">
+                        <button type="button" class="search-clear-btn" id="shop-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                    </div>
+
+                    <!-- Sort Dropdown -->
+                    <div class="shop-sort-wrap">
+                        <label for="shop-sort-select" class="shop-sort-label">Sort By:</label>
+                        <select id="shop-sort-select" class="shop-sort-select">
+                            <option value="featured">👑 Featured &amp; Bestsellers</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated ⭐</option>
+                            <option value="discount">Biggest Discount %</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Category Filter Chips -->
+                <div class="shop-category-chips" role="tablist" aria-label="Filter Products by Category">
+                    <button type="button" class="shop-cat-chip active" data-category="all">
+                        <span>⭐ All Products</span>
+                        <span class="shop-cat-count" id="count-all">12</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="cats">
+                        <span>🐱 VetiMedicos Cats</span>
+                        <span class="shop-cat-count" id="count-cats">4</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="dogs">
+                        <span>🐶 VetiMedicos Dogs</span>
+                        <span class="shop-cat-count" id="count-dogs">3</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="kitten">
+                        <span>🐾 Kitten &amp; Puppy</span>
+                        <span class="shop-cat-count" id="count-kitten">2</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="clinical">
+                        <span>🩺 Clinical Diets</span>
+                        <span class="shop-cat-count" id="count-clinical">1</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="accessories">
+                        <span>🎒 Luxury Accessories</span>
+                        <span class="shop-cat-count" id="count-accessories">3</span>
+                    </button>
+                    <button type="button" class="shop-cat-chip" data-category="hygiene">
+                        <span>✨ Grooming &amp; Hygiene</span>
+                        <span class="shop-cat-count" id="count-hygiene">3</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 4. Products Grid Container (Dynamically rendered & interactive) -->
+            <section class="shop-products-grid" id="shop-products-container" aria-label="Product Catalog">
+                <!-- Dynamically rendered via JavaScript with full state -->
+            </section>
+
+            <!-- 5. Pakistan Pet Parent Reviews Section -->
+            <section class="shop-hero-card" style="grid-template-columns: 1fr; background: rgba(255, 255, 255, 0.85); margin-top: 10px;">
+                <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+                    <div class="shop-royal-tagline">
+                        <span>💬</span> Real Reviews from Verified Pet Parents in Pakistan
+                    </div>
+                    <h2 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">
+                        Loved by Over 60,000+ Pets Across Pakistan
+                    </h2>
+                    <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 24px;">
+                        From DHA Lahore and F-7 Islamabad to Clifton Karachi, Pakistani pet parents trust VetiMedicos for guaranteed original clinical nutrition and vet-approved essentials.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                    <div style="background: #ffffff; border: 1.5px solid rgba(223, 162, 67, 0.35); border-radius: var(--radius-md); padding: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #df9c30; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                            <span style="font-size: 0.72rem; color: #15803d; font-weight: 700; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">✓ Verified Buyer</span>
+                        </div>
+                        <p style="font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 10px;">
+                            "Maine Lahore DHA me VetiMedicos Persian Royal Adult mangwaya tha. Same day deliver hua aur packaging 100% original security seal ke sath thi. Meri Persian cat ka coat ab bohot silky aur shiny ho gaya hai!"
+                        </p>
+                        <div style="font-size: 0.78rem; font-weight: 800; color: #0f172a;">Ayesha K. &bull; DHA Phase 5, Lahore</div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1.5px solid rgba(223, 162, 67, 0.35); border-radius: var(--radius-md); padding: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #df9c30; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                            <span style="font-size: 0.72rem; color: #15803d; font-weight: 700; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">✓ Verified Buyer</span>
+                        </div>
+                        <p style="font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 10px;">
+                            "VetiMedicos Maxi Canine Adult German Shepherd ke liye sab se behtareen diet hai. Sath me handcrafted leather leash bhi li, finishing aur quality outstanding hai!"
+                        </p>
+                        <div style="font-size: 0.78rem; font-weight: 800; color: #0f172a;">Hamza Tariq &bull; Sector F-11, Islamabad</div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1.5px solid rgba(223, 162, 67, 0.35); border-radius: var(--radius-md); padding: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #df9c30; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                            <span style="font-size: 0.72rem; color: #15803d; font-weight: 700; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">✓ Verified Buyer</span>
+                        </div>
+                        <p style="font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 10px;">
+                            "Smart self-cleaning cat litter box order kiya tha Karachi me, 2 din me TCS se mil gaya. Odor bilkul khatam ho gayi hai aur machine bohot silent hai."
+                        </p>
+                        <div style="font-size: 0.78rem; font-weight: 800; color: #0f172a;">Dr. Mahnoor &bull; Clifton Block 4, Karachi</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Official VetiMedicos Brand Footer -->
+            <footer class="shop-official-footer" style="text-align: center; padding: 22px 20px 8px; margin-top: 20px; margin-bottom: 0; border-top: 1px solid rgba(223, 162, 67, 0.3); border-radius: 20px 20px 0 0;">
+                <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 54px; height: 54px; border-radius: 50%; box-shadow: 0 4px 18px rgba(223, 162, 67, 0.4); border: 2px solid rgba(223, 162, 67, 0.6); object-fit: contain; background: #ffffff;">
+                    <div style="text-align: left;">
+                        <div style="font-size: 1.25rem; font-weight: 800; color: #0c1e28; letter-spacing: -0.3px;">Veti<span style="color: #df9c30;">Medicos</span></div>
+                        <div style="font-size: 0.72rem; font-weight: 800; color: #b45309; letter-spacing: 0.8px;">ROYAL PET SANCTUARY &bull; EST. 2026</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.82rem; color: #64748b; max-width: 600px; margin: 0 auto 12px; line-height: 1.5;">
+                    Pakistan's foremost VIP veterinary healthcare hospital &amp; tailored science pet emporium. Dedicated to the health, longevity, and royal care of dogs, cats, and exotic companions. &bull; 24/7 Emergency Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a>
+                </p>
+                <div style="font-size: 0.75rem; color: #94a3b8;">
+                    &copy; 2026 VetiMedicos™ Pakistan. All Rights Reserved. Official Medical Cross &amp; Laurel Crest Registered.
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- =============================================================
+         SLIDING SHOPPING CART DRAWER (FULL STATE)
+         ============================================================= -->
+    <div class="cart-drawer-backdrop" id="cart-drawer-backdrop" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-heading">
+        <div class="cart-drawer-box">
+            <!-- Header -->
+            <div class="cart-drawer-header">
+                <div class="cart-drawer-title-wrap">
+                    <h3 id="cart-drawer-heading" style="display:flex; align-items:center; gap:8px;">
+                        <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Crest EST. 2026" style="width:26px; height:26px; vertical-align:middle;">
+                        <span>Your VIP Shopping Bag</span>
+                        <span class="cart-count-badge" id="drawer-cart-badge">0 items</span>
+                    </h3>
+                </div>
+                <button type="button" class="auth-close-btn" id="cart-drawer-close-btn" aria-label="Close Shopping Bag" style="position:static;">&times;</button>
+            </div>
+
+            <!-- Free Shipping Progress -->
+            <div class="cart-free-shipping-bar" id="cart-free-shipping-bar">
+                <div id="free-shipping-text">Spend Rs. 5,000 for FREE Express VIP Shipping!</div>
+                <div class="free-ship-progress">
+                    <div class="free-ship-fill" id="free-shipping-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="cart-items-list" id="cart-items-container">
+                <!-- Dynamically populated or empty state -->
+            </div>
+
+            <!-- Footer Summary & Checkout Actions -->
+            <div class="cart-drawer-footer">
+                <div class="cart-summary-line">
+                    <span>Subtotal:</span>
+                    <strong id="cart-subtotal-val">Rs. 0</strong>
+                </div>
+                <div class="cart-summary-line">
+                    <span>Estimated Shipping (Pakistan):</span>
+                    <span id="cart-shipping-val">Rs. 250</span>
+                </div>
+                <div class="cart-summary-line total-line">
+                    <span>Total Amount:</span>
+                    <strong id="cart-total-val" style="color: #c2410c;">Rs. 0</strong>
+                </div>
+
+                <div class="cart-checkout-actions">
+                    <!-- WhatsApp 1-Click Order Button -->
+                    <button type="button" class="btn-cart-whatsapp" id="btn-cart-whatsapp" title="Instant Pakistani WhatsApp Order">
+                        <span>💬 Order via WhatsApp (Instant Confirmation)</span>
+                    </button>
+                    <!-- Standard Checkout Modal Button -->
+                    <button type="button" class="btn-cart-checkout" id="btn-cart-checkout" title="Proceed to Cash on Delivery Checkout">
+                        <span>Proceed to Checkout (COD / Bank Transfer) &rarr;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         QUICK VIEW NUTRITION & CLINICAL MODAL
+         ============================================================= -->
+    <div class="quickview-backdrop" id="quickview-modal" role="dialog" aria-modal="true" aria-labelledby="quickview-title">
+        <div class="quickview-card">
+            <button type="button" class="auth-close-btn" id="quickview-close-btn" aria-label="Close Specs" style="position:absolute; top:14px; right:14px;">&times;</button>
+            <div class="quickview-grid" id="quickview-body">
+                <!-- Dynamically filled via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+         CASH ON DELIVERY (COD) / CHECKOUT MODAL
+         ============================================================= -->
+    <div class="quickview-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title">
+        <div class="quickview-card" style="max-width: 520px;">
+            <button type="button" class="auth-close-btn" id="checkout-close-btn" aria-label="Close Checkout" style="position:absolute; top:14px; right:14px;">&times;</button>
+            
+            <div style="margin-bottom: 16px;">
+                <h3 id="checkout-modal-title" style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+                    🚚 Complete Your Order
+                </h3>
+                <p style="font-size: 0.78rem; color: #64748b;">
+                    Cash on Delivery (COD) &amp; Bank Transfer available nationwide across Pakistan.
+                </p>
+            </div>
+
+            <form id="form-shop-checkout" novalidate>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="order-fullname" class="input-label">Full Name *</label>
+                    <div class="input-box">
+                        <input type="text" id="order-fullname" placeholder="e.g. Farhan Ahmed" required autocomplete="name">
+                    </div>
+                </div>
+
+                <div class="spec-grid-2" style="margin-bottom: 10px;">
+                    <div>
+                        <label for="order-phone" class="input-label">WhatsApp / Phone *</label>
+                        <div class="input-box">
+                            <input type="tel" id="order-phone" placeholder="0300-1234567" required autocomplete="tel">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="order-city" class="input-label">City *</label>
+                        <div class="input-box">
+                            <select id="order-city">
+                                <option value="Islamabad">Islamabad (Same-Day)</option>
+                                <option value="Rawalpindi">Rawalpindi (Same-Day)</option>
+                                <option value="Lahore">Lahore (Same-Day)</option>
+                                <option value="Karachi">Karachi (TCS Express)</option>
+                                <option value="Peshawar">Peshawar (Express)</option>
+                                <option value="Faisalabad">Faisalabad (Express)</option>
+                                <option value="Multan">Multan (Express)</option>
+                                <option value="Quetta">Quetta (Express)</option>
+                                <option value="Sialkot">Sialkot (Express)</option>
+                                <option value="Gujranwala">Gujranwala (Express)</option>
+                                <option value="Other">Other City in Pakistan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="order-address" class="input-label">Delivery Street Address *</label>
+                    <div class="input-box">
+                        <input type="text" id="order-address" placeholder="House #, Street, Phase / Sector" required autocomplete="street-address">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label class="input-label">Payment Method</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <label style="border: 1.5px solid rgba(223, 162, 67, 0.4); border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #334155; cursor: pointer; background: #fff8eb;">
+                            <input type="radio" name="payment_method" value="cod" checked>
+                            <span>💵 Cash on Delivery</span>
+                        </label>
+                        <label style="border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #334155; cursor: pointer; background: #ffffff;">
+                            <input type="radio" name="payment_method" value="bank">
+                            <span>🏦 Bank / Nayapay</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Order Total Summary Box -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.8rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="color: #64748b;">Cart Total:</span>
+                        <strong id="checkout-summary-total">Rs. 0</strong>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #15803d; font-weight: 700;">
+                        🚚 Free express delivery applied on qualifying orders!
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit-order" style="height: 44px; font-size: 0.95rem;">
+                    <span class="btn-text">Confirm &amp; Place Order 📦</span>
+                    <span class="spinner"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Dual Role Auth Modal (Client & Doctor Login) -->
+    <div class="auth-modal-wrapper" id="auth-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="signin-heading-title">
+        <div class="auth-modal-backdrop" id="auth-modal-backdrop"></div>
+        <div class="auth-floating-container">
+            <div class="auth-card">
+                <button type="button" class="auth-close-btn" id="auth-close-btn" aria-label="Close Login Modal">&times;</button>
+                
+                <!-- Official Crest Header in Login Card -->
+                <div class="auth-brand-badge" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(223, 162, 67, 0.2);">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Crest EST. 2026" style="width: 38px; height: 38px; border-radius: 50%; box-shadow: 0 3px 10px rgba(223, 162, 67, 0.35); border: 1.5px solid rgba(223, 162, 67, 0.5); object-fit: contain; background: #ffffff;">
+                    <div style="text-align: left; line-height: 1.15;">
+                        <div style="font-weight: 800; font-size: 0.95rem; color: #0c1e28;">Veti<span style="color:#df9c30;">Medicos</span></div>
+                        <div style="font-size: 0.62rem; color: #b45309; font-weight: 800; letter-spacing: 0.6px;">OFFICIAL CREST &bull; EST. 2026</div>
+                    </div>
+                </div>
+
+                <div class="role-selector-bar" role="tablist" aria-label="Select Login Role">
+                    <button type="button" class="role-chip active" data-role="client" id="role-chip-client" role="tab" aria-selected="true">
+                        <span class="role-icon">🐾</span>
+                        <span>Client / Pet Parent</span>
+                    </button>
+                    <button type="button" class="role-chip" data-role="doctor" id="role-chip-doctor" role="tab" aria-selected="false">
+                        <span class="role-icon">🩺</span>
+                        <span>Veti Doctor</span>
+                    </button>
+                </div>
+                <div id="view-signin" class="card-view active">
+                    <div class="card-header">
+                        <h2 class="card-title" id="signin-heading-title">Client <span>Sign In</span></h2>
+                        <p class="card-desc" id="signin-heading-subtitle">Welcome Pet Parent! Manage your pets &amp; clinic appointments</p>
+                    </div>
+                    <form id="form-signin" novalidate>
+                        <div class="form-group">
+                            <label for="signin-email" class="input-label">Email Address</label>
+                            <div class="input-box">
+                                <input type="email" id="signin-email" placeholder="client@example.com" required autocomplete="email">
+                            </div>
+                        </div>
+                        <div class="doctor-signin-field" id="doctor-signin-spec-box">
+                            <div class="doctor-spec-compact-box">
+                                <div class="doctor-spec-header">
+                                    <span>🩺 Specified Doctor Details <span class="spec-req-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link" id="auth-duty-link" title="View Doctors On Duty">📋 OPD Roster</button>
+                                </div>
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-name" class="input-label">Doctor Name *</label>
+                                        <div class="input-box"><input type="text" id="signin-doctor-name" placeholder="Dr. Farhan Qureshi"></div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-license" class="input-label">License / Reg *</label>
+                                        <div class="input-box"><input type="text" id="signin-license" placeholder="VET-PK-2026-DVM"></div>
+                                    </div>
+                                </div>
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-specialty" class="input-label">Specialization</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-specialty">
+                                                <option value="Chief Veterinary Surgeon|Surgery & Orthopedics">Chief Veterinary Surgeon</option>
+                                                <option value="Canine Health & Dog Diagnostics|Canine Wellness OPD">Canine Specialist</option>
+                                                <option value="Feline & Small Pet Medicine|Cat Care Wing">Feline Specialist</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-room" class="input-label">Chamber</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-room">
+                                                <option value="Suite 101">Suite 101</option>
+                                                <option value="Room 103">Room 103</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spec-grid-2">
+                                    <div>
+                                        <label for="signin-doctor-shift" class="input-label">Shift</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-shift">
+                                                <option value="Morning (08:00 AM - 04:00 PM)">Morning (08:00 AM - 04:00 PM)</option>
+                                                <option value="Evening (02:00 PM - 10:00 PM)">Evening (02:00 PM - 10:00 PM)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-doctor-status" class="input-label">Status</label>
+                                        <div class="input-box">
+                                            <select id="signin-doctor-status">
+                                                <option value="onduty">🟢 On Duty Now</option>
+                                                <option value="surgery">🟡 In Surgery</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-signin-field" id="client-signin-pet-box">
+                            <div class="client-spec-compact-box">
+                                <div class="client-spec-header">
+                                    <span>🐾 Pet Details (Client Profile) <span class="spec-req-badge client-badge">Required</span></span>
+                                    <button type="button" class="btn-spec-link client-link" id="auth-clients-link">🐾 Live Directory</button>
+                                </div>
+                                <div class="spec-grid-3">
+                                    <div>
+                                        <label for="signin-pet-name" class="input-label">Pet Name *</label>
+                                        <div class="input-box"><input type="text" id="signin-pet-name" placeholder="Rocky"></div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-type" class="input-label">Species</label>
+                                        <div class="input-box">
+                                            <select id="signin-pet-type">
+                                                <option value="Dog">🐕 Dog</option>
+                                                <option value="Cat">🐈 Cat</option>
+                                                <option value="Other">🐾 Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="signin-pet-breed" class="input-label">Breed</label>
+                                        <div class="input-box"><input type="text" id="signin-pet-breed" placeholder="Persian, 2y"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signin-password" class="input-label">Password</label>
+                            <div class="input-box">
+                                <input type="password" id="signin-password" placeholder="enter your password" required autocomplete="current-password">
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-label"><input type="checkbox" id="remember-me" checked><span>Remember me</span></label>
+                            <a href="#" id="btn-to-forgot" class="forgot-link">Forgot password ?</a>
+                        </div>
+                        <button type="submit" class="btn-submit" id="btn-submit-signin">
+                            <span class="btn-text" id="signin-btn-label">Sign In as Client 🐾</span>
+                            <span class="spinner"></span>
+                        </button>
+                        <div class="auth-divider"><span>or continue with</span></div>
+                        <button type="button" class="btn-google" id="btn-google-signin">
+                            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                            <span>Sign In with Google</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctors On-Duty Board & Shift Roster Modal -->
+    <div class="doctors-duty-backdrop" id="doctors-duty-modal" role="dialog" aria-modal="true" aria-labelledby="duty-modal-title">
+        <div class="doctors-duty-box">
+            <div class="doctors-duty-header">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="duty-modal-title">🩺 VetiMedicos <span>Doctor Portal</span></h2>
+                        <p class="duty-subtitle">Live Duty Directory: Only verified veterinary doctors appear here in real-time.</p>
+                    </div>
+                    <button type="button" class="auth-close-btn" id="duty-modal-close-btn" aria-label="Close Doctor Portal" style="position: static;">&times;</button>
+                </div>
+            </div>
+            <div class="doctors-duty-body" id="doctors-duty-grid"></div>
+        </div>
+    </div>
+
+    <!-- Clients & Pets Live Directory Modal -->
+    <div class="doctors-duty-backdrop" id="clients-directory-modal" role="dialog" aria-modal="true" aria-labelledby="clients-modal-title">
+        <div class="doctors-duty-box">
+            <div class="doctors-duty-header">
+                <div class="duty-header-top">
+                    <div class="duty-title-wrap">
+                        <h2 id="clients-modal-title">🐾 VetiMedicos <span style="color: #0284c7;">Clients &amp; Pets</span></h2>
+                        <p class="duty-subtitle">Live Pet Parent Directory</p>
+                    </div>
+                    <button type="button" class="auth-close-btn" id="clients-modal-close-btn" aria-label="Close Clients Portal" style="position: static;">&times;</button>
+                </div>
+            </div>
+            <div class="doctors-duty-body" id="clients-directory-grid"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Embedded Shop E-Commerce Controller -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll from hero button to catalog
+            const btnHeroShopScroll = document.getElementById('btn-hero-shop-scroll');
+            if (btnHeroShopScroll) {
+                btnHeroShopScroll.addEventListener('click', () => {
+                    const anchor = document.getElementById('shop-catalog-anchor');
+                    if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            const btnHeroOpenCart = document.getElementById('btn-hero-open-cart');
+            if (btnHeroOpenCart) {
+                btnHeroOpenCart.addEventListener('click', () => {
+                    if (window.openCartDrawer) window.openCartDrawer();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

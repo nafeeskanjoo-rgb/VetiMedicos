@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" class="history-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Clients &amp; Pets Medical History &amp; Official Reports | VetiMedicos</title>
+    <meta name="description" content="View historical veterinary medical records, diagnoses, treatment timelines, and official clinical laboratory & radiology reports for all VIP clients and noble pets.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="history-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 70px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="checkup.html" id="nav-checkup-link" title="Instant Online Pet Checkup &amp; Video Consultations">Online Checkup <span style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(16,185,129,0.4);">LIVE</span></a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view Signed-In Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart Button -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons...">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Master History Stage ================= -->
+        <main class="history-page-stage">
+            
+            <!-- 1. Hero Showcase Card -->
+            <section class="roster-hero-card" aria-label="VIP Clients & Pets Medical Archives">
+                <div class="roster-hero-tagline">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="Crest EST. 2026" style="width:20px; height:20px; border-radius:50%; object-fit:contain; border:1px solid rgba(223,162,67,0.6);">
+                    <span>🐾</span> Verified Pet Clinical Archives &bull; <strong>EST. 2026</strong>
+                </div>
+
+                <h1 class="roster-hero-title">
+                    Clients &amp; Pets <span class="highlight-gold">Medical History &amp; Official Reports</span>
+                </h1>
+
+                <p class="roster-hero-subtitle">
+                    Complete veterinary clinical registry: Encounters timeline, clinical diagnoses, prescribed therapies, and hospital-certified diagnostic laboratory reports for our VIP client families.
+                </p>
+
+                <!-- Live Statistics Strip -->
+                <div class="roster-stats-strip">
+                    <div class="roster-stat-card">
+                        <div class="roster-stat-icon">👑</div>
+                        <div>
+                            <div class="roster-stat-val" id="hist-stat-families">5</div>
+                            <div class="roster-stat-lbl">VIP Client Families</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(223, 162, 67, 0.4);">
+                        <div class="roster-stat-icon" style="background:#fff8eb; border-color:#fed7aa; color:#c2410c;">🐾</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #c2410c;" id="hist-stat-pets">8</div>
+                            <div class="roster-stat-lbl">Registered Pets</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(147, 51, 234, 0.4);">
+                        <div class="roster-stat-icon" style="background:#faf5ff; border-color:#e9d5ff; color:#7e22ce;">📋</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #7e22ce;" id="hist-stat-encounters">14</div>
+                            <div class="roster-stat-lbl">Clinical Encounters</div>
+                        </div>
+                    </div>
+                    <div class="roster-stat-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                        <div class="roster-stat-icon" style="background:#ecfdf5; border-color:#a7f3d0; color:#059669;">🩺</div>
+                        <div>
+                            <div class="roster-stat-val" style="color: #059669;" id="hist-stat-reports">12</div>
+                            <div class="roster-stat-lbl">Attached Lab Reports</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Search & Filter Toolbar -->
+            <section class="roster-toolbar-card" aria-label="Medical History Search and Filters">
+                <div class="roster-search-bar">
+                    <svg class="search-bar-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="history-search-input" placeholder="Search by pet name, client, doctor, diagnosis, or report ID..." autocomplete="off">
+                    <button type="button" class="search-clear-btn" id="history-search-clear" aria-label="Clear search" title="Clear search">&times;</button>
+                </div>
+
+                <div class="roster-filters-wrap duty-filters-group" role="tablist" aria-label="Filter Medical Records">
+                    <button type="button" class="duty-filter-chip history-filter-chip active" data-filter="all">All Records (8)</button>
+                    <button type="button" class="duty-filter-chip history-filter-chip" data-filter="Dog">🐕 Dogs (3)</button>
+                    <button type="button" class="duty-filter-chip history-filter-chip" data-filter="Cat">🐈 Cats (3)</button>
+                    <button type="button" class="duty-filter-chip history-filter-chip" data-filter="other">🦜 Birds &amp; Exotics (2)</button>
+                    <button type="button" class="duty-filter-chip history-filter-chip" data-filter="blood">🔬 Lab Blood Tests</button>
+                    <button type="button" class="duty-filter-chip history-filter-chip" data-filter="imaging">🩻 Imaging &amp; X-Rays</button>
+                </div>
+
+                <div class="roster-actions-wrap">
+                    <a href="clients.html" class="btn-duty-login-switch" title="Back to VIP Clients Directory" style="background:#f1f5f9; border-color:#cbd5e1; color:#334155; font-weight:800; padding:9px 16px; border-radius:12px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                        <span>👥</span> Clients Directory
+                    </a>
+                    <a href="tel:03264223100" class="btn-duty-login-switch" title="Direct Emergency Call 0326-4223100" style="background:linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color:#ffffff; font-weight:800; padding:9px 16px; border-radius:12px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(220, 38, 38, 0.35);">
+                        <span>📞</span> Emergency: 03264223100
+                    </a>
+                </div>
+            </section>
+
+            <!-- 3. Medical History Cards Grid -->
+            <section class="history-cards-grid" id="history-cards-container" aria-label="Clients & Pets Medical Records">
+
+                <!-- CARD 1: Rocky (Dog - Hamza Khan) -->
+                <article class="history-pet-card" data-species="Dog" data-pet="Rocky" data-parent="Hamza Khan" data-types="blood imaging">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐕</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Rocky
+                                    <span style="font-size:0.75rem; background:#fff8eb; color:#c2410c; border:1px solid #fed7aa; padding:2px 8px; border-radius:8px;">Canine Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">Golden Retriever &bull; 2.5 Years Male (Neutered)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Hamza Khan</strong> &bull; <span>📞 +92 321 7766554</span> &bull; <span>Membership: Royal Gold VIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>31.4 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102391024</strong></div>
+                        <div class="vital-tag">Blood Group: <strong>DEA 1.1 Negative</strong></div>
+                        <div class="vital-tag">Last De-wormed: <strong>14 Aug 2026</strong></div>
+                        <div class="vital-tag vital-status-cleared">Vaccination Status: <strong>Fully Up-To-Date (DHPPi + Rabies) ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <!-- Encounter 1 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 14 August 2026 &bull; OPD Sanctuary Room 03</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Ayesha Malik (Lead Veterinary Surgeon)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Routine Bi-Annual Health Examination &amp; Hematology Workup</h3>
+                            <p class="encounter-complaints-text">
+                                Presented for scheduled semi-annual wellness checkup. Patient active, alert, responsive. Capillary refill time &lt; 2s, heart sounds clear without murmurs, lungs auscultated clear bilaterally. Complete blood count ordered for liver and immune profiling.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Prescribed Medical Treatment &amp; Regimen:</span>
+                                Administered NexGard Spectra chewable for ectoparasite prevention. Prescribed Omega-3 Royal Salmon Oil supplement (5ml daily with meal) for coat shine. Next booster due February 2027.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🔬</span>
+                                    <span>Official Report: <strong>LAB-90412</strong> &bull; Complete Blood Count (CBC) &amp; Microscopic Smear</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('LAB-90412')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Encounter 2 -->
+                        <div class="timeline-encounter-card emergency-encounter">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge" style="background:#fee2e2; border-color:#fca5a5; color:#b91c1c;">📅 10 February 2026 &bull; Isolation Ward</span>
+                                <span class="encounter-doctor-badge" style="background:#fee2e2; border-color:#fca5a5; color:#b91c1c;">🩺 Dr. Bilal Raza (Infectious Disease Specialist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Acute Parvoviral Enteritis (Resolved &bull; Post-Recovery Titre)</h3>
+                            <p class="encounter-complaints-text">
+                                Historic acute hemorrhagic gastroenteritis treated in 24/7 isolation ward with IV fluid resuscitation, maropitant antiemetic therapy, and broad-spectrum antimicrobial coverage. Complete resolution achieved on Day 6. Post-recovery antibody titre conducted to verify protective IgG levels.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Clinical Resolution &amp; Dietary Protocol:</span>
+                                Switched to Royal Canin Gastrointestinal Veterinary Diet for 4 weeks. Full recovery validated with negative fecal antigen re-test and strong protective IgG antibody levels.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🛡️</span>
+                                    <span>Official Report: <strong>IMM-90415</strong> &bull; Canine Parvovirus IgG Serum Titre &amp; Antibody Profile</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('IMM-90415')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 2: Max (Dog - Hamza Khan) -->
+                <article class="history-pet-card" data-species="Dog" data-pet="Max" data-parent="Hamza Khan" data-types="blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐕</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Max
+                                    <span style="font-size:0.75rem; background:#fff8eb; color:#c2410c; border:1px solid #fed7aa; padding:2px 8px; border-radius:8px;">Canine Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">German Shepherd &bull; 3.5 Years Male (Intact)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Hamza Khan</strong> &bull; <span>📞 +92 321 7766554</span> &bull; <span>Membership: Royal Gold VIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>38.2 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102391088</strong></div>
+                        <div class="vital-tag">Body Temp: <strong>101.4°F (Normal)</strong></div>
+                        <div class="vital-tag">Ear Canal: <strong>Mild Erythema Right Canal</strong></div>
+                        <div class="vital-tag vital-status-cleared">Vaccination Status: <strong>Rabies Passport Active ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 02 September 2026 &bull; Dermatology Suite</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Hira Siddiqui (Senior Veterinary Dermatologist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Acute Bilateral Otitis Externa &amp; Malassezia pachydermatis Overgrowth</h3>
+                            <p class="encounter-complaints-text">
+                                Client noticed vigorous head-shaking and right ear scratching over the past 48 hours. Otoscopic exam revealed copious dark ceruminous discharge and inflamed vertical auditory canal with intact tympanic membrane. Deep auricular swab collected for direct stained cytology.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Prescribed Medical Treatment &amp; Ear Flush Protocol:</span>
+                                In-clinic gentle ceruminolytic ear flush performed. Prescribed Posatex Otic suspension (orbifloxacin, mometasone, posaconazole) 6 drops once daily for 10 days. Follow-up swab scheduled after 14 days.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🔬</span>
+                                    <span>Official Report: <strong>MIC-44102</strong> &bull; Deep Auricular Exudate Bacterial &amp; Fungal Cytology</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('MIC-44102')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 3: Bella (Cat - Sara Malik) -->
+                <article class="history-pet-card" data-species="Cat" data-pet="Bella" data-parent="Sara Malik" data-types="imaging blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐈</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Bella
+                                    <span style="font-size:0.75rem; background:#faf5ff; color:#7e22ce; border:1px solid #e9d5ff; padding:2px 8px; border-radius:8px;">Feline Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">Purebred Persian Cat &bull; 2.0 Years Female (Spayed)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Sara Malik</strong> &bull; <span>📞 +92 301 5558899</span> &bull; <span>Membership: Platinum Elite</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>4.1 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102399112</strong></div>
+                        <div class="vital-tag">Blood Group: <strong>Type A Feline</strong></div>
+                        <div class="vital-tag">Heart Rate: <strong>164 bpm (Calm)</strong></div>
+                        <div class="vital-tag vital-status-cleared">PKD Status: <strong>Genetic &amp; Renal Ultrasound Clear ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <!-- Encounter 1 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 19 July 2026 &bull; Advanced Diagnostic Imaging Suite</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Farhan Ahmed (Specialist Radiologist &amp; Ultrasonographer)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Comprehensive Abdominal Ultrasound &amp; Polycystic Kidney Disease (PKD) Screen</h3>
+                            <p class="encounter-complaints-text">
+                                Breed-specific screening protocol for purebred Persian felines. Multi-frequency microconvex probe utilized. Bilateral renal cortices evaluated with sharp corticomedullary distinction. Zero anechoic cysts detected in bilateral kidneys. Hepatic parenchyma and urinary bladder smooth and unremarkable.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Diagnostic Outcome &amp; Wellness Strategy:</span>
+                                Certified free of hereditary polycystic kidney disease (PKD). Prescribed Royal Canin Persian Adult formula with calibrated dietary fiber for trichobezoar (hairball) elimination.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🩻</span>
+                                    <span>Official Report: <strong>US-70231</strong> &bull; High-Definition Abdominal Ultrasonography Examination</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('US-70231')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Encounter 2 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 05 March 2026 &bull; Dentistry &amp; Oral Surgery</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Zainab Tariq (Dental &amp; Soft Tissue Surgeon)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Stage 1 Gingivitis &amp; Full Ultrasonic Dental Scaling</h3>
+                            <p class="encounter-complaints-text">
+                                Mild supragingival calculus observed along upper maxillary carnassial teeth. Pre-anesthetic renal and liver biochemistry panel completed prior to isoflurane induction. Ultrasonic descaling, subgingival curettage, and fluoride paste polishing performed smoothly.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Post-Operative Instructions &amp; Dental Hygiene:</span>
+                                Prescribed Stomodine LP oral gel for 7 days post-cleaning. Home dental water additive recommended. Oral exam clear.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🧪</span>
+                                    <span>Official Report: <strong>BIO-61094</strong> &bull; Pre-Anesthetic Comprehensive Serum Biochemistry Profile</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('BIO-61094')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 4: Milo (Cat - Sara Malik) -->
+                <article class="history-pet-card" data-species="Cat" data-pet="Milo" data-parent="Sara Malik" data-types="blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐈</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Milo
+                                    <span style="font-size:0.75rem; background:#faf5ff; color:#7e22ce; border:1px solid #e9d5ff; padding:2px 8px; border-radius:8px;">Feline Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">British Shorthair &bull; 1.0 Year Male (Intact)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Sara Malik</strong> &bull; <span>📞 +92 301 5558899</span> &bull; <span>Membership: Platinum Elite</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>4.8 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102399554</strong></div>
+                        <div class="vital-tag">Blood Group: <strong>Type B Feline</strong></div>
+                        <div class="vital-tag">FIV/FeLV: <strong>Triple Snap Test Negative ✔</strong></div>
+                        <div class="vital-tag vital-status-cleared">Passport: <strong>International Pet Travel Passport Issued ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 11 June 2026 &bull; Global Travel Health Clearance Desk</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Bilal Raza (Certifying Quarantine Official)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">ISO 11784/11785 Microchip Implantation &amp; International Travel Passport Issuance</h3>
+                            <p class="encounter-complaints-text">
+                                Presented for pre-travel international documentation. Subcutaneous microchip transponder implanted between shoulder blades without complications; scanned and confirmed 100% readable. Feline Calicivirus, Herpesvirus, Panleukopenia and Rabies vaccines administered.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Official Documentation Handover:</span>
+                                Official Government-stamped Pet Travel Passport issued with embossed VetiMedicos holographic gold seal. Certified fit for commercial and private flight travel.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🌐</span>
+                                    <span>Official Report: <strong>ISO-55109</strong> &bull; International Microchip Registration &amp; Passport Clearance</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('ISO-55109')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 5: Leo (Dog - Zoya Qureshi) -->
+                <article class="history-pet-card" data-species="Dog" data-pet="Leo" data-parent="Zoya Qureshi" data-types="imaging blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐕</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Leo
+                                    <span style="font-size:0.75rem; background:#fff8eb; color:#c2410c; border:1px solid #fed7aa; padding:2px 8px; border-radius:8px;">Canine Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">Siberian Husky &bull; 3.0 Years Male (Neutered)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Zoya Qureshi</strong> &bull; <span>📞 +92 333 9988776</span> &bull; <span>Membership: Royal Gold VIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>27.8 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102394012</strong></div>
+                        <div class="vital-tag">Joint Mobility: <strong>Grade 1 Coxofemoral Subluxation (Controlled)</strong></div>
+                        <div class="vital-tag">Gait: <strong>Weight-Bearing on All 4 Limbs</strong></div>
+                        <div class="vital-tag vital-status-cleared">Vaccination Status: <strong>Annual Booster Complete ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <!-- Encounter 1 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 20 May 2026 &bull; Orthopedic Surgical Wing</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Farhan Ahmed (Senior Orthopedic Specialist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Bilateral Coxofemoral Digital Radiography (Hip Dysplasia Evaluation)</h3>
+                            <p class="encounter-complaints-text">
+                                History of difficulty rising following rigorous morning exercise in park. Physical manipulation revealed mild discomfort during extreme extension of left hip joint with negative Ortolani sign on right side. Ventrodorsal extended-leg digital radiographs obtained under light sedation.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Orthopedic Management &amp; Physiotherapy Plan:</span>
+                                Commenced chondroprotective therapy (Cosequin DS Glucosamine + Chondroitin chewables twice daily). Advised controlled underwater treadmill hydrotherapy sessions twice weekly. Non-steroidal anti-inflammatory (Carprofen 75mg) prescribed as needed.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🩻</span>
+                                    <span>Official Report: <strong>RAD-81093</strong> &bull; Digital Orthopedic Radiographic Diagnostic Report (Pelvic Views)</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('RAD-81093')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Encounter 2 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 14 January 2026 &bull; Pathology &amp; Immunology Unit</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Ayesha Malik (Lead Veterinary Surgeon)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Joint Mobility Follow-up &amp; Serum Inflammatory Biomarker Screening</h3>
+                            <p class="encounter-complaints-text">
+                                Six-month follow-up evaluation of inflammatory markers following initiation of omega-3 and glucosamine supplements. Client reports noticeable improvement in running stamina and painless stair climbing.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Therapeutic Outcome:</span>
+                                C-Reactive Protein (CRP) returned within normal baseline limits. Continue joint preservation therapy and maintain ideal lean muscle body condition score of 5/9.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🧪</span>
+                                    <span>Official Report: <strong>BIO-81096</strong> &bull; Serum Canine C-Reactive Protein (cCRP) &amp; Joint Panel</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('BIO-81096')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 6: Coco (Bird - Daniyal Ahmed) -->
+                <article class="history-pet-card" data-species="other" data-pet="Coco" data-parent="Daniyal Ahmed" data-types="blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🦜</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Coco
+                                    <span style="font-size:0.75rem; background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:2px 8px; border-radius:8px;">Avian Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">African Grey Parrot (Psittacus erithacus) &bull; 4.0 Years (DNA Sexed Male)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parent:</span> <strong>Daniyal Ahmed</strong> &bull; <span>📞 +92 312 4455667</span> &bull; <span>Membership: Royal Gold VIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>445 grams</strong></div>
+                        <div class="vital-tag">Closed Leg Ring: <strong>PK-AG-2022-841</strong></div>
+                        <div class="vital-tag">Crop: <strong>Empty &amp; Normal Motility</strong></div>
+                        <div class="vital-tag">Beak &amp; Nails: <strong>Smooth, Trimmed &amp; Polished</strong></div>
+                        <div class="vital-tag vital-status-cleared">PBFD / Polyoma: <strong>Real-Time PCR Negative ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <!-- Encounter 1 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 18 September 2026 &bull; Avian &amp; Exotic Medicine Pavilion</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Zainab Tariq (Avian &amp; Exotic Pets Specialist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Nutritional Avian Hypocalcemia &amp; Breast Feather Plucking Evaluation</h3>
+                            <p class="encounter-complaints-text">
+                                Brought in due to mild breast feather over-preening and lethargy. African Greys possess unique parathyroid calcium metabolism requirements. Basal blood collected from right jugular vein using 29G needle for specialized avian ionized calcium and protein electrophoresis.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Avian Dietary Intervention &amp; Full-Spectrum UV Therapy:</span>
+                                Instituted oral liquid calcium glubionate (Calcivet) supplement for 21 days. Switched all-seed diet to Harrison's High Potency Coarse organic pellets with fresh leafy greens. Full-spectrum 5.0 UVB lighting lamp installed 12 hours daily.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🔬</span>
+                                    <span>Official Report: <strong>EXO-33104</strong> &bull; Specialized Avian Serum Biochemistry &amp; Ionized Calcium Profile</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('EXO-33104')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Encounter 2 -->
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 12 April 2026 &bull; Molecular Diagnostics Lab</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Hira Siddiqui (Senior Veterinary Pathologist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Circovirus (PBFD) &amp; Avian Polyomavirus Screening</h3>
+                            <p class="encounter-complaints-text">
+                                Mandatory annual molecular screen for quarantine pathogen exclusion. Feather pulp and blood sample subjected to qualitative real-time PCR assay.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Molecular Virology Outcome:</span>
+                                All viral targets not detected (Negative). Feathers cleared for normal seasonal molt cycle.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🧬</span>
+                                    <span>Official Report: <strong>CYT-33108</strong> &bull; Avian Molecular Viral PCR Assay &amp; Feather Cytology</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('CYT-33108')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 7: Fluffy (Rabbit - Usman & Maria Ali) -->
+                <article class="history-pet-card" data-species="other" data-pet="Fluffy" data-parent="Usman &amp; Maria Ali" data-types="imaging">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐇</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Fluffy
+                                    <span style="font-size:0.75rem; background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:2px 8px; border-radius:8px;">Lagomorph Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">Pure Angora Rabbit &bull; 1.0 Year Female</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parents:</span> <strong>Usman &amp; Maria Ali</strong> &bull; <span>📞 +92 345 1122334</span> &bull; <span>Membership: Diamond VIP Member</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>2.15 kg</strong></div>
+                        <div class="vital-tag">Gut Sounds: <strong>Normoactive (All 4 Quadrants)</strong></div>
+                        <div class="vital-tag">Molar Spurring: <strong>Triglyceride Free &bull; Clipped</strong></div>
+                        <div class="vital-tag">Diet: <strong>90% 1st Cut Timothy Hay</strong></div>
+                        <div class="vital-tag vital-status-cleared">Cecotrope Cycle: <strong>Normal Active Digestion ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 05 August 2026 &bull; Dental Operatory Suite</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Zainab Tariq (Exotic Dental Specialist)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Lagomorph Molar Elongation &amp; Micro-Spur Endoscopic Planing</h3>
+                            <p class="encounter-complaints-text">
+                                Owners observed selective feeding and mild wetness around the chin. Oral video endoscopy revealed mild lingual tipping and small sharp spur on the lower right second molar touching the lateral tongue border. Dental rasping and smoothing performed under sevoflurane anesthesia.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Post-Dental Recovery &amp; Gut Motility Support:</span>
+                                Administered Meloxicam oral suspension (0.4mg/kg) for analgesia and cisapride motility stimulant for 48 hours. Chewing Timothy hay within 3 hours post-recovery.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🦷</span>
+                                    <span>Official Report: <strong>DNT-22019</strong> &bull; Lagomorph Oral Video Endoscopy &amp; Dental Charting</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('DNT-22019')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 8: Oliver (Cat - Usman & Maria Ali) -->
+                <article class="history-pet-card" data-species="Cat" data-pet="Oliver" data-parent="Usman &amp; Maria Ali" data-types="blood">
+                    <header class="pet-history-header">
+                        <div class="pet-history-title-wrap">
+                            <div class="pet-history-avatar">🐈</div>
+                            <div class="pet-history-name-box">
+                                <h2>
+                                    Oliver
+                                    <span style="font-size:0.75rem; background:#faf5ff; color:#7e22ce; border:1px solid #e9d5ff; padding:2px 8px; border-radius:8px;">Feline Companion</span>
+                                </h2>
+                                <div class="pet-history-breed">Ragdoll Feline &bull; 2.0 Years Male (Neutered)</div>
+                                <div class="pet-parent-meta-pill">
+                                    <span>👑 Parents:</span> <strong>Usman &amp; Maria Ali</strong> &bull; <span>📞 +92 345 1122334</span> &bull; <span>Membership: Diamond VIP Member</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="pet-vitals-strip">
+                        <div class="vital-tag">Weight: <strong>5.4 kg</strong></div>
+                        <div class="vital-tag">Microchip ID: <strong>981098102398419</strong></div>
+                        <div class="vital-tag">Urinary pH: <strong>6.3 (Ideal Target 6.0 - 6.5)</strong></div>
+                        <div class="vital-tag">Hydration Status: <strong>Optimal &bull; Water Fountain User</strong></div>
+                        <div class="vital-tag vital-status-cleared">Kidney Function: <strong>SDMA &amp; Creatinine Normal ✔</strong></div>
+                    </div>
+
+                    <div class="encounters-timeline-container">
+                        <div class="timeline-encounter-card">
+                            <div class="encounter-header-row">
+                                <span class="encounter-date-badge">📅 28 July 2026 &bull; Feline Special Care Pavilion</span>
+                                <span class="encounter-doctor-badge">🩺 Dr. Ayesha Malik (Lead Veterinary Surgeon)</span>
+                            </div>
+                            <h3 class="encounter-diagnosis-title">Feline Lower Urinary Tract Disease (FLUTD) Evaluation &amp; Microscopic Urinalysis</h3>
+                            <p class="encounter-complaints-text">
+                                Presented for follow-up evaluation after sporadic litter box straining 3 months prior. Sterile cystocentesis performed under ultrasound guidance to obtain pure urine sample for refractometric specific gravity, chemical dipstick, and sediment microscopy.
+                            </p>
+                            <div class="encounter-treatment-box">
+                                <span class="treatment-label">Therapeutic Nutritional Management:</span>
+                                Maintained strictly on Royal Canin Feline Urinary S/O wet pouch diet with calibrated RSS index. Zero struvite crystals or hematuria observed in sediment. Bladder wall thin and healthy.
+                            </div>
+                            <div class="report-attach-bar">
+                                <div class="report-meta-info">
+                                    <span>🧪</span>
+                                    <span>Official Report: <strong>URN-44091</strong> &bull; Complete Chemical Urinalysis, Specific Gravity &amp; Sediment Crystalluria</span>
+                                </div>
+                                <button type="button" class="report-btn-view" onclick="openClinicalReport('URN-44091')">
+                                    <span>📄</span> View Clinical Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+        </main>
+
+        <!-- ================= Official Medical Report Modal Container ================= -->
+        <div class="report-modal-backdrop" id="report-modal-backdrop" role="dialog" aria-modal="true" aria-label="Official Veterinary Diagnostic Report">
+            <div class="report-modal-sheet" id="report-modal-sheet">
+                <button type="button" class="report-modal-close-btn" id="btn-close-report" onclick="closeClinicalReport()" aria-label="Close Report">&times;</button>
+                
+                <div id="report-modal-dynamic-content">
+                    <!-- Populated dynamically via app.js with hospital letterhead, table, and doctor sign-off -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= End Point Official Brand Seal ================= -->
+        <footer class="roster-official-footer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px 20px 12px; margin-top: 30px; margin-bottom: 0; border-top: 1.5px solid rgba(223, 162, 67, 0.35); background: rgba(255, 252, 245, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
+                <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 52px; height: 52px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 16px rgba(223, 162, 67, 0.4); border: 2px solid rgba(223, 162, 67, 0.65); background: #ffffff;">
+                <div style="text-align: left; line-height: 1.25;">
+                    <div style="font-size: 1.25rem; font-weight: 900; color: #0c1e28; letter-spacing: -0.4px;">
+                        Veti<span style="color: #df9c30;">Medicos</span>
+                        <span style="font-size: 0.65rem; background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; padding: 2px 7px; border-radius: 8px; border: 1px solid rgba(223, 162, 67, 0.45); font-weight: 800; vertical-align: middle; margin-left: 4px;">EST. 2026</span>
+                    </div>
+                    <div style="font-size: 0.74rem; font-weight: 800; color: #b45309; letter-spacing: 0.8px; text-transform: uppercase;">
+                        World-Class 5-Star Veterinary Sanctuary &bull; Hospital
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 0 0 6px 0; max-width: 580px; line-height: 1.5;">
+                Dedicated to veterinary excellence, compassionate animal medicine, and 5-star royal luxury care for your beloved companions. &bull; 24/7 Emergency Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a>
+            </p>
+            <div style="font-size: 0.74rem; color: #94a3b8; font-weight: 600;">
+                &copy; 2026 VetiMedicos™. All Rights Reserved. Official Medical Cross &amp; Laurel Crest Registered.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Core Logic & Reports System -->
+    <script src="js/app.js"></script>
+</body>
+</html>

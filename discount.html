@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" class="discount-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Exclusive Offers, Discounts &amp; Coupons | VetiMedicos Official Hospital</title>
+    <meta name="description" content="Save big with limited-time veterinary discounts, promo coupons, strike-through deals on consultations, vaccines, pet spa, and clinical diets at VetiMedicos.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="discount-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 70px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view Signed-In Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="discount.html" class="active">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart Button -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons...">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Master Discount & Offers Stage ================= -->
+        <main class="discount-stage">
+            
+            <!-- 1. Hero Announcement Banner with Live Countdown Timer -->
+            <section class="discount-timer-card" aria-label="Limited Time Flash Deals">
+                <div class="discount-sale-badge">
+                    🔥 FLASH DEALS &bull; LIMITED TIME ONLY
+                </div>
+                
+                <h1 style="font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 900; color: #0c1e28; letter-spacing: -0.6px; margin-bottom: 8px;">
+                    Exclusive Seasonal Discounts &amp; Promo Coupons
+                </h1>
+                
+                <p style="font-size: clamp(0.9rem, 1.2vw, 1.05rem); color: #475569; max-width: 680px; margin: 0 auto; line-height: 1.55;">
+                    Claim high-value promotional vouchers for veterinary consultations, preventative vaccinations, luxury hydrotherapy grooming, and clinical nutrition. Copy codes with 1 click!
+                </p>
+
+                <!-- Live Countdown Timer (Days, Hours, Minutes, Seconds) -->
+                <div class="countdown-timer-wrap" aria-label="Sale Countdown Timer">
+                    <div class="countdown-box">
+                        <div class="countdown-number" id="timer-days">07</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-number" id="timer-hours">14</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-number" id="timer-minutes">32</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-number" id="timer-seconds" style="color: #dc2626;">45</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 700; color: #b45309; margin-top: 6px;">
+                    ⚡ Autumn Healthcare Festival Ends Soon &bull; Guaranteed Instant Voucher Redemption
+                </div>
+            </section>
+
+            <!-- 2. Coupon Cards Grid (6 High-Value Offers) -->
+            <section class="coupons-grid" aria-label="Discount Coupons Grid">
+                
+                <!-- Coupon 1: First OPD Checkup (30% OFF) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag">30% OFF</span>
+                        <span class="coupon-cat-pill">OPD Consultation</span>
+                    </div>
+
+                    <h2 class="coupon-title">First-Time Patient VIP Checkup</h2>
+                    <p class="coupon-desc">
+                        Comprehensive head-to-tail wellness examination, vitals triage, ophthalmic inspection, and cardiac stethoscope check with our senior doctors.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 3,500</span>
+                        <span class="coupon-final-price">Rs. 2,450</span>
+                        <span class="coupon-savings-tag">Save Rs. 1,050</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-1">VETI-WELCOME30</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('VETI-WELCOME30', this)" aria-label="Copy code VETI-WELCOME30">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('VETI-WELCOME30')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="index.html#booking" class="btn-claim-coupon">
+                        <span>Book Appointment Now</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+                <!-- Coupon 2: Royal Spa Deluxe (25% OFF) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);">25% OFF</span>
+                        <span class="coupon-cat-pill">Luxury Spa &amp; Bath</span>
+                    </div>
+
+                    <h2 class="coupon-title">Royal Aromatherapy Spa &amp; Groom</h2>
+                    <p class="coupon-desc">
+                        Warm ozone hydrotherapy bath, hypoallergenic blueberry facial, warm fluff blowout, hygienic nail trimming, ear sanitization, and silk coat conditioning.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 6,000</span>
+                        <span class="coupon-final-price">Rs. 4,500</span>
+                        <span class="coupon-savings-tag">Save Rs. 1,500</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-2">ROYALSPA25</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('ROYALSPA25', this)" aria-label="Copy code ROYALSPA25">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('ROYALSPA25')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="services.html" class="btn-claim-coupon">
+                        <span>Claim Spa Voucher</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+                <!-- Coupon 3: 7-in-1 Annual Vaccine Bundle (40% OFF) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">40% OFF</span>
+                        <span class="coupon-cat-pill">Vaccination Shield</span>
+                    </div>
+
+                    <h2 class="coupon-title">Annual 7-in-1 Vaccination Bundle</h2>
+                    <p class="coupon-desc">
+                        Full immunity shield against Parvo, Distemper, Hepatitis, Adenovirus, Parainfluenza, plus verified Anti-Rabies certification and government health passport.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 9,500</span>
+                        <span class="coupon-final-price">Rs. 5,700</span>
+                        <span class="coupon-savings-tag">Save Rs. 3,800</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-3">VETI-VAX40</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('VETI-VAX40', this)" aria-label="Copy code VETI-VAX40">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('VETI-VAX40')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="index.html#booking" class="btn-claim-coupon">
+                        <span>Book Vaccination</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+                <!-- Coupon 4: Prescription Diets & Store (20% OFF) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);">20% OFF</span>
+                        <span class="coupon-cat-pill">Store VIP Nutrition</span>
+                    </div>
+
+                    <h2 class="coupon-title">Prescription Diets &amp; Clinical Kibble</h2>
+                    <p class="coupon-desc">
+                        Enjoy 20% off all VetiMedicos certified gastrointestinal recovery formulas, renal support, urinary care, hypoallergenic kitten &amp; puppy growth packs.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 8,200</span>
+                        <span class="coupon-final-price">Rs. 6,560</span>
+                        <span class="coupon-savings-tag">Save Rs. 1,640</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-4">DIETVIP20</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('DIETVIP20', this)" aria-label="Copy code DIETVIP20">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('DIETVIP20')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="shop.html" class="btn-claim-coupon">
+                        <span>Shop Prescription Diets</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+                <!-- Coupon 5: Ultrasonic Dental Descaling (50% OFF) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);">50% OFF</span>
+                        <span class="coupon-cat-pill">Dental Surgery</span>
+                    </div>
+
+                    <h2 class="coupon-title">Ultrasonic Dental Scaling &amp; Polish</h2>
+                    <p class="coupon-desc">
+                        Deep tartar removal, subgingival calculus curettage, fluoride polish, and halitosis cure performed under safe veterinary monitored twilight sedation.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 7,000</span>
+                        <span class="coupon-final-price">Rs. 3,500</span>
+                        <span class="coupon-savings-tag">Save Rs. 3,500</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-5">SMILEPET50</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('SMILEPET50', this)" aria-label="Copy code SMILEPET50">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('SMILEPET50')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="services.html" class="btn-claim-coupon">
+                        <span>Book Dental Care</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+                <!-- Coupon 6: Critical ICU Ambulance Dispatch (100% FREE) -->
+                <article class="coupon-card">
+                    <div class="coupon-top-row">
+                        <span class="coupon-discount-tag" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);">100% FREE</span>
+                        <span class="coupon-cat-pill">Emergency 24/7</span>
+                    </div>
+
+                    <h2 class="coupon-title">Rapid Oxygen Ambulance Dispatch</h2>
+                    <p class="coupon-desc">
+                        Zero charges for our fully equipped mobile ICU ambulance with paramedic nurse, continuous oxygen chamber, and stretcher across Islamabad &amp; Rawalpindi.
+                    </p>
+
+                    <!-- Strikethrough Pricing Row -->
+                    <div class="coupon-pricing-row">
+                        <span class="coupon-strike-price">Rs. 4,000</span>
+                        <span class="coupon-final-price" style="color: #059669;">FREE</span>
+                        <span class="coupon-savings-tag">Save Rs. 4,000</span>
+                    </div>
+
+                    <!-- Promo Code Box with 1-Click Copy -->
+                    <div class="coupon-code-wrap">
+                        <span class="coupon-code-txt" id="code-txt-6">ICU-RESCUE</span>
+                        <button type="button" class="btn-copy-code" onclick="copyPromoCode('ICU-RESCUE', this)" aria-label="Copy code ICU-RESCUE">
+                            📋 Copy Code
+                        </button>
+                    </div>
+
+                    <div class="coupon-validity-row">
+                        <span>📅 <strong>Valid till 31st Oct 2026</strong></span>
+                        <a href="#terms-modal" class="coupon-terms-link" onclick="showTermsModal('ICU-RESCUE')">Terms &amp; Conditions apply</a>
+                    </div>
+
+                    <a href="tel:03264223100" class="btn-claim-coupon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);" title="Call Emergency Dispatch 0326-4223100">
+                        <span>📞 Call Ambulance (0326-4223100)</span>
+                        <span>➔</span>
+                    </a>
+                </article>
+
+            </section>
+
+            <!-- 3. Terms & Eligibility Accordion Section -->
+            <section class="faq-section-card" id="terms-section" aria-label="Coupon Eligibility &amp; Terms">
+                <div class="roster-hero-tagline" style="margin-bottom: 8px;">
+                    <span>✦</span> Voucher Policy &amp; Guidelines
+                </div>
+                <h2 class="faq-title">Eligibility Criteria &amp; Terms of Use</h2>
+                
+                <div class="faq-accordion-wrap">
+                    <div class="faq-item active">
+                        <div class="faq-question" onclick="toggleDiscountFaq(this)">
+                            <span>How do I redeem my promo code?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Simply click the "Copy Code" button on any voucher card above. When booking an appointment online, paste the promo code into the "Special Notes / Promo Code" box. For store purchases, enter the promo code during cart checkout to receive an instant strike-through deduction.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleDiscountFaq(this)">
+                            <span>Can promo codes be combined with other offers?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Only one promo voucher can be applied per single patient booking or per online store transaction. Promo vouchers cannot be combined with existing membership tier discounts unless specifically stated otherwise.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleDiscountFaq(this)">
+                            <span>What happens if the voucher expires?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            All promo codes displayed above are officially guaranteed valid through <strong>31st October 2026</strong>. Appointments scheduled before this date will honor the discounted rate even if the clinic visit occurs slightly thereafter.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleDiscountFaq(this)">
+                            <span>Are these offers applicable at the hospital clinic reception?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! You may show the active promo code on your mobile screen directly to our front-desk reception coordinator upon arrival to claim your immediate fee reduction.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Trust & Security Strip -->
+            <section class="trust-badges-bar" aria-label="Guarantee Badges">
+                <div class="trust-item">
+                    <span class="trust-item-icon">⚡</span>
+                    <div>
+                        <div class="trust-item-title">1-Click Instant Redemption</div>
+                        <div class="trust-item-sub">Automatic Price Deductions</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">🎟️</span>
+                    <div>
+                        <div class="trust-item-title">100% Genuine Hospital Vouchers</div>
+                        <div class="trust-item-sub">Authorized by Medical Board</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">🐾</span>
+                    <div>
+                        <div class="trust-item-title">All Breeds &amp; Species Eligible</div>
+                        <div class="trust-item-sub">Dogs, Cats, Birds &amp; Exotics</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">🛡️</span>
+                    <div>
+                        <div class="trust-item-title">Zero Hidden Fees</div>
+                        <div class="trust-item-sub">Transparent Billing Guaranteed</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ================= End Point Official Brand Seal ================= -->
+        <footer class="roster-official-footer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px 20px 12px; margin-top: 30px; margin-bottom: 0; border-top: 1.5px solid rgba(223, 162, 67, 0.35); background: rgba(255, 252, 245, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
+                <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 52px; height: 52px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 16px rgba(223, 162, 67, 0.4); border: 2px solid rgba(223, 162, 67, 0.65); background: #ffffff;">
+                <div style="text-align: left; line-height: 1.25;">
+                    <div style="font-size: 1.25rem; font-weight: 900; color: #0c1e28; letter-spacing: -0.4px;">
+                        Veti<span style="color: #df9c30;">Medicos</span>
+                        <span style="font-size: 0.65rem; background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; padding: 2px 7px; border-radius: 8px; border: 1px solid rgba(223, 162, 67, 0.45); font-weight: 800; vertical-align: middle; margin-left: 4px;">EST. 2026</span>
+                    </div>
+                    <div style="font-size: 0.74rem; font-weight: 800; color: #b45309; letter-spacing: 0.8px; text-transform: uppercase;">
+                        World-Class 5-Star Veterinary Sanctuary &bull; Hospital
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 0 0 6px 0; max-width: 580px; line-height: 1.5;">
+                Dedicated to veterinary excellence, compassionate animal medicine, and 5-star royal luxury care for your beloved companions. &bull; 24/7 Emergency Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a>
+            </p>
+            <div style="font-size: 0.74rem; color: #94a3b8; font-weight: 600;">
+                &copy; 2026 VetiMedicos™. All Rights Reserved. Official Medical Cross &amp; Laurel Crest Registered.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================= Toast Notification System ================= -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Interactive Countdown & Coupon Copy Scripts -->
+    <script>
+        // 1. Live Countdown Timer Loop
+        function initCountdownTimer() {
+            // Target: 7 days, 14 hours from current session
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 7);
+            targetDate.setHours(targetDate.getHours() + 14);
+            targetDate.setMinutes(targetDate.getMinutes() + 32);
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate.getTime() - now;
+
+                if (diff <= 0) {
+                    document.getElementById('timer-days').textContent = '00';
+                    document.getElementById('timer-hours').textContent = '00';
+                    document.getElementById('timer-minutes').textContent = '00';
+                    document.getElementById('timer-seconds').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('timer-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('timer-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('timer-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('timer-seconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // 2. 1-Click Copy Promo Code Function
+        function copyPromoCode(code, btnElem) {
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHtml = btnElem.innerHTML;
+                btnElem.innerHTML = '✔ Copied!';
+                btnElem.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                
+                if (window.showToast) {
+                    window.showToast('Promo Code "' + code + '" copied to clipboard! Paste it at checkout.', 'success');
+                } else {
+                    alert('Promo Code "' + code + '" copied to clipboard!');
+                }
+
+                setTimeout(() => {
+                    btnElem.innerHTML = originalHtml;
+                    btnElem.style.background = '';
+                }, 2200);
+            }).catch(err => {
+                prompt('Copy this code manually:', code);
+            });
+        }
+
+        // 3. Toggle FAQ Accordion
+        function toggleDiscountFaq(elem) {
+            const item = elem.closest('.faq-item');
+            const allItems = document.querySelectorAll('#terms-section .faq-item');
+            
+            const isOpen = item.classList.contains('active');
+            allItems.forEach(i => i.classList.remove('active'));
+            
+            if (!isOpen) {
+                item.classList.add('active');
+            }
+        }
+
+        function showTermsModal(code) {
+            const termsSection = document.getElementById('terms-section');
+            if (termsSection) {
+                termsSection.scrollIntoView({ behavior: 'smooth' });
+                if (window.showToast) {
+                    window.showToast('Voucher ' + code + ' is valid for single use till 31st Oct 2026.', 'info');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initCountdownTimer);
+    </script>
+
+    <!-- Application Script -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

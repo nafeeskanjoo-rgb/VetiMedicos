@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" class="pricing-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VIP Healthcare Plans &amp; Membership Pricing | VetiMedicos Official Hospital</title>
+    <meta name="description" content="Explore transparent tier-based healthcare memberships, monthly & yearly savings, comprehensive medical coverage, and luxury sanctuary perks at VetiMedicos.">
+
+    <!-- Official Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/vetimedicos_official_logo.png">
+    <link rel="apple-touch-icon" href="assets/images/vetimedicos_official_logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebase App, Auth, Database & Analytics SDK (Compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+</head>
+<body class="pricing-page">
+    <!-- Full-Page Background Pets Image Stage -->
+    <div class="page-background-stage" aria-hidden="true">
+        <img src="assets/images/pets_hero.jpg" alt="VetiMedicos Pets Sanctuary" class="bg-pets-cover-img" loading="eager">
+        <div class="bg-glass-overlay"></div>
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>
+
+    <!-- Master Application Container -->
+    <div class="app-container" style="height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 70px !important;">
+        
+        <!-- ================= Top Navigation Bar ================= -->
+        <header class="navbar">
+            <!-- Official Brand Logo -->
+            <a href="index.html" class="brand-logo" id="brand-home-link" aria-label="VetiMedicos Home &amp; Official Crest">
+                <div class="logo-icon-wrap" title="VetiMedicos Official Veterinary Sanctuary &amp; Hospital • EST. 2026">
+                    <img src="assets/images/vetimedicos_crest_logo.svg" alt="VetiMedicos Official Logo EST. 2026" class="brand-logo-img">
+                </div>
+                <div class="brand-title">
+                    Veti<span>Medicos</span>
+                    <span class="brand-badge" style="background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; border: 1px solid rgba(223, 162, 67, 0.4); font-weight: 800; font-size: 0.62rem; padding: 2px 7px; border-radius: 10px;">EST. 2026</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Store <span style="background:var(--gold-gradient); color:#fff; font-size:0.62rem; padding:2px 7px; border-radius:10px; font-weight:800; margin-left:3px; box-shadow:0 2px 6px rgba(223,162,67,0.4);">VIP</span></a></li>
+                    <li><a href="clients.html" id="nav-clients-link" title="Click to view Signed-In Clients &amp; Pets Directory">Clients <span class="nav-clients-dot" style="display:inline-block; width:7px; height:7px; background:#df9c30; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #df9c30;"></span></a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="discount.html">Discount</a></li>
+                    <li><a href="doctors.html" id="nav-team-link" title="Click to view Doctors On Duty Right Now">Doctors on Duty <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; margin-left:3px; vertical-align:middle; box-shadow:0 0 6px #10b981;"></span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Quick Actions -->
+            <div class="nav-actions">
+                <!-- Firebase Status Pill -->
+                <button type="button" class="firebase-status-pill" id="firebase-status-pill" title="Firebase Status: Live (veticareorg)">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Firebase: Live</span>
+                </button>
+
+                <!-- Shopping Bag / Cart Button -->
+                <button type="button" class="icon-btn" id="nav-cart-btn" aria-label="Shopping Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <!-- Site Info & Global Search Button -->
+                <button type="button" class="icon-btn nav-search-btn" id="nav-search-btn" aria-label="Search VetiMedicos Info" title="Search all website info: services, doctors, diets, plans, coupons...">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Login Trigger Button -->
+                <button type="button" class="icon-btn nav-user-trigger" id="nav-user-btn" aria-label="Account Login" title="Sign In as Client or Veti Doctor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-login-pill">Sign In</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= Master Pricing Stage ================= -->
+        <main class="pricing-stage">
+            
+            <!-- 1. Hero Showcase Card -->
+            <section class="roster-hero-card" aria-label="Pricing Hero Showcase">
+                <div class="roster-hero-tagline">
+                    <img src="assets/images/vetimedicos_official_logo.png" alt="Crest EST. 2026" style="width:20px; height:20px; border-radius:50%; object-fit:contain; border:1px solid rgba(223,162,67,0.6);">
+                    <span>✦</span> Transparent Healthcare &amp; Sanctuary Membership &bull; <strong>EST. 2026</strong>
+                </div>
+                <h1 class="roster-hero-title">
+                    Royal Healthcare Plans for Your Beloved Companions
+                </h1>
+                <p class="roster-hero-desc">
+                    Choose from our tiered wellness memberships engineered by Pakistan's top veterinary consultants. From routine wellness to all-inclusive 24/7 emergency concierge, give your pets royal 5-star protection.
+                </p>
+
+                <!-- 2. Billing Toggle Switch (Monthly vs Yearly) -->
+                <div class="billing-toggle-container">
+                    <div class="billing-toggle-pill" role="group" aria-label="Billing frequency selection">
+                        <button type="button" class="billing-btn active" id="btn-billing-monthly" onclick="switchBillingCycle('monthly')">
+                            Monthly Billing
+                        </button>
+                        <button type="button" class="billing-btn" id="btn-billing-yearly" onclick="switchBillingCycle('yearly')">
+                            Yearly Billing
+                        </button>
+                    </div>
+                    <span class="billing-save-badge" id="billing-save-badge">
+                        ✨ Save 20% Annually
+                    </span>
+                </div>
+            </section>
+
+            <!-- 3. Tier-Based Cards Layout (3 Cards) -->
+            <section class="pricing-cards-grid" aria-label="Membership Tiers">
+                
+                <!-- Plan 1: Royal Silver (Basic) -->
+                <article class="pricing-card" id="pricing-silver-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan-icon" aria-hidden="true">🩺</div>
+                        <h2 class="pricing-plan-name">Royal Silver</h2>
+                        <p class="pricing-plan-desc">Essential wellness, preventative routine immunizations, and clinical health checkups.</p>
+                        
+                        <div class="pricing-price-wrap">
+                            <span class="pricing-strike-amount" id="silver-strike" style="display: none;">Rs. 54,000</span>
+                            <span class="pricing-currency">Rs.</span>
+                            <span class="pricing-amount" id="silver-price">4,500</span>
+                            <span class="pricing-period" id="silver-period">/ month</span>
+                        </div>
+                        <div class="pricing-savings-note" id="silver-savings" style="display: none;">
+                            ✨ Save 20% (Rs. 10,800/yr) &bull; Equates to Rs. 3,600/mo
+                        </div>
+                    </div>
+
+                    <ul class="pricing-features-list">
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span id="silver-opd-feature"><strong>2 OPD Consultations</strong> per month with Duty Vet</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Core Annual Vaccinations</strong> (DHPPi / FVRCP)</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Quarterly Deworming</strong> &amp; Parasite Prophylaxis</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>5% VIP Store Discount</strong> on VetiMedicos Diets</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Verified Digital Medical Passport</strong> &amp; App Records</span>
+                        </li>
+                        <li class="pricing-feature-item muted">
+                            <span class="feature-cross">✖</span>
+                            <span>Ultrasonic Dental Scaling &amp; Polish</span>
+                        </li>
+                        <li class="pricing-feature-item muted">
+                            <span class="feature-cross">✖</span>
+                            <span>Luxury Hydrotherapy Spa Baths</span>
+                        </li>
+                        <li class="pricing-feature-item muted">
+                            <span class="feature-cross">✖</span>
+                            <span>24/7 Emergency Ambulance Dispatch</span>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="btn-pricing-action btn-pricing-outline" id="silver-btn" onclick="selectPricingPlan('Royal Silver', 4500, 43200)">
+                        Choose Silver Plan
+                    </button>
+                </article>
+
+                <!-- Plan 2: Royal Gold (Standard / Most Popular - Elevated) -->
+                <article class="pricing-card featured" id="pricing-gold-card">
+                    <div class="pricing-featured-badge">
+                        👑 Most Popular &bull; Best Value
+                    </div>
+
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan-icon" aria-hidden="true" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);">🌟</div>
+                        <h2 class="pricing-plan-name" style="color: #92400e;">Royal Gold</h2>
+                        <p class="pricing-plan-desc">Complete holistic healthcare, unlimited consults, diagnostic panels, and royal spa care.</p>
+                        
+                        <div class="pricing-price-wrap">
+                            <span class="pricing-strike-amount" id="gold-strike" style="display: none;">Rs. 102,000</span>
+                            <span class="pricing-currency" style="color: #b45309;">Rs.</span>
+                            <span class="pricing-amount" id="gold-price" style="color: #92400e;">8,500</span>
+                            <span class="pricing-period" id="gold-period">/ month</span>
+                        </div>
+                        <div class="pricing-savings-note" id="gold-savings" style="display: none; background: #fef3c7; color: #b45309; border-color: rgba(223, 162, 67, 0.4);">
+                            ✨ Save 20% (Rs. 20,400/yr) &bull; Equates to Rs. 6,800/mo
+                        </div>
+                    </div>
+
+                    <ul class="pricing-features-list">
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span id="gold-opd-feature"><strong>Unlimited OPD Consultations</strong> (Zero appointment fees)</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Full 7-in-1 Vaccine Bundle</strong> + Anti-Rabies Shield</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>2 Royal Spa Sessions</strong> (Bath, hydrotherapy &amp; grooming)</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Bi-Annual Diagnostic Suite</strong> (CBC Blood &amp; Ultrasound)</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>15% VIP Store Discount</strong> on all Diets &amp; Accessories</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>24/7 Dedicated Vet Tele-Triage</strong> WhatsApp helpline</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Priority Fast-Track</strong> in VIP Sanctuary Executive Lounge</span>
+                        </li>
+                        <li class="pricing-feature-item muted">
+                            <span class="feature-cross">✖</span>
+                            <span>In-Home Concierge Vet House Calls</span>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="btn-pricing-action btn-pricing-primary" id="gold-btn" onclick="selectPricingPlan('Royal Gold', 8500, 81600)">
+                        Get Started with Gold
+                    </button>
+                </article>
+
+                <!-- Plan 3: Imperial Platinum (Pro / VIP Sanctuary) -->
+                <article class="pricing-card" id="pricing-platinum-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-plan-icon" aria-hidden="true" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);">💎</div>
+                        <h2 class="pricing-plan-name">Imperial Platinum</h2>
+                        <p class="pricing-plan-desc">Unrestricted elite medical luxury, emergency surgery coverage, private vet, and free ICU transport.</p>
+                        
+                        <div class="pricing-price-wrap">
+                            <span class="pricing-strike-amount" id="platinum-strike" style="display: none;">Rs. 174,000</span>
+                            <span class="pricing-currency">Rs.</span>
+                            <span class="pricing-amount" id="platinum-price">14,500</span>
+                            <span class="pricing-period" id="platinum-period">/ month</span>
+                        </div>
+                        <div class="pricing-savings-note" id="platinum-savings" style="display: none;">
+                            ✨ Save 20% (Rs. 34,800/yr) &bull; Equates to Rs. 11,600/mo
+                        </div>
+                    </div>
+
+                    <ul class="pricing-features-list">
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span id="platinum-opd-feature"><strong>Unlimited OPD + 2 Surgical Theatre</strong> minor procedures</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Quarterly Ultrasonic Dental</strong> scaling and polish</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Monthly In-Home Luxury Grooming</strong> &amp; Fur Styling</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>25% VIP Elite Discount</strong> on Store &amp; Clinical Diets</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Personal Assigned Senior Vet</strong> &amp; Concierge Manager</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>24/7 Free ICU Mobile Ambulance</strong> dispatch across city</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Complimentary 7-Day Luxury Boarding</strong> in 5-Star Suites</span>
+                        </li>
+                        <li class="pricing-feature-item">
+                            <span class="feature-check">✔</span>
+                            <span><strong>Full Cardiac Ultrasound</strong> &amp; Advanced Genomic Screening</span>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="btn-pricing-action btn-pricing-outline" id="platinum-btn" onclick="selectPricingPlan('Imperial Platinum', 14500, 139200)">
+                        Choose Platinum Plan
+                    </button>
+                </article>
+
+            </section>
+
+            <!-- 4. Detailed Feature Comparison Table -->
+            <section class="comparison-card" aria-label="Detailed Feature Comparison">
+                <div class="comparison-header">
+                    <div class="roster-hero-tagline" style="margin-bottom: 8px;">
+                        <span>✦</span> Comprehensive Plan Matrix
+                    </div>
+                    <h2 class="comparison-title">Detailed Feature Comparison</h2>
+                    <p style="color: #64748b; font-size: 0.92rem; max-width: 620px; margin: 0 auto;">
+                        Compare every medical privilege, surgical allowance, diagnostic protocol, and sanctuary perk side-by-side.
+                    </p>
+                </div>
+
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 34%;">Healthcare &amp; Sanctuary Privileges</th>
+                                <th style="width: 22%;">Royal Silver</th>
+                                <th style="width: 22%;" class="col-featured">Royal Gold 👑</th>
+                                <th style="width: 22%;">Imperial Platinum 💎</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OPD Veterinary Consultations</td>
+                                <td>2 Visits / Month</td>
+                                <td class="col-featured">Unlimited Zero-Fee</td>
+                                <td>Unlimited VIP Concierge</td>
+                            </tr>
+                            <tr>
+                                <td>Core Vaccinations &amp; Boosters</td>
+                                <td><span style="color:#059669; font-weight:800;">✔ Core 2 Included</span></td>
+                                <td class="col-featured"><span style="color:#059669; font-weight:800;">✔ Full 7-in-1 Shield</span></td>
+                                <td><span style="color:#059669; font-weight:800;">✔ All Vaccines + Rabies</span></td>
+                            </tr>
+                            <tr>
+                                <td>Preventive Deworming &amp; Tick Treatment</td>
+                                <td>Quarterly</td>
+                                <td class="col-featured">Bi-Monthly</td>
+                                <td>Monthly Tailored Regimen</td>
+                            </tr>
+                            <tr>
+                                <td>Diagnostic Lab &amp; Biochemistry Blood Work</td>
+                                <td>10% Discount</td>
+                                <td class="col-featured">Bi-Annual Free Panels</td>
+                                <td>Unlimited Diagnostics</td>
+                            </tr>
+                            <tr>
+                                <td>Abdominal Ultrasound &amp; Digital X-Ray</td>
+                                <td><span style="color:#94a3b8;">✖</span></td>
+                                <td class="col-featured"><span style="color:#059669; font-weight:800;">✔ 1 Annual Scan</span></td>
+                                <td><span style="color:#059669; font-weight:800;">✔ Unlimited Scans</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ultrasonic Dental Descaling &amp; Polish</td>
+                                <td><span style="color:#94a3b8;">✖</span></td>
+                                <td class="col-featured">25% Discount</td>
+                                <td><span style="color:#059669; font-weight:800;">✔ 4 Included / Year</span></td>
+                            </tr>
+                            <tr>
+                                <td>Surgical Minor Procedures &amp; Theatre</td>
+                                <td><span style="color:#94a3b8;">✖</span></td>
+                                <td class="col-featured">15% Surgery Waiver</td>
+                                <td><span style="color:#059669; font-weight:800;">✔ 2 Included Surgeries</span></td>
+                            </tr>
+                            <tr>
+                                <td>Luxury Spa Baths &amp; Hydrotherapy</td>
+                                <td><span style="color:#94a3b8;">✖</span></td>
+                                <td class="col-featured"><span style="color:#059669; font-weight:800;">✔ 2 Sessions / Year</span></td>
+                                <td><span style="color:#059669; font-weight:800;">✔ 12 Monthly Sessions</span></td>
+                            </tr>
+                            <tr>
+                                <td>VetiMedicos Store Diet &amp; Accessories Discount</td>
+                                <td>5% Off</td>
+                                <td class="col-featured">15% Off VIP</td>
+                                <td>25% Off Elite VIP</td>
+                            </tr>
+                            <tr>
+                                <td>24/7 Critical Ambulance &amp; Oxygen Incubator</td>
+                                <td>Standard Charges</td>
+                                <td class="col-featured">Priority Dispatch</td>
+                                <td><span style="color:#059669; font-weight:800;">✔ 100% Free ICU Ride</span></td>
+                            </tr>
+                            <tr>
+                                <td>5-Star Luxury Pet Resort Boarding</td>
+                                <td>5% Off Daily Rate</td>
+                                <td class="col-featured">15% Off Daily Rate</td>
+                                <td><span style="color:#059669; font-weight:800;">✔ 7 Free Days / Year</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dedicated Doctor &amp; WhatsApp Helpline</td>
+                                <td>Standard OPD Hours</td>
+                                <td class="col-featured">24/7 Tele-Triage Team</td>
+                                <td>Assigned Private Specialist</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 5. Collapsible FAQs Accordion Section -->
+            <section class="faq-section-card" aria-label="Pricing Frequently Asked Questions">
+                <div class="roster-hero-tagline" style="margin-bottom: 8px;">
+                    <span>✦</span> Help &amp; Clarification
+                </div>
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-accordion-wrap" id="pricing-faq-accordion">
+                    <!-- Q1 -->
+                    <div class="faq-item active">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>How does the 20% annual discount work?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            When you choose Yearly Billing, you receive an immediate 20% discount on the entire 12-month period compared to month-to-month billing. For instance, on the Royal Gold plan, you save Rs. 20,400 per year, enjoying uninterrupted healthcare privileges with zero inflation price increases.
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I upgrade, downgrade, or cancel my plan anytime?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, absolutely! You can upgrade your membership tier at any time from your client dashboard with prorated adjustments. Monthly memberships can be cancelled at any time before the next billing cycle with zero cancellation fees.
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>What is your 30-Day Money-Back Guarantee policy?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            We stand behind our 5-star medical excellence. If you or your pet are unsatisfied with our hospital services within your first 30 days of subscribing, simply contact our concierge desk for a prompt, 100% full refund with no hard feelings.
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Which payment methods are accepted?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            We accept all major Pakistani and global payment gateways: Visa, MasterCard, UnionPay credit/debit cards, Raast Instant Pay, JazzCash, EasyPaisa, Direct Bank Transfer (IBFT), as well as Cash / POS card swipe directly at our clinic reception.
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I cover multiple pets under a single plan?</span>
+                            <span class="faq-chevron">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Each plan is specifically customized for one pet's unique medical records and vaccination schedules. However, multi-pet households receive an automatic 15% discount on the second pet and 20% on the third pet when registered under the same parent account.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Trust Badges & Guarantee Strip -->
+            <section class="trust-badges-bar" aria-label="Hospital Trust and Security Seals">
+                <div class="trust-item">
+                    <span class="trust-item-icon">🛡️</span>
+                    <div>
+                        <div class="trust-item-title">30-Day Money-Back Guarantee</div>
+                        <div class="trust-item-sub">100% Risk-Free Medical Trial</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">🔒</span>
+                    <div>
+                        <div class="trust-item-title">Bank-Grade 256-Bit SSL</div>
+                        <div class="trust-item-sub">Safe &amp; Encrypted Billing</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">💳</span>
+                    <div>
+                        <div class="trust-item-title">Visa, Mastercard, Raast &amp; JazzCash</div>
+                        <div class="trust-item-sub">Instant Domestic &amp; Global Pay</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item-icon">🏛️</span>
+                    <div>
+                        <div class="trust-item-title">PVMC Certified Hospital</div>
+                        <div class="trust-item-sub">Verified Specialists • EST. 2026</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ================= End Point Official Brand Seal ================= -->
+        <footer class="roster-official-footer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px 20px 12px; margin-top: 30px; margin-bottom: 0; border-top: 1.5px solid rgba(223, 162, 67, 0.35); background: rgba(255, 252, 245, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
+                <img src="assets/images/vetimedicos_official_logo.png" alt="VetiMedicos Official Logo EST. 2026" style="width: 52px; height: 52px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 16px rgba(223, 162, 67, 0.4); border: 2px solid rgba(223, 162, 67, 0.65); background: #ffffff;">
+                <div style="text-align: left; line-height: 1.25;">
+                    <div style="font-size: 1.25rem; font-weight: 900; color: #0c1e28; letter-spacing: -0.4px;">
+                        Veti<span style="color: #df9c30;">Medicos</span>
+                        <span style="font-size: 0.65rem; background: linear-gradient(135deg, #fff8eb 0%, #fef3c7 100%); color: #b45309; padding: 2px 7px; border-radius: 8px; border: 1px solid rgba(223, 162, 67, 0.45); font-weight: 800; vertical-align: middle; margin-left: 4px;">EST. 2026</span>
+                    </div>
+                    <div style="font-size: 0.74rem; font-weight: 800; color: #b45309; letter-spacing: 0.8px; text-transform: uppercase;">
+                        World-Class 5-Star Veterinary Sanctuary &bull; Hospital
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin: 0 0 6px 0; max-width: 580px; line-height: 1.5;">
+                Dedicated to veterinary excellence, compassionate animal medicine, and 5-star royal luxury care for your beloved companions. &bull; 24/7 Emergency Line: <a href="tel:03264223100" style="color: #dc2626; font-weight: 800; text-decoration: none;" title="Call Emergency Line 03264223100">📞 0326-4223100</a>
+            </p>
+            <div style="font-size: 0.74rem; color: #94a3b8; font-weight: 600;">
+                &copy; 2026 VetiMedicos™. All Rights Reserved. Official Medical Cross &amp; Laurel Crest Registered.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================= Toast Notification System ================= -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Inline Pricing Script (Toggles & Interactions) -->
+    <script>
+        let currentCycle = 'monthly';
+
+        const planPricingData = {
+            silver: {
+                monthly: 4500,
+                yearlyTotal: 43200,
+                yearlyOriginal: 54000,
+                yearlySavings: 10800,
+                effectiveMonthly: 3600
+            },
+            gold: {
+                monthly: 8500,
+                yearlyTotal: 81600,
+                yearlyOriginal: 102000,
+                yearlySavings: 20400,
+                effectiveMonthly: 6800
+            },
+            platinum: {
+                monthly: 14500,
+                yearlyTotal: 139200,
+                yearlyOriginal: 174000,
+                yearlySavings: 34800,
+                effectiveMonthly: 11600
+            }
+        };
+
+        function switchBillingCycle(cycle) {
+            currentCycle = cycle;
+            const btnMonthly = document.getElementById('btn-billing-monthly');
+            const btnYearly = document.getElementById('btn-billing-yearly');
+            
+            const silverStrike = document.getElementById('silver-strike');
+            const silverPrice = document.getElementById('silver-price');
+            const silverPeriod = document.getElementById('silver-period');
+            const silverSavings = document.getElementById('silver-savings');
+            const silverBtn = document.getElementById('silver-btn');
+            const silverOpd = document.getElementById('silver-opd-feature');
+
+            const goldStrike = document.getElementById('gold-strike');
+            const goldPrice = document.getElementById('gold-price');
+            const goldPeriod = document.getElementById('gold-period');
+            const goldSavings = document.getElementById('gold-savings');
+            const goldBtn = document.getElementById('gold-btn');
+            const goldOpd = document.getElementById('gold-opd-feature');
+
+            const platinumStrike = document.getElementById('platinum-strike');
+            const platinumPrice = document.getElementById('platinum-price');
+            const platinumPeriod = document.getElementById('platinum-period');
+            const platinumSavings = document.getElementById('platinum-savings');
+            const platinumBtn = document.getElementById('platinum-btn');
+            const platinumOpd = document.getElementById('platinum-opd-feature');
+
+            if (cycle === 'yearly') {
+                btnMonthly.classList.remove('active');
+                btnYearly.classList.add('active');
+
+                // Silver Yearly Plan
+                silverStrike.style.display = 'inline-block';
+                silverStrike.textContent = 'Rs. ' + planPricingData.silver.yearlyOriginal.toLocaleString();
+                silverPrice.textContent = planPricingData.silver.yearlyTotal.toLocaleString();
+                silverPeriod.textContent = '/ year';
+                silverSavings.style.display = 'inline-flex';
+                silverSavings.innerHTML = '✨ Save 20% (Rs. ' + planPricingData.silver.yearlySavings.toLocaleString() + '/yr) &bull; Equates to Rs. ' + planPricingData.silver.effectiveMonthly.toLocaleString() + '/mo';
+                silverBtn.textContent = 'Get Silver Annual Plan';
+                if (silverOpd) silverOpd.innerHTML = '<strong>24 OPD Consultations / Year</strong> (2 visits per month)';
+
+                // Gold Yearly Plan
+                goldStrike.style.display = 'inline-block';
+                goldStrike.textContent = 'Rs. ' + planPricingData.gold.yearlyOriginal.toLocaleString();
+                goldPrice.textContent = planPricingData.gold.yearlyTotal.toLocaleString();
+                goldPeriod.textContent = '/ year';
+                goldSavings.style.display = 'inline-flex';
+                goldSavings.innerHTML = '✨ Save 20% (Rs. ' + planPricingData.gold.yearlySavings.toLocaleString() + '/yr) &bull; Equates to Rs. ' + planPricingData.gold.effectiveMonthly.toLocaleString() + '/mo';
+                goldBtn.textContent = 'Get Gold Annual Plan (Best Value)';
+                if (goldOpd) goldOpd.innerHTML = '<strong>Unlimited OPD Consultations</strong> (Zero doctor fees all year)';
+
+                // Platinum Yearly Plan
+                platinumStrike.style.display = 'inline-block';
+                platinumStrike.textContent = 'Rs. ' + planPricingData.platinum.yearlyOriginal.toLocaleString();
+                platinumPrice.textContent = planPricingData.platinum.yearlyTotal.toLocaleString();
+                platinumPeriod.textContent = '/ year';
+                platinumSavings.style.display = 'inline-flex';
+                platinumSavings.innerHTML = '✨ Save 20% (Rs. ' + planPricingData.platinum.yearlySavings.toLocaleString() + '/yr) &bull; Equates to Rs. ' + planPricingData.platinum.effectiveMonthly.toLocaleString() + '/mo';
+                platinumBtn.textContent = 'Get Platinum Annual Plan';
+                if (platinumOpd) platinumOpd.innerHTML = '<strong>Unlimited OPD + 2 Surgical Theatre</strong> procedures / year';
+
+                if (window.showToast) {
+                    window.showToast('Annual Membership Plans Active: Enjoy 20% Discount!', 'success');
+                }
+            } else {
+                btnYearly.classList.remove('active');
+                btnMonthly.classList.add('active');
+
+                // Silver Monthly Plan
+                silverStrike.style.display = 'none';
+                silverPrice.textContent = planPricingData.silver.monthly.toLocaleString();
+                silverPeriod.textContent = '/ month';
+                silverSavings.style.display = 'none';
+                silverBtn.textContent = 'Choose Silver Plan';
+                if (silverOpd) silverOpd.innerHTML = '<strong>2 OPD Consultations</strong> per month with Duty Vet';
+
+                // Gold Monthly Plan
+                goldStrike.style.display = 'none';
+                goldPrice.textContent = planPricingData.gold.monthly.toLocaleString();
+                goldPeriod.textContent = '/ month';
+                goldSavings.style.display = 'none';
+                goldBtn.textContent = 'Get Started with Gold';
+                if (goldOpd) goldOpd.innerHTML = '<strong>Unlimited OPD Consultations</strong> (Zero appointment fees)';
+
+                // Platinum Monthly Plan
+                platinumStrike.style.display = 'none';
+                platinumPrice.textContent = planPricingData.platinum.monthly.toLocaleString();
+                platinumPeriod.textContent = '/ month';
+                platinumSavings.style.display = 'none';
+                platinumBtn.textContent = 'Choose Platinum Plan';
+                if (platinumOpd) platinumOpd.innerHTML = '<strong>Unlimited OPD + 2 Surgical Theatre</strong> minor procedures';
+
+                if (window.showToast) {
+                    window.showToast('Switched to Monthly Healthcare Billing Cycle', 'info');
+                }
+            }
+        }
+
+        function toggleFaq(elem) {
+            const item = elem.closest('.faq-item');
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            const isOpen = item.classList.contains('active');
+            allItems.forEach(i => i.classList.remove('active'));
+            
+            if (!isOpen) {
+                item.classList.add('active');
+            }
+        }
+
+        function selectPricingPlan(planName, monthlyRate, yearlyRate) {
+            const amount = currentCycle === 'yearly' ? yearlyRate : monthlyRate;
+            const periodStr = currentCycle === 'yearly' ? 'Annual Plan (Rs. ' + amount.toLocaleString() + ' / year)' : 'Monthly Plan (Rs. ' + amount.toLocaleString() + ' / month)';
+            
+            if (window.showToast) {
+                window.showToast('Selected ' + planName + ' ' + periodStr + '. Redirecting to checkout...', 'success');
+            } else {
+                alert('Selected ' + planName + ' ' + periodStr + '!');
+            }
+            
+            setTimeout(() => {
+                window.location.href = 'index.html#booking';
+            }, 1200);
+        }
+    </script>
+
+    <!-- Application Script -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
