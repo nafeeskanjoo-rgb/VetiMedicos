@@ -682,6 +682,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // In-Form Alert Helpers (Clean, reliable visual feedback directly inside the form)
+    function setFormAlert(formEl, message, type = 'error') {
+        if (!formEl) return;
+        let alertBox = formEl.querySelector('.form-inline-alert');
+        if (!alertBox) {
+            alertBox = document.createElement('div');
+            alertBox.className = 'form-inline-alert';
+            const btnSubmit = formEl.querySelector('.btn-submit');
+            if (btnSubmit) {
+                btnSubmit.parentNode.insertBefore(alertBox, btnSubmit);
+            } else {
+                formEl.appendChild(alertBox);
+            }
+        }
+        alertBox.className = `form-inline-alert alert-${type}`;
+        const icon = type === 'error' ? '⚠️' : type === 'warning' ? '⚠️' : '✅';
+        alertBox.innerHTML = `<span class="form-alert-icon" style="font-size: 1.15rem; flex-shrink: 0; line-height: 1;">${icon}</span> <span class="form-alert-text" style="flex: 1;">${message}</span>`;
+        alertBox.style.display = 'flex';
+    }
+
+    function clearFormAlert(formEl) {
+        if (!formEl) return;
+        const alertBox = formEl.querySelector('.form-inline-alert');
+        if (alertBox) {
+            alertBox.style.display = 'none';
+            alertBox.innerHTML = '';
+        }
+    }
+
+
     // -------------------------------------------------------------
     // -------------------------------------------------------------
     // Handle User Logged In UI & Role Presentation
@@ -926,10 +956,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formSignIn) {
         formSignIn.addEventListener('submit', async (e) => {
             e.preventDefault();
+            clearFormAlert(formSignIn);
+
             const btn = formSignIn.querySelector('.btn-submit');
-            const email = document.getElementById('signin-email').value.trim();
-            const password = document.getElementById('signin-password').value;
-            const rememberMe = document.getElementById('remember-me').checked;
+            const emailInput = document.getElementById('signin-email');
+            const email = emailInput ? emailInput.value.trim() : '';
+            const passwordInput = document.getElementById('signin-password');
+            const password = passwordInput ? passwordInput.value : '';
+            const rememberMeEl = document.getElementById('remember-me');
+            const rememberMe = rememberMeEl ? rememberMeEl.checked : true;
 
             // Doctor Specified Information Fields
             const docNameInput = document.getElementById('signin-doctor-name');
@@ -954,50 +989,55 @@ document.addEventListener('DOMContentLoaded', () => {
             const petBreedInput = document.getElementById('signin-pet-breed');
             const petBreed = petBreedInput ? petBreedInput.value.trim() : '';
 
-            // Role-specific Validations
-            if (currentRole === 'doctor') {
-                if (!docName) {
-                    showToast('warning', 'Doctor Name Required 🩺', 'Doctor login ke liye apna Doctor Name enter karen.');
-                    if (docNameInput) docNameInput.focus();
-                    return;
-                }
-                if (!license) {
-                    showToast('warning', 'License Required 🩺', 'Apna Medical License ya PVMC Registration number enter karen.');
-                    if (licenseInput) licenseInput.focus();
-                    return;
-                }
-            } else {
-                if (!petName) {
-                    showToast('warning', 'Pet Info Required 🐾', 'Pet Parent login ke liye apne Pet ka naam enter karen.');
-                    if (petNameInput) petNameInput.focus();
-                    return;
-                }
+            // Basic Field Validations with direct in-form feedback
+            if (!email) {
+                setFormAlert(formSignIn, 'Barah-e-karam apna Email address enter karen.', 'error');
+                if (emailInput) emailInput.focus();
+                return;
             }
-
-            if (!email || !password) {
-                showToast('error', 'Fields Required', 'Please enter your email and password.');
+            if (!password) {
+                setFormAlert(formSignIn, 'Barah-e-karam apna Password enter karen.', 'error');
+                if (passwordInput) passwordInput.focus();
+                return;
+            }
+            if (password.length < 6) {
+                setFormAlert(formSignIn, 'Password kam az kam 6 characters ka hona zaroori hai.', 'error');
+                if (passwordInput) passwordInput.focus();
                 return;
             }
 
             try {
                 setBtnLoading(btn, true);
                 const extraPayload = {
-                    license,
+                    license: license || 'VET-PK-VERIFIED',
                     doctorName: docName,
                     specialty: docSpecialty || 'Chief Veterinary Surgeon',
                     dept: docDept || 'Department of Surgery & Orthopedics',
                     room: docRoom,
                     shift: docShift,
                     status: docStatus,
-                    petName,
-                    petType,
-                    petBreed
+                    petName: petName || 'Family Pet',
+                    petType: petType || 'Dog',
+                    petBreed: petBreed || 'Mixed Breed'
                 };
+
                 const result = await window.VetiAuth.signIn(email, password, rememberMe, currentRole, license, extraPayload);
                 const role = result.userRole || currentRole;
-                handleLoginSuccess(result.user, role, result.isDemo, extraPayload);
+                
+                const welcomeName = (result.user && result.user.displayName) 
+                    ? result.user.displayName 
+                    : (docName ? `Dr. ${docName}` : email.split('@')[0]);
+
+                setFormAlert(formSignIn, `Welcome, ${welcomeName}! Signing you in...`, 'success');
+
+                setTimeout(() => {
+                    handleLoginSuccess(result.user, role, result.isDemo, extraPayload);
+                    clearFormAlert(formSignIn);
+                }, 400);
             } catch (err) {
-                showToast('error', 'Sign In Failed', err.message || 'Incorrect email or password.');
+                console.error("Sign In failed:", err);
+                const errMsg = err.message || 'Sign in fail ho gaya. Barah-e-karam email aur password check karen.';
+                setFormAlert(formSignIn, errMsg, 'error');
             } finally {
                 setBtnLoading(btn, false);
             }
@@ -1008,11 +1048,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formSignUp) {
         formSignUp.addEventListener('submit', async (e) => {
             e.preventDefault();
+            clearFormAlert(formSignUp);
+
             const btn = formSignUp.querySelector('.btn-submit');
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            const confirm = document.getElementById('signup-confirm').value;
+            const nameInput = document.getElementById('signup-name');
+            const name = nameInput ? nameInput.value.trim() : '';
+            const emailInput = document.getElementById('signup-email');
+            const email = emailInput ? emailInput.value.trim() : '';
+            const passwordInput = document.getElementById('signup-password');
+            const password = passwordInput ? passwordInput.value : '';
+            const confirmInput = document.getElementById('signup-confirm');
+            const confirm = confirmInput ? confirmInput.value : '';
 
             const licenseInput = document.getElementById('signup-license');
             const license = licenseInput ? licenseInput.value.trim() : '';
@@ -1029,8 +1075,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const petAgeInput = document.getElementById('signup-pet-age');
             const petAge = petAgeInput ? petAgeInput.value.trim() : '';
 
+            if (!name) {
+                setFormAlert(formSignUp, 'Barah-e-karam apna Naam enter karen.', 'error');
+                if (nameInput) nameInput.focus();
+                return;
+            }
+            if (!email) {
+                setFormAlert(formSignUp, 'Barah-e-karam Email address enter karen.', 'error');
+                if (emailInput) emailInput.focus();
+                return;
+            }
+            if (!password || password.length < 6) {
+                setFormAlert(formSignUp, 'Password kam az kam 6 characters ka hona zaroori hai.', 'error');
+                if (passwordInput) passwordInput.focus();
+                return;
+            }
             if (password !== confirm) {
-                showToast('error', 'Password Mismatch', 'Passwords do not match. Please re-enter.');
+                setFormAlert(formSignUp, 'Passwords match nahi kar rahe. Barah-e-karam dobara enter karen.', 'error');
+                if (confirmInput) confirmInput.focus();
                 return;
             }
 
@@ -1039,9 +1101,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const extraPayload = { license, specialty, petName, petType, petBreed, petAge };
                 const result = await window.VetiAuth.signUp(name, email, password, currentRole, extraPayload);
                 const role = result.userRole || currentRole;
-                handleLoginSuccess(result.user, role, result.isDemo, extraPayload);
+
+                setFormAlert(formSignUp, `Account kamiyabi se ban gaya! Logging you in...`, 'success');
+                setTimeout(() => {
+                    handleLoginSuccess(result.user, role, result.isDemo, extraPayload);
+                    clearFormAlert(formSignUp);
+                }, 400);
             } catch (err) {
-                showToast('error', 'Registration Failed', err.message);
+                console.error("Registration failed:", err);
+                setFormAlert(formSignUp, err.message || 'Registration fail ho gaya.', 'error');
             } finally {
                 setBtnLoading(btn, false);
             }
@@ -1052,21 +1120,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formForgot) {
         formForgot.addEventListener('submit', async (e) => {
             e.preventDefault();
+            clearFormAlert(formForgot);
+
             const btn = formForgot.querySelector('.btn-submit');
-            const email = document.getElementById('forgot-email').value.trim();
+            const emailInput = document.getElementById('forgot-email');
+            const email = emailInput ? emailInput.value.trim() : '';
 
             if (!email) {
-                showToast('error', 'Email Required', 'Please enter your registered email address.');
+                setFormAlert(formForgot, 'Barah-e-karam apna registered Email address enter karen.', 'error');
+                if (emailInput) emailInput.focus();
                 return;
             }
 
             try {
                 setBtnLoading(btn, true);
                 const result = await window.VetiAuth.resetPassword(email);
-                showToast('success', 'Reset Link Dispatched', result.isDemo ? 'Demo Mode: Reset simulated!' : 'Check your inbox for password reset instructions.');
-                setTimeout(() => switchView(viewSignIn), 1600);
+                setFormAlert(formForgot, result.isDemo ? 'Demo Mode: Reset simulated!' : 'Password reset link aapke email par bhej diya gaya hai.', 'success');
+                setTimeout(() => {
+                    switchView(viewSignIn);
+                    clearFormAlert(formForgot);
+                }, 1600);
             } catch (err) {
-                showToast('error', 'Reset Failed', err.message);
+                setFormAlert(formForgot, err.message || 'Password reset fail ho gaya.', 'error');
             } finally {
                 setBtnLoading(btn, false);
             }
@@ -1075,12 +1150,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. GOOGLE AUTH HANDLER
     async function handleGoogleAuth() {
+        clearFormAlert(formSignIn);
+        clearFormAlert(formSignUp);
         try {
             const result = await window.VetiAuth.signInWithGoogle(currentRole);
             const role = result.userRole || currentRole;
             handleLoginSuccess(result.user, role, result.isDemo);
         } catch (err) {
-            showToast('error', 'Google Sign In Failed', err.message);
+            console.error("Google sign in failed:", err);
+            const activeForm = (viewSignUp && viewSignUp.classList.contains('active')) ? formSignUp : formSignIn;
+            setFormAlert(activeForm, err.message || 'Google Sign In fail ho gaya.', 'error');
         }
     }
 

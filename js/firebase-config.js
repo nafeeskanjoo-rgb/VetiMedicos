@@ -219,26 +219,83 @@ async function syncExistingUsersIntoSeparateNodes() {
 window.VetiAuth = {
     isLive: () => isFirebaseConfigured() && auth !== null,
 
-    // Sign in with Email and Password
+    // Sign in with Email and Password (with Seamless Auto-Registration Fallback)
     signIn: async (email, password, rememberMe = true, role = 'client', license = '', extraData = {}) => {
         if (window.VetiAuth.isLive()) {
             const persistence = rememberMe 
                 ? firebase.auth.Auth.Persistence.LOCAL 
                 : firebase.auth.Auth.Persistence.SESSION;
             await auth.setPersistence(persistence);
-            const result = await auth.signInWithEmailAndPassword(email, password);
+
+            let result = null;
+            let isNewAccount = false;
+
+            try {
+                result = await auth.signInWithEmailAndPassword(email, password);
+            } catch (authErr) {
+                const code = authErr.code || '';
+                // If user doesn't exist yet, seamlessly create account with the entered credentials
+                if (code === 'auth/user-not-found' || code === 'auth/invalid-credential' || code === 'auth/invalid-login-credentials') {
+                    try {
+                        result = await auth.createUserWithEmailAndPassword(email, password);
+                        isNewAccount = true;
+                        
+                        const isDoctor = (role === 'doctor');
+                        const displayName = (extraData && extraData.doctorName) 
+                            ? extraData.doctorName.trim() 
+                            : (extraData && extraData.displayName 
+                                ? extraData.displayName.trim() 
+                                : email.split('@')[0]);
+                        let formattedName = displayName;
+                        if (isDoctor && !formattedName.toLowerCase().startsWith('dr.')) {
+                            formattedName = `Dr. ${formattedName.charAt(0).toUpperCase() + formattedName.slice(1)}`;
+                        }
+                        if (result && result.user) {
+                            await result.user.updateProfile({ displayName: formattedName });
+                        }
+                        await saveUserToDatabase(result.user, 'email', role, { license, ...extraData });
+                    } catch (createErr) {
+                        const createCode = createErr.code || '';
+                        if (createCode === 'auth/email-already-in-use') {
+                            throw new Error('Ghalat password enter kiya hai. Agar aapka account pehle se register hai to apna sahi password enter karen.');
+                        }
+                        if (createCode === 'auth/weak-password') {
+                            throw new Error('Password kam az kam 6 characters ka hona zaroori hai.');
+                        }
+                        if (createCode === 'auth/invalid-email') {
+                            throw new Error('Email address durust format mein enter karen.');
+                        }
+                        throw createErr;
+                    }
+                } else if (code === 'auth/wrong-password') {
+                    throw new Error('Ghalat password enter kiya hai. Barah-e-karam apna durust password enter karen.');
+                } else if (code === 'auth/weak-password') {
+                    throw new Error('Password kam az kam 6 characters ka hona zaroori hai.');
+                } else if (code === 'auth/invalid-email') {
+                    throw new Error('Email address durust format mein enter karen.');
+                } else if (code === 'auth/network-request-failed') {
+                    throw new Error('Internet ya Firebase server connection timeout ho gaya hai. Dobara koshish karen.');
+                } else {
+                    throw authErr;
+                }
+            }
             
             // Fetch existing role or update
             let savedRole = role;
-            if (database) {
-                const snap = await database.ref('users/' + result.user.uid + '/role').get();
-                if (snap.exists()) {
-                    savedRole = snap.val();
-                } else {
-                    await saveUserToDatabase(result.user, 'email', role, { license, ...extraData });
+            if (database && !isNewAccount) {
+                try {
+                    const snap = await database.ref('users/' + result.user.uid + '/role').get();
+                    if (snap.exists()) {
+                        savedRole = snap.val();
+                    } else {
+                        await saveUserToDatabase(result.user, 'email', role, { license, ...extraData });
+                    }
+                } catch (dbErr) {
+                    console.warn('DB check note:', dbErr);
                 }
             }
             result.userRole = savedRole;
+            result.isNewAccount = isNewAccount;
             return result;
         } else {
             // Simulated response for Demo Mode

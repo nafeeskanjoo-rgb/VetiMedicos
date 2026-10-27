@@ -1533,6 +1533,43 @@ body:has(.auth-modal-wrapper.open)::-webkit-scrollbar {
 }
 
 /* -------------------------------------------------------------
+   In-Form Inline Alerts (Safe, non-intrusive feedback)
+   ------------------------------------------------------------- */
+.form-inline-alert {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 12px 0;
+    transition: all 0.25s ease;
+    animation: alertSlideIn 0.25s ease-out;
+}
+@keyframes alertSlideIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.form-inline-alert.alert-error {
+    background: #fef2f2;
+    border: 1.5px solid #f87171;
+    color: #991b1b;
+}
+.form-inline-alert.alert-warning {
+    background: #fffbeb;
+    border: 1.5px solid #fbbf24;
+    color: #92400e;
+}
+.form-inline-alert.alert-success {
+    background: #f0fdf4;
+    border: 1.5px solid #4ade80;
+    color: #166534;
+}
+
+
+/* -------------------------------------------------------------
    Firebase Help Modal
    ------------------------------------------------------------- */
 .modal-backdrop {
