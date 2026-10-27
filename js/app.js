@@ -22,6 +22,11 @@ window.closeCartDrawer = function() {
     }
 };
 
+// Global Suppression of all popup toast notifications across the application
+window.showToast = function() { return; };
+function showToast() { return; }
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Universal Modal Scroll Lock helper
     window.setModalScrollLock = function(locked) {
@@ -627,39 +632,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Toast Notification System
+    // Toast Notification System - COMPLETELY DISABLED ACROSS APPLICATION
     window.showToast = function(type, title, message, duration = 4000) {
-        const container = document.getElementById('toast-container');
-        if (!container) return;
-
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-
-        const icons = {
-            success: '✅',
-            error: '❌',
-            warning: '⚠️',
-            info: '🐾'
-        };
-
-        toast.innerHTML = `
-            <div class="toast-icon">${icons[type] || '🔔'}</div>
-            <div class="toast-content">
-                <div class="toast-title">${title}</div>
-                <div class="toast-message">${message}</div>
-            </div>
-        `;
-
-        container.appendChild(toast);
-
-        requestAnimationFrame(() => {
-            toast.classList.add('show');
-        });
-
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 400);
-        }, duration);
+        // Suppress all toast popup notifications as requested
+        return;
     };
 
     // Firebase Status Indicator Initializer
