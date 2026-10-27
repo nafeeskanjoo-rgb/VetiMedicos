@@ -48,6 +48,11 @@ if (typeof firebase !== 'undefined') {
             window.firebaseDatabase = database;
             window.firebaseAnalytics = analytics;
             console.log("✅ VetiMedicos: Live Firebase Auth & Realtime Database connected successfully (veticareorg)!");
+
+            // Run automatic organization of existing users into /clients and /doctors nodes
+            setTimeout(() => {
+                syncExistingUsersIntoSeparateNodes();
+            }, 600);
         } catch (error) {
             console.error("❌ Firebase Initialization Error:", error);
         }
@@ -57,35 +62,154 @@ if (typeof firebase !== 'undefined') {
 }
 
 /**
- * Save / update user record in Realtime Database at /users/{uid}
+ * ==============================================================================
+ * SEPARATE DATABASE NODES & TAGS SYSTEM (Clients vs Doctors)
+ * ==============================================================================
+ * 📁 /clients/{uid}  -> All Pet Parents with 'accountTag: 🐾 Client / Pet Parent'
+ * 📁 /doctors/{uid}  -> All Clinicians with 'accountTag: 🩺 Verified Veti Doctor'
+ * 📁 /users/{uid}    -> Unified quick index with nodePath and accountTag
  */
 async function saveUserToDatabase(user, provider = 'email', role = 'client', extraData = {}) {
     if (!database || !user) return;
     try {
+        const isDoctor = (role === 'doctor');
+        const now = new Date().toISOString();
+        const baseName = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
+
+        if (isDoctor) {
+            // 🩺 1. DEDICATED DOCTORS NODE: /doctors/{uid}
+            const doctorRef = database.ref('doctors/' + user.uid);
+            const doctorPayload = {
+                uid:          user.uid,
+                displayName:  baseName.startsWith('Dr.') ? baseName : `Dr. ${baseName}`,
+                email:        user.email || '',
+                photoURL:     user.photoURL || null,
+                provider:     provider,
+                role:         'doctor',
+                accountTag:   '🩺 Verified Veti Doctor',
+                badge:        'Veterinary Specialist',
+                license:      extraData.license || 'PVMC-PK-2026',
+                specialty:    extraData.specialty || 'General Veterinary Medicine & Surgery',
+                hospitalOpd:  extraData.hospitalOpd || 'Main Sanctuary OPD & Emergency ICU',
+                status:       'On Duty / Verified',
+                isVerified:   true,
+                lastLogin:    now
+            };
+            await doctorRef.update(doctorPayload);
+            const snapDoc = await doctorRef.child('createdAt').get();
+            if (!snapDoc.exists()) {
+                await doctorRef.update({ createdAt: now });
+            }
+            console.log('✅ [Firebase] Doctor record saved to /doctors/' + user.uid);
+        } else {
+            // 🐾 2. DEDICATED CLIENTS NODE: /clients/{uid}
+            const clientRef = database.ref('clients/' + user.uid);
+            const clientPayload = {
+                uid:          user.uid,
+                displayName:  baseName,
+                email:        user.email || '',
+                photoURL:     user.photoURL || null,
+                provider:     provider,
+                role:         'client',
+                accountTag:   '🐾 Client / Pet Parent',
+                badge:        'VIP Member',
+                phone:        extraData.phone || '',
+                petName:      extraData.petName || 'Family Pet',
+                petType:      extraData.petType || 'Dog / Cat',
+                status:       'Active VIP Client',
+                lastLogin:    now
+            };
+            await clientRef.update(clientPayload);
+            const snapCli = await clientRef.child('createdAt').get();
+            if (!snapCli.exists()) {
+                await clientRef.update({ createdAt: now });
+            }
+            console.log('✅ [Firebase] Client record saved to /clients/' + user.uid);
+        }
+
+        // 3. UNIFIED LOOKUP INDEX: /users/{uid}
         const userRef = database.ref('users/' + user.uid);
-        const updatePayload = {
+        const indexPayload = {
             uid:         user.uid,
-            displayName: user.displayName || user.email.split('@')[0],
+            displayName: baseName,
             email:       user.email,
-            photoURL:    user.photoURL || null,
-            provider:    provider,
-            role:        role || 'client',
-            lastLogin:   new Date().toISOString()
+            role:        isDoctor ? 'doctor' : 'client',
+            accountTag:  isDoctor ? '🩺 Verified Veti Doctor' : '🐾 Client / Pet Parent',
+            nodePath:    isDoctor ? `doctors/${user.uid}` : `clients/${user.uid}`,
+            lastLogin:   now
         };
-        if (role === 'doctor') {
-            updatePayload.license = extraData.license || 'VET-LIC-VERIFIED';
-            updatePayload.specialty = extraData.specialty || 'General Veterinary Medicine';
+        await userRef.update(indexPayload);
+        const snapUser = await userRef.child('createdAt').get();
+        if (!snapUser.exists()) {
+            await userRef.update({ createdAt: now });
         }
-        await userRef.update(updatePayload);
-        
-        // Set createdAt only on first registration
-        const snap = await userRef.child('createdAt').get();
-        if (!snap.exists()) {
-            await userRef.update({ createdAt: new Date().toISOString() });
-        }
-        console.log('✅ User saved to DB with role:', role, user.uid);
     } catch (err) {
         console.error('❌ DB save failed:', err);
+    }
+}
+
+/**
+ * Auto-Sync: Scans existing users under '/users' and organizes them into
+ * separate '/clients' and '/doctors' nodes with clear tags in Firebase.
+ */
+async function syncExistingUsersIntoSeparateNodes() {
+    if (!database) return;
+    try {
+        const usersSnap = await database.ref('users').get();
+        if (!usersSnap.exists()) return;
+        const usersData = usersSnap.val();
+        const now = new Date().toISOString();
+
+        for (const [uid, userItem] of Object.entries(usersData)) {
+            if (!userItem) continue;
+            const isDoctor = (userItem.role === 'doctor');
+            const targetNode = isDoctor ? 'doctors' : 'clients';
+            const targetRef = database.ref(`${targetNode}/${uid}`);
+            const existingSnap = await targetRef.get();
+
+            if (!existingSnap.exists()) {
+                const displayName = userItem.displayName || (userItem.email ? userItem.email.split('@')[0] : 'User');
+                const createdTime = userItem.createdAt || now;
+
+                if (isDoctor) {
+                    await targetRef.set({
+                        uid:         uid,
+                        displayName: displayName.startsWith('Dr.') ? displayName : `Dr. ${displayName}`,
+                        email:       userItem.email || '',
+                        role:        'doctor',
+                        accountTag:  '🩺 Verified Veti Doctor',
+                        badge:       'Veterinary Specialist',
+                        license:     userItem.license || 'PVMC-PK-VERIFIED',
+                        specialty:   userItem.specialty || 'General Veterinary Medicine',
+                        status:      'On Duty / Verified',
+                        isVerified:  true,
+                        createdAt:   createdTime,
+                        lastLogin:   userItem.lastLogin || now
+                    });
+                } else {
+                    await targetRef.set({
+                        uid:         uid,
+                        displayName: displayName,
+                        email:       userItem.email || '',
+                        role:        'client',
+                        accountTag:  '🐾 Client / Pet Parent',
+                        badge:       'VIP Member',
+                        status:      'Active VIP Client',
+                        createdAt:   createdTime,
+                        lastLogin:   userItem.lastLogin || now
+                    });
+                }
+
+                // Update /users/{uid} index tag & nodePath
+                await database.ref(`users/${uid}`).update({
+                    accountTag: isDoctor ? '🩺 Verified Veti Doctor' : '🐾 Client / Pet Parent',
+                    nodePath:   `${targetNode}/${uid}`
+                });
+                console.log(`🔄 [Auto-Sync] Categorized user ${uid} into /${targetNode} node.`);
+            }
+        }
+    } catch (err) {
+        console.warn('Auto-sync note:', err);
     }
 }
 
