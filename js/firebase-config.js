@@ -247,15 +247,35 @@ window.VetiAuth = {
     }
 };
 
-// Realtime Database Order Saver
+// Realtime Database Order Saver (with Auth Fallback & Local Backup)
 window.saveOrderToFirebase = async function(orderData) {
-    if (!database) return null;
+    const payload = {
+        ...orderData,
+        createdAt: new Date().toISOString()
+    };
+
+    // Always backup to localStorage first
     try {
+        const localOrders = JSON.parse(localStorage.getItem('vetimedicos_offline_orders') || '[]');
+        localOrders.unshift(payload);
+        localStorage.setItem('vetimedicos_offline_orders', JSON.stringify(localOrders.slice(0, 50)));
+    } catch (e) {}
+
+    if (!database) {
+        console.warn("⚠️ Firebase Realtime Database not initialized, order kept in local storage.");
+        return false;
+    }
+
+    try {
+        // If auth is required by Firebase rules and no user is logged in, attempt anonymous auth
+        if (auth && !auth.currentUser) {
+            try {
+                await auth.signInAnonymously();
+            } catch (anonErr) {}
+        }
+
         const orderRef = database.ref('orders/' + orderData.orderId);
-        await orderRef.set({
-            ...orderData,
-            createdAt: new Date().toISOString()
-        });
+        await orderRef.set(payload);
         console.log("✅ Order saved to Realtime Database:", orderData.orderId);
         return true;
     } catch (e) {
@@ -266,13 +286,29 @@ window.saveOrderToFirebase = async function(orderData) {
 
 // Realtime Database Consultation / Checkup Saver
 window.saveConsultationToFirebase = async function(consultData) {
-    if (!database) return null;
+    const payload = {
+        ...consultData,
+        createdAt: new Date().toISOString()
+    };
+
+    // Backup to localStorage
     try {
+        const localConsults = JSON.parse(localStorage.getItem('vetimedicos_offline_consultations') || '[]');
+        localConsults.unshift(payload);
+        localStorage.setItem('vetimedicos_offline_consultations', JSON.stringify(localConsults.slice(0, 50)));
+    } catch (e) {}
+
+    if (!database) return false;
+
+    try {
+        if (auth && !auth.currentUser) {
+            try {
+                await auth.signInAnonymously();
+            } catch (anonErr) {}
+        }
+
         const consultRef = database.ref('consultations/' + consultData.id);
-        await consultRef.set({
-            ...consultData,
-            createdAt: new Date().toISOString()
-        });
+        await consultRef.set(payload);
         console.log("✅ Consultation saved to Realtime Database:", consultData.id);
         return true;
     } catch (e) {
