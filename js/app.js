@@ -1033,7 +1033,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     handleLoginSuccess(result.user, role, result.isDemo, extraPayload);
                     clearFormAlert(formSignIn);
-                }, 400);
+                    // Automatically close the modal so the user immediately sees their card live on the page!
+                    if (typeof window.closeAuthModal === 'function') {
+                        setTimeout(() => window.closeAuthModal(), 600);
+                    }
+                }, 300);
             } catch (err) {
                 console.error("Sign In failed:", err);
                 const errMsg = err.message || 'Sign in fail ho gaya. Barah-e-karam email aur password check karen.';
@@ -1042,6 +1046,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 setBtnLoading(btn, false);
             }
         });
+
+        // Ensure direct click on submit button always triggers form submission
+        const btnSubmitSignIn = document.getElementById('btn-submit-signin');
+        if (btnSubmitSignIn) {
+            btnSubmitSignIn.addEventListener('click', () => {
+                if (!btnSubmitSignIn.classList.contains('loading')) {
+                    if (typeof formSignIn.requestSubmit === 'function') {
+                        formSignIn.requestSubmit();
+                    } else {
+                        formSignIn.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+                    }
+                }
+            });
+        }
     }
 
     // 2. SIGN UP SUBMISSION
